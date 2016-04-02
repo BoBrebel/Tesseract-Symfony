@@ -6,11 +6,11 @@
 
     <mapped-superclass name="FOS\UserBundle\Model\User">
 
-        <field name="username" column="username" type="string" length="255" />
+        <field name="username" column="pseudo" type="string" length="255" unique="true" />
 
         <field name="usernameCanonical" column="username_canonical" type="string" length="255" unique="true" />
 
-        <field name="email" column="email" type="string" length="255" />
+        <field name="email" column="mail" type="string" length="255" />
 
         <field name="emailCanonical" column="email_canonical" type="string" length="255" unique="true" />
 
@@ -18,7 +18,7 @@
 
         <field name="salt" column="salt" type="string" />
 
-        <field name="password" column="password" type="string" />
+        <field name="password" column="mdp" type="string" />
 
         <field name="lastLogin" column="last_login" type="datetime" nullable="true" />
 
