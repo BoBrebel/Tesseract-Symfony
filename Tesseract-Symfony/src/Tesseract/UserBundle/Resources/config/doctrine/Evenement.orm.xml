@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Tesseract\UserBundle\Entity\Evenement" table="evenement">
+    <indexes>
+      <index name="fk_evenement_organisation1_idx" columns="id_organisation"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nom" type="string" column="nom" length="45" nullable="true"/>
+    <field name="description" type="text" column="description" nullable="true"/>
+    <field name="nbrMax" type="integer" column="nbr_max" nullable="true"/>
+    <field name="affiche" type="string" column="affiche" length="100" nullable="true"/>
+    <field name="date" type="datetime" column="date" nullable="true"/>
+    <many-to-one field="idOrganisation" target-entity="Organisation">
+      <join-columns>
+        <join-column name="id_organisation" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

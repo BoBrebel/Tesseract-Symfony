@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Tesseract\UserBundle\Entity\CommentaireCours" table="commentaire_cours">
+    <indexes>
+      <index name="fk_cours_has_utilisateur_utilisateur1_idx" columns="id_utilisateur"/>
+      <index name="fk_cours_has_utilisateur_cours1_idx" columns="id_cours"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="commentaire" type="text" column="commentaire" nullable="true"/>
+    <field name="date" type="datetime" column="date" nullable="true"/>
+    <many-to-one field="idUtilisateur" target-entity="Utilisateur">
+      <join-columns>
+        <join-column name="id_utilisateur" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idCours" target-entity="Cours">
+      <join-columns>
+        <join-column name="id_cours" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

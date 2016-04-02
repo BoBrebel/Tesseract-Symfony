@@ -1,3 +1,7 @@
+tesseract_user:
+    resource: "@TesseractUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
 app:
     resource: @AppBundle/Controller/
     type:     annotation

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Tesseract\UserBundle\Entity\Notification" table="notification">
+    <indexes>
+      <index name="fk_notification_utilisateur1_idx" columns="id_utilisateur"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="notification" type="string" column="notification" length="100" nullable="true"/>
+    <field name="date" type="date" column="date" nullable="true"/>
+    <field name="vue" type="string" column="vue" length="50" nullable="false"/>
+    <many-to-one field="idUtilisateur" target-entity="Utilisateur">
+      <join-columns>
+        <join-column name="id_utilisateur" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

@@ -1,0 +1,66 @@
+<?php
+
+namespace Tesseract\UserBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * SessionEpreuve
+ *
+ * @ORM\Table(name="session_epreuve", indexes={@ORM\Index(name="id_utilisateur", columns={"id_utilisateur"}), @ORM\Index(name="id_epreuve", columns={"id_epreuve"})})
+ * @ORM\Entity
+ */
+class SessionEpreuve
+{
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="note", type="float", precision=10, scale=0, nullable=true)
+     */
+    private $note;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="nbr_tentative", type="integer", nullable=true)
+     */
+    private $nbrTentative;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date", type="date", nullable=true)
+     */
+    private $date;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var \Tesseract\UserBundle\Entity\Utilisateur
+     *
+     * @ORM\ManyToOne(targetEntity="Tesseract\UserBundle\Entity\Utilisateur")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_utilisateur", referencedColumnName="id")
+     * })
+     */
+    private $idUtilisateur;
+
+    /**
+     * @var \Tesseract\UserBundle\Entity\Epreuve
+     *
+     * @ORM\ManyToOne(targetEntity="Tesseract\UserBundle\Entity\Epreuve")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_epreuve", referencedColumnName="id")
+     * })
+     */
+    private $idEpreuve;
+
+
+}

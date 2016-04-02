@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Tesseract\UserBundle\Entity\Reponse" table="reponse">
+    <indexes>
+      <index name="fk_reponse_question1_idx" columns="id_question"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="reponse" type="text" column="reponse" nullable="true"/>
+    <field name="justification" type="text" column="justification" nullable="true"/>
+    <field name="etat" type="string" column="etat" length="11" nullable="true"/>
+    <many-to-one field="idQuestion" target-entity="Question">
+      <join-columns>
+        <join-column name="id_question" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

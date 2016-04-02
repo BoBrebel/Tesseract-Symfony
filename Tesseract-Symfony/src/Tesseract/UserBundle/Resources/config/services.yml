@@ -1,0 +1,4 @@
+services:
+#    tesseract_user.example:
+#        class: Tesseract\UserBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
