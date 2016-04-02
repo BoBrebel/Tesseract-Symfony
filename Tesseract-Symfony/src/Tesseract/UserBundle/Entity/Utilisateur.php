@@ -3,28 +3,28 @@
 namespace Tesseract\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use FOS\UserBundle\Model\User as BaseUser;
 /**
  * Utilisateur
  *
  * @ORM\Table(name="utilisateur", uniqueConstraints={@ORM\UniqueConstraint(name="nom_utilisateur_UNIQUE", columns={"pseudo"})}, indexes={@ORM\Index(name="fk_users_organisations1_idx", columns={"id_organisation"})})
  * @ORM\Entity
  */
-class Utilisateur
+class Utilisateur extends BaseUser
 {
     /**
      * @var string
      *
      * @ORM\Column(name="pseudo", type="string", length=45, nullable=true)
      */
-    private $pseudo;
+    protected $username;
 
     /**
      * @var string
      *
      * @ORM\Column(name="mdp", type="string", length=45, nullable=true)
      */
-    private $mdp;
+    protected $password;
 
     /**
      * @var string
@@ -66,7 +66,7 @@ class Utilisateur
      *
      * @ORM\Column(name="mail", type="string", length=45, nullable=true)
      */
-    private $mail;
+    protected $email;
 
     /**
      * @var string
@@ -117,7 +117,7 @@ class Utilisateur
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var \Tesseract\UserBundle\Entity\Organisation

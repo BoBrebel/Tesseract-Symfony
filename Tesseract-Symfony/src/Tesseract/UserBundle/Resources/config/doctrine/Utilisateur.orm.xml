@@ -10,14 +10,11 @@
     <id name="id" type="integer" column="id">
       <generator strategy="IDENTITY"/>
     </id>
-    <field name="pseudo" type="string" column="pseudo" length="45" nullable="true"/>
-    <field name="mdp" type="string" column="mdp" length="45" nullable="true"/>
     <field name="nom" type="string" column="nom" length="45" nullable="true"/>
     <field name="prenom" type="string" column="prenom" length="45" nullable="true"/>
     <field name="dateNaissance" type="date" column="date_naissance" nullable="true"/>
     <field name="telephone" type="integer" column="telephone" nullable="true"/>
     <field name="adresse" type="string" column="adresse" length="45" nullable="true"/>
-    <field name="mail" type="string" column="mail" length="45" nullable="true"/>
     <field name="photo" type="string" column="photo" length="255" nullable="true"/>
     <field name="role" type="string" column="role" length="3" nullable="true"/>
     <field name="score" type="integer" column="score" nullable="true"/>
