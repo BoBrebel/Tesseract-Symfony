@@ -1,10 +1,6 @@
 tesseract_mooc:
     resource: "@TesseractMOOCBundle/Resources/config/routing.yml"
-    prefix:   /
-
-tesseract_user:
-    resource: "@TesseractUserBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /tesseract
 
 app:
     resource: @AppBundle/Controller/
@@ -12,4 +8,5 @@ app:
 
 
 fos_user:
+    prefix:   /tesseract
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"

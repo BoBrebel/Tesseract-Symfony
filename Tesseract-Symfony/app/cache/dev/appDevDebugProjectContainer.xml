@@ -19,6 +19,7 @@
       <parameter key="AppBundle">AppBundle\AppBundle</parameter>
       <parameter key="FOSUserBundle">FOS\UserBundle\FOSUserBundle</parameter>
       <parameter key="TesseractUserBundle">Tesseract\UserBundle\TesseractUserBundle</parameter>
+      <parameter key="TesseractMOOCBundle">Tesseract\MOOCBundle\TesseractMOOCBundle</parameter>
       <parameter key="DebugBundle">Symfony\Bundle\DebugBundle\DebugBundle</parameter>
       <parameter key="AcmeDemoBundle">Acme\DemoBundle\AcmeDemoBundle</parameter>
       <parameter key="WebProfilerBundle">Symfony\Bundle\WebProfilerBundle\WebProfilerBundle</parameter>
@@ -186,6 +187,7 @@
     <parameter key="profiler.storage.username"></parameter>
     <parameter key="profiler.storage.password"></parameter>
     <parameter key="profiler.storage.lifetime">86400</parameter>
+    <parameter key="translator.logging">true</parameter>
     <parameter key="router.class">Symfony\Bundle\FrameworkBundle\Routing\Router</parameter>
     <parameter key="router.request_context.class">Symfony\Component\Routing\RequestContext</parameter>
     <parameter key="routing.loader.class">Symfony\Bundle\FrameworkBundle\Routing\DelegatingLoader</parameter>
@@ -295,6 +297,18 @@
     <parameter key="security.role_hierarchy.roles" type="collection">
       <parameter key="ROLE_ADMIN" type="collection">
         <parameter>ROLE_USER</parameter>
+      </parameter>
+      <parameter key="ROLE_APR" type="collection">
+        <parameter>ROLE_APR</parameter>
+      </parameter>
+      <parameter key="ROLE_FOR" type="collection">
+        <parameter>ROLE_FOR</parameter>
+      </parameter>
+      <parameter key="ROLE_MCP" type="collection">
+        <parameter>ROLE_MCP</parameter>
+      </parameter>
+      <parameter key="ROLE_AOR" type="collection">
+        <parameter>ROLE_AOR</parameter>
       </parameter>
       <parameter key="ROLE_SUPER_ADMIN" type="collection">
         <parameter>ROLE_ADMIN</parameter>
@@ -587,7 +601,7 @@
     <parameter key="fos_user.storage">orm</parameter>
     <parameter key="fos_user.firewall_name">main</parameter>
     <parameter key="fos_user.model_manager_name">null</parameter>
-    <parameter key="fos_user.model.user.class">Tesseract\UserBundle\Entity\Utilisateur</parameter>
+    <parameter key="fos_user.model.user.class">Tesseract\MOOCBundle\Entity\Utilisateur</parameter>
     <parameter key="fos_user.profile.form.type">fos_user_profile</parameter>
     <parameter key="fos_user.profile.form.name">fos_user_profile_form</parameter>
     <parameter key="fos_user.profile.form.validation_groups" type="collection">
@@ -598,7 +612,7 @@
       <parameter key="webmaster@example.com">webmaster</parameter>
     </parameter>
     <parameter key="fos_user.registration.confirmation.enabled">false</parameter>
-    <parameter key="fos_user.registration.form.type">fos_user_registration</parameter>
+    <parameter key="fos_user.registration.form.type">app_user_registration</parameter>
     <parameter key="fos_user.registration.form.name">fos_user_registration_form</parameter>
     <parameter key="fos_user.registration.form.validation_groups" type="collection">
       <parameter>Registration</parameter>
@@ -696,6 +710,12 @@
     </parameter>
   </parameters>
   <services>
+    <service id="app.form.registration" class="Tesseract\MOOCBundle\Form\RegistrationType">
+      <tag name="form.type" alias="app_user_registration"/>
+    </service>
+    <service id="redirect.after.login" class="Tesseract\MOOCBundle\Redirection\AfterLoginRedirection">
+      <argument type="service" id="router"/>
+    </service>
     <service id="controller_name_converter" class="Symfony\Bundle\FrameworkBundle\Controller\ControllerNameParser" public="false">
       <tag name="monolog.logger" channel="request"/>
       <argument type="service" id="kernel"/>
@@ -841,7 +861,9 @@
     </service>
     <service id="translator.default" class="Symfony\Bundle\FrameworkBundle\Translation\Translator">
       <argument type="service" id="service_container"/>
-      <argument type="service" id="translator.selector"/>
+      <argument type="service">
+        <service class="Symfony\Component\Translation\MessageSelector" public="false"/>
+      </argument>
       <argument type="collection">
         <argument key="translation.loader.php" type="collection">
           <argument>php</argument>
@@ -882,11 +904,1194 @@
         <argument key="cache_dir">C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\app\cache\dev/translations</argument>
         <argument key="debug">true</argument>
       </argument>
+      <call method="setFallbackLocales">
+        <argument type="collection">
+          <argument>en</argument>
+        </argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.af.xlf</argument>
+        <argument>af</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.ar.xlf</argument>
+        <argument>ar</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.az.xlf</argument>
+        <argument>az</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.bg.xlf</argument>
+        <argument>bg</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.ca.xlf</argument>
+        <argument>ca</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.cs.xlf</argument>
+        <argument>cs</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.cy.xlf</argument>
+        <argument>cy</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.da.xlf</argument>
+        <argument>da</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.de.xlf</argument>
+        <argument>de</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.el.xlf</argument>
+        <argument>el</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.en.xlf</argument>
+        <argument>en</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.es.xlf</argument>
+        <argument>es</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.et.xlf</argument>
+        <argument>et</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.eu.xlf</argument>
+        <argument>eu</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.fa.xlf</argument>
+        <argument>fa</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.fi.xlf</argument>
+        <argument>fi</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.fr.xlf</argument>
+        <argument>fr</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.gl.xlf</argument>
+        <argument>gl</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.he.xlf</argument>
+        <argument>he</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.hr.xlf</argument>
+        <argument>hr</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.hu.xlf</argument>
+        <argument>hu</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.hy.xlf</argument>
+        <argument>hy</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.id.xlf</argument>
+        <argument>id</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.it.xlf</argument>
+        <argument>it</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.ja.xlf</argument>
+        <argument>ja</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.lb.xlf</argument>
+        <argument>lb</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.lt.xlf</argument>
+        <argument>lt</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.mn.xlf</argument>
+        <argument>mn</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.nb.xlf</argument>
+        <argument>nb</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.nl.xlf</argument>
+        <argument>nl</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.no.xlf</argument>
+        <argument>no</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.pl.xlf</argument>
+        <argument>pl</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.pt.xlf</argument>
+        <argument>pt</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.pt_BR.xlf</argument>
+        <argument>pt_BR</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.ro.xlf</argument>
+        <argument>ro</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.ru.xlf</argument>
+        <argument>ru</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.sk.xlf</argument>
+        <argument>sk</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.sl.xlf</argument>
+        <argument>sl</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.sq.xlf</argument>
+        <argument>sq</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.sr_Cyrl.xlf</argument>
+        <argument>sr_Cyrl</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.sr_Latn.xlf</argument>
+        <argument>sr_Latn</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.sv.xlf</argument>
+        <argument>sv</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.th.xlf</argument>
+        <argument>th</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.tr.xlf</argument>
+        <argument>tr</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.uk.xlf</argument>
+        <argument>uk</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.vi.xlf</argument>
+        <argument>vi</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.zh_CN.xlf</argument>
+        <argument>zh_CN</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.zh_TW.xlf</argument>
+        <argument>zh_TW</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Form/Resources/translations\validators.ar.xlf</argument>
+        <argument>ar</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Form/Resources/translations\validators.az.xlf</argument>
+        <argument>az</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Form/Resources/translations\validators.bg.xlf</argument>
+        <argument>bg</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Form/Resources/translations\validators.ca.xlf</argument>
+        <argument>ca</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Form/Resources/translations\validators.cs.xlf</argument>
+        <argument>cs</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Form/Resources/translations\validators.da.xlf</argument>
+        <argument>da</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Form/Resources/translations\validators.de.xlf</argument>
+        <argument>de</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Form/Resources/translations\validators.el.xlf</argument>
+        <argument>el</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Form/Resources/translations\validators.en.xlf</argument>
+        <argument>en</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Form/Resources/translations\validators.es.xlf</argument>
+        <argument>es</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Form/Resources/translations\validators.et.xlf</argument>
+        <argument>et</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Form/Resources/translations\validators.eu.xlf</argument>
+        <argument>eu</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Form/Resources/translations\validators.fa.xlf</argument>
+        <argument>fa</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Form/Resources/translations\validators.fi.xlf</argument>
+        <argument>fi</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Form/Resources/translations\validators.fr.xlf</argument>
+        <argument>fr</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Form/Resources/translations\validators.gl.xlf</argument>
+        <argument>gl</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Form/Resources/translations\validators.he.xlf</argument>
+        <argument>he</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Form/Resources/translations\validators.hr.xlf</argument>
+        <argument>hr</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Form/Resources/translations\validators.hu.xlf</argument>
+        <argument>hu</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Form/Resources/translations\validators.hy.xlf</argument>
+        <argument>hy</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Form/Resources/translations\validators.id.xlf</argument>
+        <argument>id</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Form/Resources/translations\validators.it.xlf</argument>
+        <argument>it</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Form/Resources/translations\validators.ja.xlf</argument>
+        <argument>ja</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Form/Resources/translations\validators.lb.xlf</argument>
+        <argument>lb</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Form/Resources/translations\validators.lt.xlf</argument>
+        <argument>lt</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Form/Resources/translations\validators.lv.xlf</argument>
+        <argument>lv</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Form/Resources/translations\validators.mn.xlf</argument>
+        <argument>mn</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Form/Resources/translations\validators.nb.xlf</argument>
+        <argument>nb</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Form/Resources/translations\validators.nl.xlf</argument>
+        <argument>nl</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Form/Resources/translations\validators.pl.xlf</argument>
+        <argument>pl</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Form/Resources/translations\validators.pt.xlf</argument>
+        <argument>pt</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Form/Resources/translations\validators.pt_BR.xlf</argument>
+        <argument>pt_BR</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Form/Resources/translations\validators.ro.xlf</argument>
+        <argument>ro</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Form/Resources/translations\validators.ru.xlf</argument>
+        <argument>ru</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Form/Resources/translations\validators.sk.xlf</argument>
+        <argument>sk</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Form/Resources/translations\validators.sl.xlf</argument>
+        <argument>sl</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Form/Resources/translations\validators.sr_Cyrl.xlf</argument>
+        <argument>sr_Cyrl</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Form/Resources/translations\validators.sr_Latn.xlf</argument>
+        <argument>sr_Latn</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Form/Resources/translations\validators.sv.xlf</argument>
+        <argument>sv</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Form/Resources/translations\validators.uk.xlf</argument>
+        <argument>uk</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Form/Resources/translations\validators.zh_CN.xlf</argument>
+        <argument>zh_CN</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Security\Core\Exception/../Resources/translations\security.ar.xlf</argument>
+        <argument>ar</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Security\Core\Exception/../Resources/translations\security.az.xlf</argument>
+        <argument>az</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Security\Core\Exception/../Resources/translations\security.ca.xlf</argument>
+        <argument>ca</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Security\Core\Exception/../Resources/translations\security.cs.xlf</argument>
+        <argument>cs</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Security\Core\Exception/../Resources/translations\security.da.xlf</argument>
+        <argument>da</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Security\Core\Exception/../Resources/translations\security.de.xlf</argument>
+        <argument>de</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Security\Core\Exception/../Resources/translations\security.el.xlf</argument>
+        <argument>el</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Security\Core\Exception/../Resources/translations\security.en.xlf</argument>
+        <argument>en</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Security\Core\Exception/../Resources/translations\security.es.xlf</argument>
+        <argument>es</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Security\Core\Exception/../Resources/translations\security.fa.xlf</argument>
+        <argument>fa</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Security\Core\Exception/../Resources/translations\security.fr.xlf</argument>
+        <argument>fr</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Security\Core\Exception/../Resources/translations\security.gl.xlf</argument>
+        <argument>gl</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Security\Core\Exception/../Resources/translations\security.he.xlf</argument>
+        <argument>he</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Security\Core\Exception/../Resources/translations\security.hu.xlf</argument>
+        <argument>hu</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Security\Core\Exception/../Resources/translations\security.it.xlf</argument>
+        <argument>it</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Security\Core\Exception/../Resources/translations\security.lb.xlf</argument>
+        <argument>lb</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Security\Core\Exception/../Resources/translations\security.nl.xlf</argument>
+        <argument>nl</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Security\Core\Exception/../Resources/translations\security.no.xlf</argument>
+        <argument>no</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Security\Core\Exception/../Resources/translations\security.pl.xlf</argument>
+        <argument>pl</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Security\Core\Exception/../Resources/translations\security.pt_BR.xlf</argument>
+        <argument>pt_BR</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Security\Core\Exception/../Resources/translations\security.pt_PT.xlf</argument>
+        <argument>pt_PT</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Security\Core\Exception/../Resources/translations\security.ro.xlf</argument>
+        <argument>ro</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Security\Core\Exception/../Resources/translations\security.ru.xlf</argument>
+        <argument>ru</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Security\Core\Exception/../Resources/translations\security.sk.xlf</argument>
+        <argument>sk</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Security\Core\Exception/../Resources/translations\security.sl.xlf</argument>
+        <argument>sl</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Security\Core\Exception/../Resources/translations\security.sr_Cyrl.xlf</argument>
+        <argument>sr_Cyrl</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Security\Core\Exception/../Resources/translations\security.sr_Latn.xlf</argument>
+        <argument>sr_Latn</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Security\Core\Exception/../Resources/translations\security.sv.xlf</argument>
+        <argument>sv</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Security\Core\Exception/../Resources/translations\security.tr.xlf</argument>
+        <argument>tr</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Component\Security\Core\Exception/../Resources/translations\security.ua.xlf</argument>
+        <argument>ua</argument>
+        <argument>security</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.ar.yml</argument>
+        <argument>ar</argument>
+        <argument>FOSUserBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.bg.yml</argument>
+        <argument>bg</argument>
+        <argument>FOSUserBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.ca.yml</argument>
+        <argument>ca</argument>
+        <argument>FOSUserBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.cs.yml</argument>
+        <argument>cs</argument>
+        <argument>FOSUserBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.da.yml</argument>
+        <argument>da</argument>
+        <argument>FOSUserBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.de.yml</argument>
+        <argument>de</argument>
+        <argument>FOSUserBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.el.yml</argument>
+        <argument>el</argument>
+        <argument>FOSUserBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.en.yml</argument>
+        <argument>en</argument>
+        <argument>FOSUserBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.es.yml</argument>
+        <argument>es</argument>
+        <argument>FOSUserBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.et.yml</argument>
+        <argument>et</argument>
+        <argument>FOSUserBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.eu.yml</argument>
+        <argument>eu</argument>
+        <argument>FOSUserBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.fa.yml</argument>
+        <argument>fa</argument>
+        <argument>FOSUserBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.fi.yml</argument>
+        <argument>fi</argument>
+        <argument>FOSUserBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.fr.yml</argument>
+        <argument>fr</argument>
+        <argument>FOSUserBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.he.yml</argument>
+        <argument>he</argument>
+        <argument>FOSUserBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.hr.yml</argument>
+        <argument>hr</argument>
+        <argument>FOSUserBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.hu.yml</argument>
+        <argument>hu</argument>
+        <argument>FOSUserBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.id.yml</argument>
+        <argument>id</argument>
+        <argument>FOSUserBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.it.yml</argument>
+        <argument>it</argument>
+        <argument>FOSUserBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.ja.yml</argument>
+        <argument>ja</argument>
+        <argument>FOSUserBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.lb.yml</argument>
+        <argument>lb</argument>
+        <argument>FOSUserBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.lt.yml</argument>
+        <argument>lt</argument>
+        <argument>FOSUserBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.lv.yml</argument>
+        <argument>lv</argument>
+        <argument>FOSUserBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.nb.yml</argument>
+        <argument>nb</argument>
+        <argument>FOSUserBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.nl.yml</argument>
+        <argument>nl</argument>
+        <argument>FOSUserBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.pl.yml</argument>
+        <argument>pl</argument>
+        <argument>FOSUserBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.pt.yml</argument>
+        <argument>pt</argument>
+        <argument>FOSUserBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.pt_BR.yml</argument>
+        <argument>pt_BR</argument>
+        <argument>FOSUserBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.ro.yml</argument>
+        <argument>ro</argument>
+        <argument>FOSUserBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.ru.yml</argument>
+        <argument>ru</argument>
+        <argument>FOSUserBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.sk.yml</argument>
+        <argument>sk</argument>
+        <argument>FOSUserBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.sl.yml</argument>
+        <argument>sl</argument>
+        <argument>FOSUserBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.sr_Latn.yml</argument>
+        <argument>sr_Latn</argument>
+        <argument>FOSUserBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.sv.yml</argument>
+        <argument>sv</argument>
+        <argument>FOSUserBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.th.yml</argument>
+        <argument>th</argument>
+        <argument>FOSUserBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.tr.yml</argument>
+        <argument>tr</argument>
+        <argument>FOSUserBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.uk.yml</argument>
+        <argument>uk</argument>
+        <argument>FOSUserBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.vi.yml</argument>
+        <argument>vi</argument>
+        <argument>FOSUserBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.zh_CN.yml</argument>
+        <argument>zh_CN</argument>
+        <argument>FOSUserBundle</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.ar.yml</argument>
+        <argument>ar</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.bg.yml</argument>
+        <argument>bg</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.ca.yml</argument>
+        <argument>ca</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.cs.yml</argument>
+        <argument>cs</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.da.yml</argument>
+        <argument>da</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.de.yml</argument>
+        <argument>de</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.el.yml</argument>
+        <argument>el</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.en.yml</argument>
+        <argument>en</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.es.yml</argument>
+        <argument>es</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.eu.yml</argument>
+        <argument>eu</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.fa.yml</argument>
+        <argument>fa</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.fi.yml</argument>
+        <argument>fi</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.fr.yml</argument>
+        <argument>fr</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.he.yml</argument>
+        <argument>he</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.hr.yml</argument>
+        <argument>hr</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.hu.yml</argument>
+        <argument>hu</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.id.yml</argument>
+        <argument>id</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.it.yml</argument>
+        <argument>it</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.ja.yml</argument>
+        <argument>ja</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.lt.yml</argument>
+        <argument>lt</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.lv.yml</argument>
+        <argument>lv</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.nb.yml</argument>
+        <argument>nb</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.nl.yml</argument>
+        <argument>nl</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.pl.yml</argument>
+        <argument>pl</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.pt.yml</argument>
+        <argument>pt</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.pt_BR.yml</argument>
+        <argument>pt_BR</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.ro.yml</argument>
+        <argument>ro</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.ru.yml</argument>
+        <argument>ru</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.sk.yml</argument>
+        <argument>sk</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.sl.yml</argument>
+        <argument>sl</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.sr_Latn.yml</argument>
+        <argument>sr_Latn</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.sv.yml</argument>
+        <argument>sv</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.th.yml</argument>
+        <argument>th</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.tr.yml</argument>
+        <argument>tr</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.uk.yml</argument>
+        <argument>uk</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.vi.yml</argument>
+        <argument>vi</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>yml</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.zh_CN.yml</argument>
+        <argument>zh_CN</argument>
+        <argument>validators</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\src\Tesseract\UserBundle/Resources/translations\messages.fr.xlf</argument>
+        <argument>fr</argument>
+        <argument>messages</argument>
+      </call>
+      <call method="addResource">
+        <argument>xlf</argument>
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\src\Tesseract\MOOCBundle/Resources/translations\messages.fr.xlf</argument>
+        <argument>fr</argument>
+        <argument>messages</argument>
+      </call>
     </service>
-    <service id="translator" class="Symfony\Component\Translation\IdentityTranslator">
-      <argument type="service" id="translator.selector"/>
-    </service>
-    <service id="translator.selector" class="Symfony\Component\Translation\MessageSelector" public="false"/>
     <service id="translation.loader.php" class="Symfony\Component\Translation\Loader\PhpFileLoader">
       <tag name="translation.loader" alias="php"/>
     </service>
@@ -1107,6 +2312,7 @@
           <service class="Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension" public="false">
             <argument type="service" id="service_container"/>
             <argument type="collection">
+              <argument key="app_user_registration">app.form.registration</argument>
               <argument key="form">form.type.form</argument>
               <argument key="birthday">form.type.birthday</argument>
               <argument key="checkbox">form.type.checkbox</argument>
@@ -1866,7 +3072,7 @@
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>57000a63b6b76</argument>
+            <argument>570ae1ec6e072</argument>
           </service>
         </argument>
       </argument>
@@ -1919,6 +3125,18 @@
       <argument type="collection">
         <argument key="ROLE_ADMIN" type="collection">
           <argument>ROLE_USER</argument>
+        </argument>
+        <argument key="ROLE_APR" type="collection">
+          <argument>ROLE_APR</argument>
+        </argument>
+        <argument key="ROLE_FOR" type="collection">
+          <argument>ROLE_FOR</argument>
+        </argument>
+        <argument key="ROLE_MCP" type="collection">
+          <argument>ROLE_MCP</argument>
+        </argument>
+        <argument key="ROLE_AOR" type="collection">
+          <argument>ROLE_AOR</argument>
         </argument>
         <argument key="ROLE_SUPER_ADMIN" type="collection">
           <argument>ROLE_ADMIN</argument>
@@ -2084,26 +3302,16 @@
             </argument>
             <argument>main</argument>
             <argument type="service">
-              <service class="Symfony\Component\Security\Http\Authentication\DefaultAuthenticationSuccessHandler" public="false">
-                <argument type="service">
-                  <service class="Symfony\Component\Security\Http\HttpUtils" public="false">
-                    <argument type="service" id="router" on-invalid="null"/>
-                    <argument type="service" id="router" on-invalid="null"/>
-                  </service>
+              <service class="Symfony\Component\Security\Http\Authentication\CustomAuthenticationSuccessHandler" public="false">
+                <argument type="service" id="redirect.after.login"/>
+                <argument type="collection">
+                  <argument key="login_path">fos_user_security_login</argument>
+                  <argument key="always_use_default_target_path">false</argument>
+                  <argument key="default_target_path">/</argument>
+                  <argument key="target_path_parameter">_target_path</argument>
+                  <argument key="use_referer">false</argument>
                 </argument>
-                <argument type="collection"/>
-                <call method="setOptions">
-                  <argument type="collection">
-                    <argument key="always_use_default_target_path">false</argument>
-                    <argument key="default_target_path">/</argument>
-                    <argument key="login_path">/login</argument>
-                    <argument key="target_path_parameter">_target_path</argument>
-                    <argument key="use_referer">false</argument>
-                  </argument>
-                </call>
-                <call method="setProviderKey">
-                  <argument>main</argument>
-                </call>
+                <argument>main</argument>
               </service>
             </argument>
             <argument type="service">
@@ -2119,7 +3327,7 @@
                 <argument type="service" id="monolog.logger.security" on-invalid="null"/>
                 <call method="setOptions">
                   <argument type="collection">
-                    <argument key="login_path">/login</argument>
+                    <argument key="login_path">fos_user_security_login</argument>
                     <argument key="failure_path">null</argument>
                     <argument key="failure_forward">false</argument>
                     <argument key="failure_path_parameter">_failure_path</argument>
@@ -2128,7 +3336,7 @@
               </service>
             </argument>
             <argument type="collection">
-              <argument key="check_path">/login_check</argument>
+              <argument key="check_path">fos_user_security_check</argument>
               <argument key="use_forward">false</argument>
               <argument key="require_previous_session">true</argument>
               <argument key="username_parameter">_username</argument>
@@ -2145,7 +3353,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.context"/>
-            <argument>57000a63b6b76</argument>
+            <argument>570ae1ec6e072</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
             <argument type="service" id="security.authentication.manager"/>
           </service>
@@ -2227,7 +3435,7 @@
                   <argument type="service" id="router" on-invalid="null"/>
                 </service>
               </argument>
-              <argument>/login</argument>
+              <argument>fos_user_security_login</argument>
               <argument>false</argument>
             </service>
           </argument>
@@ -2660,6 +3868,7 @@
           <call method="setEntityNamespaces">
             <argument type="collection">
               <argument key="TesseractUserBundle">Tesseract\UserBundle\Entity</argument>
+              <argument key="TesseractMOOCBundle">Tesseract\MOOCBundle\Entity</argument>
             </argument>
           </call>
           <call method="setMetadataCacheImpl">
@@ -2679,6 +3888,7 @@
                     <service class="Doctrine\ORM\Mapping\Driver\SimplifiedXmlDriver" public="false">
                       <argument type="collection">
                         <argument key="C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\src\Tesseract\UserBundle\Resources\config\doctrine">Tesseract\UserBundle\Entity</argument>
+                        <argument key="C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\src\Tesseract\MOOCBundle\Resources\config\doctrine">Tesseract\MOOCBundle\Entity</argument>
                       </argument>
                       <call method="setGlobalBasename">
                         <argument>mapping</argument>
@@ -2686,6 +3896,20 @@
                     </service>
                   </argument>
                   <argument>Tesseract\UserBundle\Entity</argument>
+                </call>
+                <call method="addDriver">
+                  <argument type="service">
+                    <service class="Doctrine\ORM\Mapping\Driver\SimplifiedXmlDriver" public="false">
+                      <argument type="collection">
+                        <argument key="C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\src\Tesseract\UserBundle\Resources\config\doctrine">Tesseract\UserBundle\Entity</argument>
+                        <argument key="C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\src\Tesseract\MOOCBundle\Resources\config\doctrine">Tesseract\MOOCBundle\Entity</argument>
+                      </argument>
+                      <call method="setGlobalBasename">
+                        <argument>mapping</argument>
+                      </call>
+                    </service>
+                  </argument>
+                  <argument>Tesseract\MOOCBundle\Entity</argument>
                 </call>
                 <call method="addDriver">
                   <argument type="service">
@@ -2824,12 +4048,12 @@
     </service>
     <service id="fos_user.profile.form.type" class="FOS\UserBundle\Form\Type\ProfileFormType">
       <tag name="form.type" alias="fos_user_profile"/>
-      <argument>Tesseract\UserBundle\Entity\Utilisateur</argument>
+      <argument>Tesseract\MOOCBundle\Entity\Utilisateur</argument>
     </service>
     <service id="fos_user.registration.form.factory" class="FOS\UserBundle\Form\Factory\FormFactory">
       <argument type="service" id="form.factory"/>
       <argument>fos_user_registration_form</argument>
-      <argument>fos_user_registration</argument>
+      <argument>app_user_registration</argument>
       <argument type="collection">
         <argument>Registration</argument>
         <argument>Default</argument>
@@ -2837,7 +4061,7 @@
     </service>
     <service id="fos_user.registration.form.type" class="FOS\UserBundle\Form\Type\RegistrationFormType">
       <tag name="form.type" alias="fos_user_registration"/>
-      <argument>Tesseract\UserBundle\Entity\Utilisateur</argument>
+      <argument>Tesseract\MOOCBundle\Entity\Utilisateur</argument>
     </service>
     <service id="fos_user.change_password.form.factory" class="FOS\UserBundle\Form\Factory\FormFactory">
       <argument type="service" id="form.factory"/>
@@ -2850,7 +4074,7 @@
     </service>
     <service id="fos_user.change_password.form.type" class="FOS\UserBundle\Form\Type\ChangePasswordFormType">
       <tag name="form.type" alias="fos_user_change_password"/>
-      <argument>Tesseract\UserBundle\Entity\Utilisateur</argument>
+      <argument>Tesseract\MOOCBundle\Entity\Utilisateur</argument>
     </service>
     <service id="fos_user.resetting.form.factory" class="FOS\UserBundle\Form\Factory\FormFactory">
       <argument type="service" id="form.factory"/>
@@ -2863,7 +4087,7 @@
     </service>
     <service id="fos_user.resetting.form.type" class="FOS\UserBundle\Form\Type\ResettingFormType">
       <tag name="form.type" alias="fos_user_resetting"/>
-      <argument>Tesseract\UserBundle\Entity\Utilisateur</argument>
+      <argument>Tesseract\MOOCBundle\Entity\Utilisateur</argument>
     </service>
     <service id="fos_user.listener.resetting" class="FOS\UserBundle\EventListener\ResettingListener">
       <tag name="kernel.event_subscriber"/>
@@ -3169,6 +4393,11 @@
       <argument type="service" id="templating.locator"/>
       <argument type="service" id="debug.stopwatch"/>
     </service>
+    <service id="translator" class="Symfony\Component\Translation\LoggingTranslator">
+      <tag name="monolog.logger" channel="translation"/>
+      <argument type="service" id="translator.default"/>
+      <argument type="service" id="monolog.logger.translation"/>
+    </service>
     <service id="router" class="Symfony\Bundle\FrameworkBundle\Routing\Router">
       <tag name="monolog.logger" channel="router"/>
       <argument type="service" id="service_container"/>
@@ -3241,6 +4470,10 @@
       <call method="addPath">
         <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\src\Tesseract\UserBundle/Resources/views</argument>
         <argument>TesseractUser</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\src\Tesseract\MOOCBundle/Resources/views</argument>
+        <argument>TesseractMOOC</argument>
       </call>
       <call method="addPath">
         <argument>C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\vendor\symfony\symfony\src\Symfony\Bundle\DebugBundle/Resources/views</argument>
@@ -3367,7 +4600,7 @@
           <factory service="fos_user.doctrine_registry" method="getManager"/>
         </service>
       </argument>
-      <argument>Tesseract\UserBundle\Entity\Utilisateur</argument>
+      <argument>Tesseract\MOOCBundle\Entity\Utilisateur</argument>
     </service>
     <service id="fos_user.doctrine_registry" alias="doctrine"/>
     <service id="session.storage" alias="session.storage.native"/>

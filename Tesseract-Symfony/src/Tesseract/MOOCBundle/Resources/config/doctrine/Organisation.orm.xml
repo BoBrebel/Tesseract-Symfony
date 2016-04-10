@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Tesseract\MOOCBundle\Entity\Organisation" table="organisation">
+    <unique-constraints>
+      <unique-constraint name="matricule_UNIQUE" columns="matricule"/>
+    </unique-constraints>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nom" type="string" column="nom" length="45" nullable="true"/>
+    <field name="adress" type="string" column="adress" length="45" nullable="true"/>
+    <field name="email" type="string" column="email" length="255" nullable="false"/>
+    <field name="matricule" type="string" column="matricule" length="45" nullable="true"/>
+    <field name="photo" type="string" column="photo" length="45" nullable="true"/>
+  </entity>
+</doctrine-mapping>

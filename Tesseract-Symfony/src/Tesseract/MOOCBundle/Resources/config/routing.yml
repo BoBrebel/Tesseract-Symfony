@@ -1,3 +1,6 @@
 tesseract_mooc_homepage:
-    path:     /hello/{name}
+    path:     /
     defaults: { _controller: TesseractMOOCBundle:Default:index }
+tesseract_mooc_apprenant_interface:
+    path:     /apprenant
+    defaults: { _controller: TesseractMOOCBundle:Apprenant:index }

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Tesseract\MOOCBundle\Entity\Log" table="log">
+    <indexes>
+      <index name="fk_log_utilisateur1_idx" columns="id_utilisateur"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="tache" type="string" column="tache" length="45" nullable="true"/>
+    <field name="date" type="datetime" column="date" nullable="true"/>
+    <field name="cible" type="string" column="cible" length="20" nullable="true"/>
+    <many-to-one field="idUtilisateur" target-entity="Utilisateur">
+      <join-columns>
+        <join-column name="id_utilisateur" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

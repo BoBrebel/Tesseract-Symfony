@@ -1,0 +1,10 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+    {{ form_widget(form) }}
+    <div>
+      <div class="clear center-align">
+    <button type="submit" id="mc-embedded-subscribe" class="waves-effect waves-light btn-large green accent-2 indigo-text text-darken-4" >  Register</button>
+    </div>
+    </div>
+{{ form_end(form) }}

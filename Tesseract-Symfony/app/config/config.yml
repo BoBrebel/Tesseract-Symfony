@@ -2,10 +2,10 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
-
+    - { resource: @TesseractMOOCBundle/Resources/config/services.yml }
 framework:
     #esi:             ~
-    #translator:      { fallbacks: ["%locale%"] }
+    translator:      { fallbacks: ["%locale%"] }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -75,4 +75,7 @@ swiftmailer:
 fos_user:
     db_driver: orm 
     firewall_name: main
-    user_class: Tesseract\UserBundle\Entity\Utilisateur
+    user_class: Tesseract\MOOCBundle\Entity\Utilisateur
+    registration:
+        form:
+            type: app_user_registration

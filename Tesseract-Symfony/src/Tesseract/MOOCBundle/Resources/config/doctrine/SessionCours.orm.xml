@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Tesseract\MOOCBundle\Entity\SessionCours" table="session_cours">
+    <indexes>
+      <index name="id_chapitre" columns="nbr"/>
+      <index name="id_utilisateur" columns="id_utilisateur"/>
+      <index name="id_cour" columns="id_cours"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nbr" type="integer" column="nbr" nullable="true"/>
+    <field name="date" type="date" column="date" nullable="true"/>
+    <field name="badge" type="string" column="badge" length="255" nullable="true"/>
+    <many-to-one field="idUtilisateur" target-entity="Utilisateur">
+      <join-columns>
+        <join-column name="id_utilisateur" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idCours" target-entity="Cours">
+      <join-columns>
+        <join-column name="id_cours" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

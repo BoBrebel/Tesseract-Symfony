@@ -1,4 +1,9 @@
 services:
-#    tesseract_mooc.example:
-#        class: Tesseract\MOOCBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+    app.form.registration:
+        class: Tesseract\MOOCBundle\Form\RegistrationType
+        tags:
+            - { name: form.type, alias: app_user_registration }
+
+    redirect.after.login:
+        class: Tesseract\MOOCBundle\Redirection\AfterLoginRedirection
+        arguments: [@router]
