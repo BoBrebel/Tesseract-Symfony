@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Tesseract\UserBundle\TesseractUserBundle(),
+            new Tesseract\MOOCBundle\TesseractMOOCBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -1,3 +1,7 @@
+tesseract_mooc:
+    resource: "@TesseractMOOCBundle/Resources/config/routing.yml"
+    prefix:   /
+
 tesseract_user:
     resource: "@TesseractUserBundle/Resources/config/routing.yml"
     prefix:   /
