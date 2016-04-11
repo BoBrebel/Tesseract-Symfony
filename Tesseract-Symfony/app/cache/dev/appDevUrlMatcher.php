@@ -134,7 +134,7 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                     return $this->redirect($pathinfo.'/', 'tesseract_mooc_homepage');
                 }
 
-                return array (  '_controller' => 'Tesseract\\MOOCBundle\\Controller\\DefaultController::indexAction',  '_route' => 'tesseract_mooc_homepage',);
+                return array (  '_controller' => 'Tesseract\\MOOCBundle\\Controller\\OrganisationController::inscriptionOrganisationAction',  '_route' => 'tesseract_mooc_homepage',);
             }
 
             if (0 === strpos($pathinfo, '/tesseract/a')) {
@@ -148,6 +148,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                     return array (  '_controller' => 'Tesseract\\MOOCBundle\\Controller\\AdminController::indexAction',  '_route' => 'tesseract_mooc_admin_dashboard',);
                 }
 
+            }
+
+            // tesseract_mooc_oranisation_register_interface
+            if ($pathinfo === '/tesseract/registerorg') {
+                return array (  '_controller' => 'Tesseract\\MOOCBundle\\Controller\\OrganisationController::inscriptionOrganisationAction',  '_route' => 'tesseract_mooc_oranisation_register_interface',);
             }
 
         }
