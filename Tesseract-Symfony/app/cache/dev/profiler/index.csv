@@ -1734,3 +1734,5 @@ bdd49c,127.0.0.1,GET,http://localhost/symf/Tesseract-Symfony/Tesseract-Symfony/w
 0af772,127.0.0.1,POST,http://localhost/symf/Tesseract-Symfony/Tesseract-Symfony/web/app_dev.php/tesseract/login_check,1460449857,
 96ae3c,127.0.0.1,GET,http://localhost/symf/Tesseract-Symfony/Tesseract-Symfony/web/app_dev.php/tesseract/apprenant,1460449857,
 >>>>>>> origin/master
+f192d7,::1,GET,http://localhost/Tesseract-Symfony/Tesseract-Symfony/web/app_dev.php/tesseract/admin,1460388669,
+f21520,::1,GET,http://localhost/Tesseract-Symfony/Tesseract-Symfony/web/app_dev.php/tesseract/admin,1460388681,
