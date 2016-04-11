@@ -4,3 +4,6 @@ tesseract_mooc_homepage:
 tesseract_mooc_apprenant_interface:
     path:     /apprenant
     defaults: { _controller: TesseractMOOCBundle:Apprenant:index }
+tesseract_mooc_admin_dashboard:
+    path:     /admin
+    defaults: { _controller: TesseractMOOCBundle:Admin:index }
