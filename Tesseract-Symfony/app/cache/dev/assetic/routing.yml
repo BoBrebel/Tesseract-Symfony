@@ -1,5 +1,0 @@
-_assetic:
-    resource: .
-    type: assetic
-_app:
-    resource: 'C:\wamp\www\symf\Tesseract-Symfony\Tesseract-Symfony\app/config/routing_dev.yml'
