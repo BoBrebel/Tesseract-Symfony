@@ -119,7 +119,7 @@ class __TwigTemplate_1c477f0c01d5e1f06e1f0359ec89817ebefde2821cfadf63db2e071ad14
         echo "\">
 
         <!-- Site title -->
-        <title>Wata - shared on themelock.com</title>
+        <title>Tesseract coding</title>
     </head>
     <body>
         <div id=\"wrapper\">
@@ -175,7 +175,7 @@ class __TwigTemplate_1c477f0c01d5e1f06e1f0359ec89817ebefde2821cfadf63db2e071ad14
                             <li><a href=\"#services\">Services</a></li>
                             <li><a href=\"#works\">Works</a></li>
                             <li><a href=\"#about\">About</a></li>
-                            <li><a href=\"#prices\">Prices</a></li>
+                            <li><a href=\"#prices\">Organisation</a></li>
                             <li><a href=\"#subscribe\">Sign in</a></li>
                             <li><a href=\"#blog\">Register</a></li>
                             <li><a href=\"#contact\">Contact</a></li>
@@ -187,7 +187,7 @@ class __TwigTemplate_1c477f0c01d5e1f06e1f0359ec89817ebefde2821cfadf63db2e071ad14
                             <li><a href=\"#services\">Services</a></li>
                             <li><a href=\"#works\">Works</a></li>
                             <li><a href=\"#about\">About</a></li>
-                            <li><a href=\"#prices\">Prices</a></li>
+                            <li><a href=\"#prices\">Organisation</a></li>
                             <li><a href=\"#blog\">Blog</a></li>
                             <li><a href=\"#contact\">Contact</a></li>
                         </ul>
@@ -203,7 +203,7 @@ class __TwigTemplate_1c477f0c01d5e1f06e1f0359ec89817ebefde2821cfadf63db2e071ad14
                             <div class=\"row\">
                                 <div class=\"col s12\">
                                     <!-- Your company's slogan, feel free to add more tags here -->
-                                    <h1>We work really hard to make your live easier.</h1>
+                                    <h1>Improve yourself and learn new technologies through free courses.</h1>
                                 </div>
                             </div>
                         </div>
@@ -219,7 +219,7 @@ class __TwigTemplate_1c477f0c01d5e1f06e1f0359ec89817ebefde2821cfadf63db2e071ad14
             <div class=\"section scrollspy\" id=\"services\">
                 <div class=\"container\">
                     <div class=\"row\">
-                        <h2>We are Wata</h2>
+                        <h2>We are Tesseract</h2>
                         <div class=\"col s12 m10 offset-m1 l8 offset-l2\">
                             <p class=\"flow-text center-align\">
                                 We're a small local company focused on crafting special and precise products that really help in
@@ -351,7 +351,7 @@ class __TwigTemplate_1c477f0c01d5e1f06e1f0359ec89817ebefde2821cfadf63db2e071ad14
                         <h2>Like what you see?</h2>
                         <div class=\"col s12 m10 offset-m1 l8 offset-l2\">
                             <p class=\"flow-text center-align\">
-                                Let's start building your next project together. View our bundle <a href=\"#prices\">prices</a> or get started right away.
+                                Let's start building your next project together. View our bundle <a href=\"#prices\">Organisation</a> or get started right away.
                             </p>
                             <p class=\"center-align\">
                                 <a class=\"waves-effect waves-light btn-large green accent-2 indigo-text text-darken-4\">
@@ -494,78 +494,34 @@ class __TwigTemplate_1c477f0c01d5e1f06e1f0359ec89817ebefde2821cfadf63db2e071ad14
             <div class=\"section scrollspy\" id=\"prices\">
                 <div class=\"container\">
                     <div class=\"row\">
-                        <h2>Prices</h2>
+                        <h2>Organisation</h2>
                         <div class=\"col s12 m10 offset-m1 l8 offset-l2\">
                             <p class=\"flow-text center-align\">
-                                Browse between a standard, professional and extended bundle versions.
-                                We've got your next project covered.
+                                Start your own organisation by signing up here.
                             </p>
                         </div>
-                        <div class=\"col s12\">
-                            <!-- Currency switcher radio buttons -->
-                            <p class=\"right-align currency-switcher\">
-                                Choose your currency:
-                                <span class=\"currency-group\">
-                                    <input name=\"currency\" type=\"radio\" id=\"usd\" checked>
-                                    <label for=\"usd\">\$</label>
-                                </span>
-                                <span class=\"currency-group\">
-                                    <input name=\"currency\" type=\"radio\" id=\"eur\">
-                                    <label for=\"eur\">€</label>
-                                </span>
-                            </p>
-                        </div>
+                       
                     </div>
                     <div class=\"row\">
-                        <div class=\"col s12 m4\">
-                            <div class=\"price-container z-depth-1\" id=\"standard\">
-                                <div class=\"offer\">Standard</div>
-                                <div class=\"divider\"></div>
-                                <div class=\"price\">\$19</div>
-                                <ul>
-                                    <li>Mobile support</li>
-                                    <li>Site optimization</li>
-                                    <li>SEO setup</li>
-                                    <li>Subscribers</li>
-                                    <li>Support tickets</li>
-                                </ul>
-                                <a class=\"waves-effect waves-dark white black-text btn\">Choose</a>
+                     </div>
+                    <div class=\"row\">
+                        <div class=\"col s8 offset-s2\">
+                            <!-- Begin MailChimp Signup Form -->
+                            <div id=\"mc_embed_signup\">
+                                
+                                ";
+        // line 392
+        $this->env->loadTemplate("TesseractMOOCBundle:Registration:registerorg.html.twig")->display($context);
+        // line 393
+        echo "                                
+                               
                             </div>
-                        </div>
-                        <div class=\"col s12 m4\">
-                            <div class=\"price-container z-depth-1 best-offer\" id=\"professional\">
-                                <div class=\"offer best-value\">Professional</div>
-                                <div class=\"divider\"></div>
-                                <div class=\"price\">\$49</div>
-                                <ul>
-                                    <li>Mobile support</li>
-                                    <li>Site optimization</li>
-                                    <li>SEO setup</li>
-                                    <li>Subscribers</li>
-                                    <li>PHP integration</li>
-                                    <li>Unlimited support</li>
-                                </ul>
-                                <a class=\"waves-effect waves-light green accent-2 indigo-text text-darken-4 btn\">Choose</a>
-                            </div>
-                        </div>
-                        <div class=\"col s12 m4\">
-                            <div class=\"price-container z-depth-1\" id=\"extended\">
-                                <div class=\"offer\">Extended</div>
-                                <div class=\"divider\"></div>
-                                <div class=\"price\">\$99</div>
-                                <ul>
-                                    <li>Mobile support</li>
-                                    <li>Site optimization</li>
-                                    <li>SEO setup</li>
-                                    <li>MailChimp Subscribers</li>
-                                    <li>WebGL effects</li>
-                                    <li>PHP integration</li>
-                                    <li>Unlimited support</li>
-                                </ul>
-                                <a class=\"waves-effect waves-dark white black-text btn\">Choose</a>
-                            </div>
+                            <!--End mc_embed_signup-->
                         </div>
                     </div>
+                 
+            
+             
                 </div>
             </div>
 
@@ -584,11 +540,13 @@ class __TwigTemplate_1c477f0c01d5e1f06e1f0359ec89817ebefde2821cfadf63db2e071ad14
                         <div class=\"col s8 offset-s2\">
                             <!-- Begin MailChimp Signup Form -->
                             <div id=\"mc_embed_signup\">
+                              
                                 ";
-        // line 467
+        // line 421
         echo $this->env->getExtension('actions')->renderUri($this->env->getExtension('routing')->getUrl("fos_user_security_login"), array());
-        // line 468
-        echo "                               
+        // line 422
+        echo "                             
+                               
                             </div>
                             <!--End mc_embed_signup-->
                         </div>
@@ -618,9 +576,9 @@ class __TwigTemplate_1c477f0c01d5e1f06e1f0359ec89817ebefde2821cfadf63db2e071ad14
                             <!-- Begin MailChimp Signup Form -->
                             <div id=\"mc_embed_signup\">
                              ";
-        // line 497
+        // line 452
         echo $this->env->getExtension('actions')->renderUri($this->env->getExtension('routing')->getUrl("fos_user_registration_register"), array());
-        // line 498
+        // line 453
         echo "                            </div>
                             <!--End mc_embed_signup-->
                         </div>
@@ -643,10 +601,7 @@ class __TwigTemplate_1c477f0c01d5e1f06e1f0359ec89817ebefde2821cfadf63db2e071ad14
                         </div>
                     </div>
                     <div class=\"row\">
-                        <form class=\"col s12 m12 l8 offset-l2\" action=\"";
-        // line 520
-        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/mooc/php/mailer.php"), "html", null, true);
-        echo "\" id=\"contact-form\" novalidate>
+                     
                             <!-- This field helps us avoid spam bots, don't remove it -->
                             <div class=\"cant-touch-this\">
                                 <input type=\"text\" name=\"hammertime\" tabindex=\"-1\" value=\"\">
@@ -679,7 +634,7 @@ class __TwigTemplate_1c477f0c01d5e1f06e1f0359ec89817ebefde2821cfadf63db2e071ad14
                                     Send
                                 </button>
                             </div>
-                        </form>
+                       
                     </div>
                 </div>
                 <div class=\"wide-container\">
@@ -696,17 +651,17 @@ class __TwigTemplate_1c477f0c01d5e1f06e1f0359ec89817ebefde2821cfadf63db2e071ad14
                             <h5>Headquarters</h5>
                             <div class=\"divider\"></div>
                             <address>
-                                12 W 1st St<br>
-                                90001 Los Angeles<br>
-                                California<br>
+                                
+                                Tunisia<br>
+                                Tunis-Ariana<br>
                             </address>
                         </div>
                         <div class=\"col s12 m6 l4\">
                             <h5>Reach us</h5>
                             <div class=\"divider\"></div>
                             <p>
-                                +1-800-41-23-09<br>
-                                <a href=\"mailto:hello@wata.com\">hello@wata.com</a>
+                                0000<br>
+                                <a href=\"tesseract@esprit.com\">tesseract@esprit.com</a>
                             </p>
                         </div>
                         <div class=\"col s12 m6 l4 modern-connect\">
@@ -714,9 +669,9 @@ class __TwigTemplate_1c477f0c01d5e1f06e1f0359ec89817ebefde2821cfadf63db2e071ad14
                             <div class=\"divider\"></div>
                             <p>
                                 <!-- Add your Skype link here -->
-                                <a href=\"skype:wata?chat\"><i class=\"fa fa-skype\"></i> wata.skype</a><br>
-                                <i class=\"fa fa-whatsapp\"></i> wata.whatsapp<br>
-                                <i class=\"fa fa-wechat\"></i> wata.wechat
+                                <a href=\"skype:wata?chat\"><i class=\"fa fa-skype\"></i> tesseract.skype</a><br>
+                                <i class=\"fa fa-whatsapp\"></i> tesseract.linekdin<br>
+                                <i class=\"fa fa-wechat\"></i> tesseract.twitter
                             </p>
                         </div>
                     </div>
@@ -727,8 +682,8 @@ class __TwigTemplate_1c477f0c01d5e1f06e1f0359ec89817ebefde2821cfadf63db2e071ad14
             <footer class=\"page-footer\">
                 <div class=\"footer-copyright\">
                     <div class=\"container\">
-                        © 2015 Wata | <a href=\"";
-        // line 601
+                        © 2016 tesseract | <a href=\"";
+        // line 556
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/mooc/ajax/pages/privacy-policy.html"), "html", null, true);
         echo "\" class=\"ajax-link\">Privacy policy</a>
 
@@ -752,15 +707,15 @@ class __TwigTemplate_1c477f0c01d5e1f06e1f0359ec89817ebefde2821cfadf63db2e071ad14
         <!-- Scripts -->
         <script src=\"https://maps.googleapis.com/maps/api/js\"></script>
         <script src=\"";
-        // line 622
+        // line 577
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/mooc/scripts/config.js"), "html", null, true);
         echo "\"></script>
         <script src=\"";
-        // line 623
+        // line 578
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/mooc/scripts/build.js"), "html", null, true);
         echo "\"></script>
               <script src=\"";
-        // line 624
+        // line 579
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/mooc/scripts/mooc.js"), "html", null, true);
         echo "\"></script>
     </body>
@@ -779,6 +734,6 @@ class __TwigTemplate_1c477f0c01d5e1f06e1f0359ec89817ebefde2821cfadf63db2e071ad14
 
     public function getDebugInfo()
     {
-        return array (  764 => 624,  760 => 623,  756 => 622,  732 => 601,  648 => 520,  624 => 498,  622 => 497,  591 => 468,  589 => 467,  482 => 363,  456 => 340,  430 => 317,  404 => 294,  339 => 232,  335 => 231,  329 => 228,  325 => 227,  319 => 224,  315 => 223,  309 => 220,  305 => 219,  299 => 216,  295 => 215,  288 => 211,  118 => 44,  114 => 43,  110 => 42,  106 => 41,  100 => 38,  94 => 35,  90 => 34,  86 => 33,  82 => 32,  76 => 29,  72 => 28,  68 => 27,  64 => 26,  60 => 25,  56 => 24,  52 => 23,  48 => 22,  44 => 21,  35 => 15,  19 => 1,);
+        return array (  719 => 579,  715 => 578,  711 => 577,  687 => 556,  582 => 453,  580 => 452,  548 => 422,  546 => 421,  516 => 393,  514 => 392,  482 => 363,  456 => 340,  430 => 317,  404 => 294,  339 => 232,  335 => 231,  329 => 228,  325 => 227,  319 => 224,  315 => 223,  309 => 220,  305 => 219,  299 => 216,  295 => 215,  288 => 211,  118 => 44,  114 => 43,  110 => 42,  106 => 41,  100 => 38,  94 => 35,  90 => 34,  86 => 33,  82 => 32,  76 => 29,  72 => 28,  68 => 27,  64 => 26,  60 => 25,  56 => 24,  52 => 23,  48 => 22,  44 => 21,  35 => 15,  19 => 1,);
     }
 }

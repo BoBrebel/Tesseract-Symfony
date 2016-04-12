@@ -55,6 +55,54 @@ class Organisation
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
+    function getNom() {
+        return $this->nom;
+    }
+
+    function getAdress() {
+        return $this->adress;
+    }
+
+    function getEmail() {
+        return $this->email;
+    }
+
+    function getMatricule() {
+        return $this->matricule;
+    }
+
+    function getPhoto() {
+        return $this->photo;
+    }
+
+    function getId() {
+        return $this->id;
+    }
+
+    function setNom($nom) {
+        $this->nom = $nom;
+    }
+
+    function setAdress($adress) {
+        $this->adress = $adress;
+    }
+
+    function setEmail($email) {
+        $this->email = $email;
+    }
+
+    function setMatricule($matricule) {
+        $this->matricule = $matricule;
+    }
+
+    function setPhoto($photo) {
+        $this->photo = $photo;
+    }
+
+    function setId($id) {
+        $this->id = $id;
+    }
+
 
 
 }

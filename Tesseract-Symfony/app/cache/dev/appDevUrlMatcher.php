@@ -134,12 +134,17 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                     return $this->redirect($pathinfo.'/', 'tesseract_mooc_homepage');
                 }
 
-                return array (  '_controller' => 'Tesseract\\MOOCBundle\\Controller\\DefaultController::indexAction',  '_route' => 'tesseract_mooc_homepage',);
+                return array (  '_controller' => 'Tesseract\\MOOCBundle\\Controller\\OrganisationController::inscriptionOrganisationAction',  '_route' => 'tesseract_mooc_homepage',);
             }
 
             // tesseract_mooc_apprenant_interface
             if ($pathinfo === '/tesseract/apprenant') {
                 return array (  '_controller' => 'Tesseract\\MOOCBundle\\Controller\\ApprenantController::indexAction',  '_route' => 'tesseract_mooc_apprenant_interface',);
+            }
+
+            // tesseract_mooc_oranisation_register_interface
+            if ($pathinfo === '/tesseract/registerorg') {
+                return array (  '_controller' => 'Tesseract\\MOOCBundle\\Controller\\OrganisationController::inscriptionOrganisationAction',  '_route' => 'tesseract_mooc_oranisation_register_interface',);
             }
 
         }
