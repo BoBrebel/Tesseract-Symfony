@@ -20,13 +20,42 @@ class __TwigTemplate_c252dd29f5ddf9976529c127b970ffd4cc160d6cdf7f5896ad176fdc735
      
                             
 <form method=\"POST\">
-    ";
-        // line 5
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock((isset($context["formm"]) ? $context["formm"] : $this->getContext($context, "formm")), 'widget');
+   ";
+        // line 6
+        echo "   ";
+        // line 7
+        echo "        ";
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["formm"]) ? $context["formm"] : $this->getContext($context, "formm")), "nom", array()), 'row');
         echo "
-    ";
-        // line 21
-        echo "</form>
+    
+        ";
+        // line 9
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["formm"]) ? $context["formm"] : $this->getContext($context, "formm")), "adress", array()), 'row');
+        echo "
+    
+        ";
+        // line 11
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["formm"]) ? $context["formm"] : $this->getContext($context, "formm")), "email", array()), 'row');
+        echo "
+    
+        ";
+        // line 13
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["formm"]) ? $context["formm"] : $this->getContext($context, "formm")), "matricule", array()), 'row');
+        echo "
+    
+        ";
+        // line 15
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["formm"]) ? $context["formm"] : $this->getContext($context, "formm")), "photo", array()), 'row');
+        echo "
+        </br></br>
+        <div  style=\"text-align:center\">
+            ";
+        // line 18
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["formm"]) ? $context["formm"] : $this->getContext($context, "formm")), "Register", array()), 'row');
+        echo "
+        </div>
+        
+</form>
   ";
     }
 
@@ -42,6 +71,6 @@ class __TwigTemplate_c252dd29f5ddf9976529c127b970ffd4cc160d6cdf7f5896ad176fdc735
 
     public function getDebugInfo()
     {
-        return array (  29 => 21,  25 => 5,  19 => 1,);
+        return array (  54 => 18,  48 => 15,  43 => 13,  38 => 11,  33 => 9,  27 => 7,  25 => 6,  19 => 1,);
     }
 }
