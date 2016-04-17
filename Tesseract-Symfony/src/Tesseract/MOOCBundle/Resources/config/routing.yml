@@ -1,6 +1,9 @@
 tesseract_mooc_homepage:
     path:     /
     defaults: { _controller: TesseractMOOCBundle:Organisation:inscriptionOrganisation }
+tesseract_mooc_homepage_2:
+    path:     /home
+    defaults: { _controller: TesseractMOOCBundle:Default:index }
 tesseract_mooc_apprenant_interface:
     path:     /apprenant
     defaults: { _controller: TesseractMOOCBundle:Apprenant:index }
