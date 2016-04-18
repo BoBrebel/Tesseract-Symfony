@@ -1,3 +1,7 @@
+tesseract_mooc_log:
+    resource: "@TesseractMOOCBundle/Resources/config/routing/log.yml"
+    prefix:   /log
+
 tesseract_mooc_homepage:
     path:     /
     defaults: { _controller: TesseractMOOCBundle:Organisation:inscriptionOrganisation }

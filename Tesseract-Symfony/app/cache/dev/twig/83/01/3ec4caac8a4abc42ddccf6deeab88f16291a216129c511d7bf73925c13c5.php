@@ -20,6 +20,7 @@ class __TwigTemplate_83013ec4caac8a4abc42ddccf6deeab88f16291a216129c511d7bf73925
         $this->blocks = array(
             'header' => array($this, 'block_header'),
             'menubar' => array($this, 'block_menubar'),
+            'content' => array($this, 'block_content'),
             'offcanvas' => array($this, 'block_offcanvas'),
         );
     }
@@ -223,9 +224,17 @@ class __TwigTemplate_83013ec4caac8a4abc42ddccf6deeab88f16291a216129c511d7bf73925
     }
 
     // line 174
-    public function block_offcanvas($context, array $blocks = array())
+    public function block_content($context, array $blocks = array())
     {
         // line 175
+        echo "    
+    ";
+    }
+
+    // line 177
+    public function block_offcanvas($context, array $blocks = array())
+    {
+        // line 178
         echo "
     <div id=\"offcanvas-search\" class=\"offcanvas-pane width-8\">
         <div class=\"offcanvas-head\">
@@ -305,6 +314,6 @@ class __TwigTemplate_83013ec4caac8a4abc42ddccf6deeab88f16291a216129c511d7bf73925
 
     public function getDebugInfo()
     {
-        return array (  229 => 175,  226 => 174,  164 => 115,  161 => 114,  131 => 87,  127 => 86,  122 => 84,  41 => 5,  38 => 4,  11 => 1,);
+        return array (  238 => 178,  235 => 177,  230 => 175,  227 => 174,  165 => 115,  162 => 114,  132 => 87,  128 => 86,  123 => 84,  42 => 5,  39 => 4,  11 => 1,);
     }
 }

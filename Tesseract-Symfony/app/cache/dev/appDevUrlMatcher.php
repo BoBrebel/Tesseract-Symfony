@@ -128,6 +128,66 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         }
 
         if (0 === strpos($pathinfo, '/tesseract')) {
+            if (0 === strpos($pathinfo, '/tesseract/log')) {
+                // log
+                if (rtrim($pathinfo, '/') === '/tesseract/log') {
+                    if (substr($pathinfo, -1) !== '/') {
+                        return $this->redirect($pathinfo.'/', 'log');
+                    }
+
+                    return array (  '_controller' => 'Tesseract\\MOOCBundle\\Controller\\LogController::indexAction',  '_route' => 'log',);
+                }
+
+                // log_show
+                if (preg_match('#^/tesseract/log/(?P<id>[^/]++)/show$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'log_show')), array (  '_controller' => 'Tesseract\\MOOCBundle\\Controller\\LogController::showAction',));
+                }
+
+                // log_new
+                if ($pathinfo === '/tesseract/log/new') {
+                    return array (  '_controller' => 'Tesseract\\MOOCBundle\\Controller\\LogController::newAction',  '_route' => 'log_new',);
+                }
+
+                // log_create
+                if ($pathinfo === '/tesseract/log/create') {
+                    if ($this->context->getMethod() != 'POST') {
+                        $allow[] = 'POST';
+                        goto not_log_create;
+                    }
+
+                    return array (  '_controller' => 'Tesseract\\MOOCBundle\\Controller\\LogController::createAction',  '_route' => 'log_create',);
+                }
+                not_log_create:
+
+                // log_edit
+                if (preg_match('#^/tesseract/log/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'log_edit')), array (  '_controller' => 'Tesseract\\MOOCBundle\\Controller\\LogController::editAction',));
+                }
+
+                // log_update
+                if (preg_match('#^/tesseract/log/(?P<id>[^/]++)/update$#s', $pathinfo, $matches)) {
+                    if (!in_array($this->context->getMethod(), array('POST', 'PUT'))) {
+                        $allow = array_merge($allow, array('POST', 'PUT'));
+                        goto not_log_update;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'log_update')), array (  '_controller' => 'Tesseract\\MOOCBundle\\Controller\\LogController::updateAction',));
+                }
+                not_log_update:
+
+                // log_delete
+                if (preg_match('#^/tesseract/log/(?P<id>[^/]++)/delete$#s', $pathinfo, $matches)) {
+                    if (!in_array($this->context->getMethod(), array('POST', 'DELETE'))) {
+                        $allow = array_merge($allow, array('POST', 'DELETE'));
+                        goto not_log_delete;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'log_delete')), array (  '_controller' => 'Tesseract\\MOOCBundle\\Controller\\LogController::deleteAction',));
+                }
+                not_log_delete:
+
+            }
+
             // tesseract_mooc_homepage
             if (rtrim($pathinfo, '/') === '/tesseract') {
                 if (substr($pathinfo, -1) !== '/') {
