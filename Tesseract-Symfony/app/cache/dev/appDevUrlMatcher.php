@@ -197,6 +197,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 return array (  '_controller' => 'Tesseract\\MOOCBundle\\Controller\\OrganisationController::inscriptionOrganisationAction',  '_route' => 'tesseract_mooc_homepage',);
             }
 
+            // tesseract_mooc_homepage_2
+            if ($pathinfo === '/tesseract/home') {
+                return array (  '_controller' => 'Tesseract\\MOOCBundle\\Controller\\DefaultController::indexAction',  '_route' => 'tesseract_mooc_homepage_2',);
+            }
+
             if (0 === strpos($pathinfo, '/tesseract/a')) {
                 // tesseract_mooc_apprenant_interface
                 if ($pathinfo === '/tesseract/apprenant') {
@@ -213,6 +218,16 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             // tesseract_mooc_oranisation_register_interface
             if ($pathinfo === '/tesseract/registerorg') {
                 return array (  '_controller' => 'Tesseract\\MOOCBundle\\Controller\\OrganisationController::inscriptionOrganisationAction',  '_route' => 'tesseract_mooc_oranisation_register_interface',);
+            }
+
+            // tesseract_profile_apprenant
+            if ($pathinfo === '/tesseract/profileapprenant') {
+                return array (  '_controller' => 'Tesseract\\MOOCBundle\\Controller\\ApprenantController::profileApprenantAction',  '_route' => 'tesseract_profile_apprenant',);
+            }
+
+            // tesseract_afficher_cours_categ
+            if ($pathinfo === '/tesseract/courses-categ') {
+                return array (  '_controller' => 'Tesseract\\MOOCBundle\\Controller\\ApprenantController::coursesCategApprenantAction',  '_route' => 'tesseract_afficher_cours_categ',);
             }
 
         }

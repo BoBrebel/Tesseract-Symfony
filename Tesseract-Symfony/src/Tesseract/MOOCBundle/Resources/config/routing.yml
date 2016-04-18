@@ -5,6 +5,9 @@ tesseract_mooc_log:
 tesseract_mooc_homepage:
     path:     /
     defaults: { _controller: TesseractMOOCBundle:Organisation:inscriptionOrganisation }
+tesseract_mooc_homepage_2:
+    path:     /home
+    defaults: { _controller: TesseractMOOCBundle:Default:index }
 tesseract_mooc_apprenant_interface:
     path:     /apprenant
     defaults: { _controller: TesseractMOOCBundle:Apprenant:index }
@@ -17,3 +20,11 @@ tesseract_mooc_oranisation_register_interface:
     path:     /registerorg
     defaults: { _controller: TesseractMOOCBundle:Organisation:inscriptionOrganisation }
 
+
+tesseract_profile_apprenant:
+    path:    /profileapprenant
+    defaults: { _controller: TesseractMOOCBundle:Apprenant:profileApprenant }
+    
+tesseract_afficher_cours_categ:
+    path:    /courses-categ
+    defaults: { _controller: TesseractMOOCBundle:Apprenant:coursesCategApprenant }

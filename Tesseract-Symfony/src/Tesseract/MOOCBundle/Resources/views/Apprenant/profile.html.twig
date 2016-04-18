@@ -1,0 +1,13 @@
+{%  extends "TesseractMOOCBundle:LayoutApprenant:layoutprofile.html.twig"%}
+{% block iconeprofile %}
+    {% include 'TesseractMOOCBundle:Apprenant:iconeprofile.html.twig' %}
+
+{% endblock %}
+
+{% block matieres %} 
+    {% include 'TesseractMOOCBundle:Apprenant:affichermatieres.html.twig' %}
+{% endblock %}
+{% block body %} 
+   {% include 'TesseractMOOCBundle:Apprenant:formprofile.html.twig' %}
+{% endblock %}
+

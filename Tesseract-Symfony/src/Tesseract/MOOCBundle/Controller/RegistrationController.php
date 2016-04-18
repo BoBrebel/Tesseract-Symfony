@@ -47,6 +47,7 @@ class RegistrationController extends BaseController {
             } else if (strcmp((string) $user->getType(), "student") == 0) {
                 $user->addRole("ROLE_APR");
             }
+            $user->uploadProfilePicture();
             $event = new FormEvent($form, $request);
             $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
 

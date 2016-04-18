@@ -1,0 +1,3 @@
+{% for i in item %}
+    <li><a href='{{path('tesseract_afficher_cours_categ',{'id':i.id})}}'><span>{{i.nom}}</span></a></li>
+    {% endfor %}

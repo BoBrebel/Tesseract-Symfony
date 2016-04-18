@@ -8,6 +8,6 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('TesseractMOOCBundle:Default:index.html.twig');
+        return $this->render('TesseractMOOCBundle:Default:home.html.twig');
     }
 }

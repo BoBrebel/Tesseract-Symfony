@@ -1,0 +1,28 @@
+<ul>
+    
+
+{% for course in pagination %}
+    <li style="display:inline-block; margin-left: 100px;margin-top: 100px;">
+    <div style="background-color: white ;width: 200px;box-shadow: 0 2px 2px rgba(0,0,0,0.15);">
+        <div  style="background-color: yellow ; height: 150px; ">
+            <img src=""> 
+        </div>
+        <span style="font-family: "Roboto", sans-serif;font-weight: normal;" >
+          {{course.nom}}
+    </span>
+    </br>
+    <span style="font-family: "Roboto", sans-serif;font-weight: normal;">
+           {{course.difficulte}}
+</span> 
+<span style="font-family: "Roboto", sans-serif;font-weight: normal;">
+    (125)
+</span> 
+<input type="submit" value="sybuscribe" style="width: 200px;">
+</div>
+</li>
+{% endfor %}
+
+<div class="navigation">
+{{ knp_pagination_render(pagination) }}
+</div>
+</ul>
