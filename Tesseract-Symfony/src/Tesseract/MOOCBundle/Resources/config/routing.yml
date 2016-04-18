@@ -16,3 +16,7 @@ tesseract_mooc_oranisation_register_interface:
     path:     /registerorg
     defaults: { _controller: TesseractMOOCBundle:Organisation:inscriptionOrganisation }
 
+
+tesseract_profile_apprenant:
+    path:    /profileapprenant
+    defaults: { _controller: TesseractMOOCBundle:Apprenant:profileApprenant }

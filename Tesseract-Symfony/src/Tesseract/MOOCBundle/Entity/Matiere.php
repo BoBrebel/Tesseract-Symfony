@@ -35,5 +35,29 @@ class Matiere
      */
     private $id;
 
+    function getNom() {
+        return $this->nom;
+    }
+
+    function getDescription() {
+        return $this->description;
+    }
+
+    function getId() {
+        return $this->id;
+    }
+
+    function setNom($nom) {
+        $this->nom = $nom;
+    }
+
+    function setDescription($description) {
+        $this->description = $description;
+    }
+
+    function setId($id) {
+        $this->id = $id;
+    }
+
 
 }

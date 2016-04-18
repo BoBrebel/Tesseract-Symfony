@@ -111,5 +111,109 @@ class Cours
      */
     private $idMatiere;
 
+    function getNom() {
+        return $this->nom;
+    }
+
+    function getDifficulte() {
+        return $this->difficulte;
+    }
+
+    function getDescription() {
+        return $this->description;
+    }
+
+    function getBadge() {
+        return $this->badge;
+    }
+
+    function getAffiche() {
+        return $this->affiche;
+    }
+
+    function getVideo() {
+        return $this->video;
+    }
+
+    function getValidation1() {
+        return $this->validation1;
+    }
+
+    function getValidation2() {
+        return $this->validation2;
+    }
+
+    function getLanguage() {
+        return $this->language;
+    }
+
+    function getUpload() {
+        return $this->upload;
+    }
+
+    function getId() {
+        return $this->id;
+    }
+
+    function getIdUtilisateur() {
+        return $this->idUtilisateur;
+    }
+
+    function getIdMatiere() {
+        return $this->idMatiere;
+    }
+
+    function setNom($nom) {
+        $this->nom = $nom;
+    }
+
+    function setDifficulte($difficulte) {
+        $this->difficulte = $difficulte;
+    }
+
+    function setDescription($description) {
+        $this->description = $description;
+    }
+
+    function setBadge($badge) {
+        $this->badge = $badge;
+    }
+
+    function setAffiche($affiche) {
+        $this->affiche = $affiche;
+    }
+
+    function setVideo($video) {
+        $this->video = $video;
+    }
+
+    function setValidation1($validation1) {
+        $this->validation1 = $validation1;
+    }
+
+    function setValidation2($validation2) {
+        $this->validation2 = $validation2;
+    }
+
+    function setLanguage($language) {
+        $this->language = $language;
+    }
+
+    function setUpload(\DateTime $upload) {
+        $this->upload = $upload;
+    }
+
+    function setId($id) {
+        $this->id = $id;
+    }
+
+    function setIdUtilisateur(\Tesseract\UserBundle\Entity\Utilisateur $idUtilisateur) {
+        $this->idUtilisateur = $idUtilisateur;
+    }
+
+    function setIdMatiere(\Tesseract\UserBundle\Entity\Matiere $idMatiere) {
+        $this->idMatiere = $idMatiere;
+    }
+
 
 }

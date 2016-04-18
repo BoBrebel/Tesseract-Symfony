@@ -1,8 +1,10 @@
 <?php
 
 namespace Tesseract\MOOCBundle\Entity;
+
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Utilisateur
@@ -10,8 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="utilisateur", uniqueConstraints={@ORM\UniqueConstraint(name="nom_utilisateur_UNIQUE", columns={"pseudo"})}, indexes={@ORM\Index(name="fk_users_organisations1_idx", columns={"id_organisation"})})
  * @ORM\Entity
  */
-class Utilisateur extends BaseUser
-{
+class Utilisateur extends BaseUser {
+
     /**
      * @var string
      *
@@ -128,9 +130,14 @@ class Utilisateur extends BaseUser
      * })
      */
     private $idOrganisation;
-
     private $type;
-            function getNom() {
+
+    /**
+     * @Assert\File(maxSize="50000k")
+     */
+    public $file;
+
+    function getNom() {
         return $this->nom;
     }
 
@@ -229,6 +236,7 @@ class Utilisateur extends BaseUser
     function setId($id) {
         $this->id = $id;
     }
+
     function getType() {
         return $this->type;
     }
@@ -237,9 +245,50 @@ class Utilisateur extends BaseUser
         $this->type = $type;
     }
 
-        function setIdOrganisation($idOrganisation) {
+    function setIdOrganisation($idOrganisation) {
         $this->idOrganisation = $idOrganisation;
     }
+
+    public function getWebPath() {
+        return null === $this->photo ? null : $this->getUploadDir() . '/' . $this->photo;
+    }
+
+    protected function getUploadRootDir() {
+        // le chemin absolu du répertoire dans lequel sauvegarder les photos de profil
+        return __DIR__ . '/../../../../web/' . $this->getUploadDir();
+    }
+
+    protected function getUploadDir() {
+        // get rid of the __DIR__ so it doesn't screw when displaying uploaded doc/image in the view.
+        return 'uploads/pictures';
+    }
+
+    public function uploadProfilePicture() {
+        // Nous utilisons le nom de fichier original, donc il est dans la pratique 
+        // nécessaire de le nettoyer pour éviter les problèmes de sécurité
+
+        $nowTime = new \DateTime();
+
+        $randTime = $nowTime->format('Y-m-d-H-i-s');
+
+        // move copie le fichier présent chez le client dans le répertoire indiqué.
+        $this->file->move($this->getUploadRootDir(), md5($this->file->getClientOriginalName() . '' . $randTime) . '.jpg');
+
+        // On sauvegarde le nom de fichier
+        $this->photo = md5($this->file->getClientOriginalName() . '' . $randTime) . '.jpg';
+
+
+        // La propriété file ne servira plus
+        $this->file = null;
+    }
+    function getFile() {
+        return $this->file;
+    }
+
+    function setFile($file) {
+        $this->file = $file;
+    }
+
 
 
 }
