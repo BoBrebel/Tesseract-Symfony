@@ -237,7 +237,7 @@ class Utilisateur extends BaseUser
         $this->type = $type;
     }
 
-        function setIdOrganisation(\Tesseract\AccessBundle\Entity\Organisation $idOrganisation) {
+        function setIdOrganisation($idOrganisation) {
         $this->idOrganisation = $idOrganisation;
     }
 
