@@ -1,6 +1,10 @@
 $(document).ready(function (){
  
-
-
-    alert('hii');
+$('#profilepic').click(function (){
+   $var = $((this)).val();
+        if ($var!==''){
+            
+          
+        }
+});
 });

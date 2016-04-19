@@ -20,3 +20,7 @@ tesseract_mooc_oranisation_register_interface:
 tesseract_profile_apprenant:
     path:    /profileapprenant
     defaults: { _controller: TesseractMOOCBundle:Apprenant:profileApprenant }
+    
+tesseract_afficher_cours_categ:
+    path:    /courses-categ
+    defaults: { _controller: TesseractMOOCBundle:Apprenant:coursesCategApprenant }

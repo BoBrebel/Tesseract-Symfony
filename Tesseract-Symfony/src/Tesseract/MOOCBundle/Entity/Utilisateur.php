@@ -197,7 +197,7 @@ class Utilisateur extends BaseUser {
         $this->prenom = $prenom;
     }
 
-    function setDateNaissance(\DateTime $dateNaissance) {
+    function setDateNaissance( $dateNaissance) {
         $this->dateNaissance = $dateNaissance;
     }
 
@@ -286,6 +286,7 @@ class Utilisateur extends BaseUser {
     }
 
     function setFile($file) {
+         
         $this->file = $file;
     }
 

@@ -42,16 +42,42 @@ class ApprenantController extends Controller {
     public function profileApprenantAction() {
         $user = $this->getUser();
         $utilisateur = new \Tesseract\MOOCBundle\Entity\Utilisateur();
-        $form = $this->createForm(new \Tesseract\MOOCBundle\Form\CurrentUserType(), $utilisateur);
+        $form = $this->createForm(new \Tesseract\MOOCBundle\Form\CurrentUserType(), $user);
         $em = $this->getDoctrine()->getManager();
         $items = $em->getRepository("TesseractMOOCBundle:Matiere")->findAll();
-        $utilisateur = $em->getRepository("TesseractMOOCBundle:Utilisateur")->find($user->getId());
-        return $this->render('TesseractMOOCBundle:Apprenant:profile.html.twig', array('form' =>$form->createView(), 'user' => $user, 'item' => $items));
+        // $utilisateur = $em->getRepository("TesseractMOOCBundle:Utilisateur")->find($user->getId());
+
+        $request = $this->getRequest();
+
+        $form->handleRequest($request);
+
+
+
+
+
+        if ($form->isValid() && ($request->getMethod() == "POST")) {
+            print_r($user->getFile());
+            $user->uploadProfilePicture();
+            $em->merge($user);
+            $em->flush();
+
+            // return $this->render("TesseractMOOCBundle:Apprenant:profffile.html.twig", array('form' => $form->createView(), 'user' => $user, 'item' => $items));
+            return $this->render("TesseractMOOCBundle:Apprenant:profile.html.twig", array('form' => $form->createView(), 'user' => $user, 'item' => $items));
+        }
+
+        return $this->render('TesseractMOOCBundle:Apprenant:profile.html.twig', array('form' => $form->createView(), 'user' => $user, 'item' => $items));
     }
-public function updatePhoto() {
-    
-    
-    
-}    
+
+    public function updatePhoto() {
+        
+    }
+
+    public function coursesCategApprenantAction() {
+         $user = $this->getUser();
+        $request = $this->get('request');
+        $em = $this->getDoctrine()->getManager();
+        $items = $em->getRepository("TesseractMOOCBundle:Matiere")->findAll();
+         return $this->render('TesseractMOOCBundle:Apprenant:courses_categ.html.twig', array('user' => $user, 'item' => $items));
+    }
 
 }
