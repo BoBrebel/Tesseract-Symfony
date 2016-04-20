@@ -1,0 +1,47 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Objectif list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Numero</th>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>Difficulte</th>
+                <th>Id</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('objectif_show', { 'id': entity.id }) }}">{{ entity.numero }}</a></td>
+                <td>{{ entity.nom }}</td>
+                <td>{{ entity.description }}</td>
+                <td>{{ entity.difficulte }}</td>
+                <td>{{ entity.id }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('objectif_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('objectif_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('objectif_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

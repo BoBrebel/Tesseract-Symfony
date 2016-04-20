@@ -1,0 +1,47 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Chapitre list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Numero</th>
+                <th>Description</th>
+                <th>Resume</th>
+                <th>Id</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('chapitre_show', { 'id': entity.id }) }}">{{ entity.nom }}</a></td>
+                <td>{{ entity.numero }}</td>
+                <td>{{ entity.description }}</td>
+                <td>{{ entity.resume }}</td>
+                <td>{{ entity.id }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('chapitre_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('chapitre_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('chapitre_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

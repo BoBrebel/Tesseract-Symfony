@@ -1,0 +1,40 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>SessionCours</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Nbr</th>
+                <td>{{ entity.nbr }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ entity.date|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Badge</th>
+                <td>{{ entity.badge }}</td>
+            </tr>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('sessioncours') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('sessioncours_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}
