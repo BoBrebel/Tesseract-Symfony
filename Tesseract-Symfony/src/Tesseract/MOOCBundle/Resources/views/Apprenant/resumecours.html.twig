@@ -1,0 +1,45 @@
+
+<div>
+    {{cours.nom}}
+    {{cours.video}}
+
+</div>
+
+<div class="video-container" style="width: 800px;height: 300px;">
+    <iframe width="800" height="200" src="https://www.youtube.com/embed/watch?v=BEhMjZGJQ-Y&index=18&list=PLL24PCE8BNk23eR2_tWZ30u8XZ7OEdMom" frameborder="0" allowfullscreen></iframe>
+</div>
+
+<div style="z-index: 1003; display: block; opacity: 1; bottom: 0px;" id="modal3" class="modal bottom-sheet open">
+    <div class="modal-content">
+        <h4>Comments</h4>
+        <ul class="collection">
+             <li>
+                <form method="POST">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <textarea id="textarea1" class="materialize-textarea" length="120"></textarea>
+                        <label for="textarea1">add comment</label>
+                    </div>
+                    <input type="submit" value="submit">
+                </div>
+                </form>
+
+            </li>
+            {% for item in pagination %}
+
+                <li class="collection-item avatar">
+                    <img src="../../uploads/pictures/{{item.photo}}" alt="" class="circle">
+                    <span class="title">{{item.username}}</span>
+                    <p>{{item.commentaire }}<br>
+
+                    </p>
+                    <p> Le {{item.date|date('Y-m-d\\TH:i:sP')}}
+
+                    </p>
+
+                </li>
+            {% endfor %}
+           
+        </ul>
+    </div>
+</div>

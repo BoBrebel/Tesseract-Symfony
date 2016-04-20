@@ -207,11 +207,11 @@ class Cours
         $this->id = $id;
     }
 
-    function setIdUtilisateur(\Tesseract\UserBundle\Entity\Utilisateur $idUtilisateur) {
+    function setIdUtilisateur(\Tesseract\MOOCBundle\Entity\Utilisateur $idUtilisateur) {
         $this->idUtilisateur = $idUtilisateur;
     }
 
-    function setIdMatiere(\Tesseract\UserBundle\Entity\Matiere $idMatiere) {
+    function setIdMatiere(\Tesseract\MOOCBundle\Entity\Matiere $idMatiere) {
         $this->idMatiere = $idMatiere;
     }
 

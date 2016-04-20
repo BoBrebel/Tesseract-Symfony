@@ -1,0 +1,30 @@
+<ul>
+
+
+    
+    {% for course in pagination %}
+        <li style="display:inline-block; margin-left: 100px;margin-top: 100px;">
+
+            <div class="card" style="width: 300px; height: 300px;" >
+                <div class="card-image waves-effect waves-block waves-light"  style="width: 300px; height: 200px;">
+                    <img style="height: 200px; width: 300px;" class="activator" src="../../uploads/pictures/{{course.affiche}}">
+                </div>
+                <div class="card-content" >
+                    <span class="card-title activator grey-text text-darken-4"> {{course.nom}}<i class="material-icons right">more_vert</i></span>
+                    </br>
+                    <a href="{{ path ('course_subscribed_id',{'id':course.id})}}"> Subscribe</a>
+                   |
+                   <a href="{{ path ('course_comments_id',{'id':course.id})}}" id="{{course.id}}" class="modal-trigger"> Comments</a>
+                </div>
+                <div class="card-reveal">
+                    <span class="card-title grey-text text-darken-4"> {{course.difficulte}}<i class="material-icons right">close</i></span>
+                    <p> {{course.description}}</p>
+                </div>
+            </div>
+        </li>
+    {% endfor %}
+
+<div class="navigation">
+    {{ knp_pagination_render(pagination) }}
+</div>
+</ul>

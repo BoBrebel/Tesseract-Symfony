@@ -24,3 +24,19 @@ tesseract_profile_apprenant:
 tesseract_afficher_cours_categ:
     path:    /courses-categ
     defaults: { _controller: TesseractMOOCBundle:Apprenant:coursesCategApprenant }
+    
+course_subscribed_id:
+    path:   /course-subed
+    defaults: { _controller: TesseractMOOCBundle:Apprenant:coursesSubedApprenant }
+    
+course_comments_id:
+    path:   /course-comm
+    defaults: { _controller: TesseractMOOCBundle:Apprenant:coursesCommentsApprenant }
+    
+afficher_cours_chap_appr:
+    path:     /session
+    defaults: { _controller: TesseractMOOCBundle:Apprenant:afficherContenuCours }
+terminer_cours_chap_appr:
+    path:     /nextsession
+    defaults: { _controller: TesseractMOOCBundle:Apprenant:terminerCours }
+   

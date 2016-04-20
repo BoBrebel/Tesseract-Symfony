@@ -1,0 +1,25 @@
+{%  extends "TesseractMOOCBundle:LayoutApprenant:layoutsubscribe.html.twig"%}
+
+
+{% block nav %}
+
+    {% for item in pagination | slice(0,session.nbr+1)%}
+     <a href="{{path('afficher_cours_chap_appr',{'idcours':item.idCours,'idchapitre':item.id})}}" class="breadcrumb">{{item.nom}}</a>
+    
+    {% endfor %}
+{% endblock %}
+
+
+{% block video %} 
+
+
+{% endblock %}
+              
+       
+                    
+                      {% block contenu %}
+                      
+                        
+                        
+                      {% endblock %}
+

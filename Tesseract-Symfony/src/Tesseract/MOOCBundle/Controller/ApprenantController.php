@@ -1,20 +1,9 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 namespace Tesseract\MOOCBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-/**
- * Description of ApprenantController
- *
- * @author haikal
- */
 class ApprenantController extends Controller {
 
     public function indexAction() {
@@ -22,12 +11,6 @@ class ApprenantController extends Controller {
         $request = $this->get('request');
         $em = $this->getDoctrine()->getManager();
         $items = $em->getRepository("TesseractMOOCBundle:Matiere")->findAll();
-        // $courses = $em->getRepository("TesseractMOOCBundle:Cours")->findAll();
-//     $dql = "SELECT a FROM TesseractMOOCBundle:Cours a";
-//     $query = $em->createQuery($dql);
-//     
-//     $paginator = $this->get('knp_paginator');
-//     $pagination= $paginator->pa
 
         $dql = "SELECT a FROM TesseractMOOCBundle:Cours a";
         $query = $em->createQuery($dql);
@@ -45,7 +28,7 @@ class ApprenantController extends Controller {
         $form = $this->createForm(new \Tesseract\MOOCBundle\Form\CurrentUserType(), $user);
         $em = $this->getDoctrine()->getManager();
         $items = $em->getRepository("TesseractMOOCBundle:Matiere")->findAll();
-        // $utilisateur = $em->getRepository("TesseractMOOCBundle:Utilisateur")->find($user->getId());
+
 
         $request = $this->getRequest();
 
@@ -61,7 +44,6 @@ class ApprenantController extends Controller {
             $em->merge($user);
             $em->flush();
 
-            // return $this->render("TesseractMOOCBundle:Apprenant:profffile.html.twig", array('form' => $form->createView(), 'user' => $user, 'item' => $items));
             return $this->render("TesseractMOOCBundle:Apprenant:profile.html.twig", array('form' => $form->createView(), 'user' => $user, 'item' => $items));
         }
 
@@ -72,12 +54,115 @@ class ApprenantController extends Controller {
         
     }
 
-    public function coursesCategApprenantAction() {
-         $user = $this->getUser();
+    public function coursesCategApprenantAction(\Symfony\Component\HttpFoundation\Request $req) {
+        $user = $this->getUser();
+        $id = $req->get('id');
         $request = $this->get('request');
         $em = $this->getDoctrine()->getManager();
         $items = $em->getRepository("TesseractMOOCBundle:Matiere")->findAll();
-         return $this->render('TesseractMOOCBundle:Apprenant:courses_categ.html.twig', array('user' => $user, 'item' => $items));
+        $dql = "SELECT a FROM TesseractMOOCBundle:Cours a where a.idMatiere = :id and a.validation2  = :val";
+
+        $query = $em->createQuery($dql)->setParameters(array('id' => $id, 'val' => 'ACC'));
+
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+                $query, $request->query->get('page', 1), 4);
+        return $this->render('TesseractMOOCBundle:Apprenant:courses_categ.html.twig', array('user' => $user, 'item' => $items, 'pagination' => $pagination));
+    }
+
+    public function coursesSubedApprenantAction(\Symfony\Component\HttpFoundation\Request $req) {
+        $user = $this->getUser();
+        $id = $req->get('id');
+        $em = $this->getDoctrine()->getManager();
+
+        $cours = $em->getRepository('TesseractMOOCBundle:Cours')->find($id);
+        $session = new \Tesseract\MOOCBundle\Entity\SessionCours();
+        $session->setNbr(0);
+
+        $session->setIdUtilisateur($user);
+        $session->setIdCours($cours);
+//        $em->persist($session);
+//        $em->flush();
+        $dql = 'SELECT c FROM TesseractMOOCBundle:Chapitre c where c.idCours = :id '
+        ;
+        $dql2 = 'SELECT c FROM TesseractMOOCBundle:SessionCours c where c.idCours = :id1 and c.idUtilisateur =:id2 '
+        ;
+
+        $query = $em->createQuery($dql)->setParameters(array('id' => $id));
+        $pagination = $query->getResult();
+        $query2 = $em->createQuery($dql2)->setParameters(array('id1' => $id, 'id2' => $user->getId()));
+        $sessioncours = $query2->getResult();
+        return $this->render('TesseractMOOCBundle:Apprenant:subs.html.twig', array('pagination' => $pagination, 'session' => $sessioncours[0]));
+    }
+
+    public function coursesCommentsApprenantAction(\Symfony\Component\HttpFoundation\Request $req) {
+        $user = $this->getUser();
+        $id = $req->get('id');
+        $request = $this->get('request');
+        $em = $this->getDoctrine()->getManager();
+        $items = $em->getRepository("TesseractMOOCBundle:Matiere")->findAll();
+        $cours = $em->getRepository("TesseractMOOCBundle:Cours")->find($id);
+
+        $dql = 'SELECT cc.commentaire, cc.date , c.username,c.photo FROM TesseractMOOCBundle:CommentaireCours cc join cc.idUtilisateur c  where cc.idCours = :id '
+        ;
+
+        $query = $em->createQuery($dql)->setParameters(array('id' => $id));
+        $pagination = $query->getResult();
+
+
+        return $this->render('TesseractMOOCBundle:Apprenant:commentairecours.html.twig', array('user' => $user, 'item' => $items, 'cours' => $cours, 'pagination' => $pagination));
+    }
+
+    public function afficherContenuCoursAction(\Symfony\Component\HttpFoundation\Request $req) {
+          $user = $this->getUser();
+        $id = $req->get('idchapitre');
+        $em = $this->getDoctrine()->getManager();
+
+        $cours = $em->getRepository('TesseractMOOCBundle:Cours')->find($id);
+        $session = new \Tesseract\MOOCBundle\Entity\SessionCours();
+        $session->setNbr(0);
+
+        $session->setIdUtilisateur($user);
+        $session->setIdCours($cours);
+
+        $dql = 'SELECT c FROM TesseractMOOCBundle:Chapitre c where c.idCours = :id '
+        ;
+        $dql2 = 'SELECT c FROM TesseractMOOCBundle:SessionCours c where c.idCours = :id1 and c.idUtilisateur =:id2 '
+        ;
+
+        $query = $em->createQuery($dql)->setParameters(array('id' => $id));
+        $pagination = $query->getResult();
+        $query2 = $em->createQuery($dql2)->setParameters(array('id1' => $id, 'id2' => $user->getId()));
+        $sessioncours = $query2->getResult();
+        return $this->render('TesseractMOOCBundle:Apprenant:subs.html.twig', array('pagination' => $pagination, 'session' => $sessioncours[0]));
+  
+    }
+
+    public function terminerCoursAction(\Symfony\Component\HttpFoundation\Request $req) {
+
+        $user = $this->getUser();
+        $id = $req->get('id');
+        $em = $this->getDoctrine()->getManager();
+
+        $cours = $em->getRepository('TesseractMOOCBundle:Cours')->find($id);
+
+
+//        $em->persist($session);
+//        $em->flush();
+        $dql = 'SELECT c FROM TesseractMOOCBundle:Chapitre c where c.idCours = :id '
+        ;
+        $dql2 = 'SELECT c FROM TesseractMOOCBundle:SessionCours c where c.idCours = :id1 and c.idUtilisateur =:id2 '
+        ;
+
+        $query = $em->createQuery($dql)->setParameters(array('id' => $id));
+        $pagination = $query->getResult();
+        $query2 = $em->createQuery($dql2)->setParameters(array('id1' => $id, 'id2' => $user->getId()));
+        $sessioncours = $query2->getResult();
+        $sessionn = $sessioncours[0];
+        $sessionn->setNbr($sessionn->getNbr() + 1);
+        $em->merge($sessionn);
+        $em->flush();
+        return $this->render('TesseractMOOCBundle:Apprenant:subs.html.twig', array('pagination' => $pagination, 'session' => $sessionn));
     }
 
 }

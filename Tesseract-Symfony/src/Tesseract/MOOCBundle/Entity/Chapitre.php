@@ -58,6 +58,54 @@ class Chapitre
      * })
      */
     private $idCours;
+    function getNom() {
+        return $this->nom;
+    }
+
+    function getNumero() {
+        return $this->numero;
+    }
+
+    function getDescription() {
+        return $this->description;
+    }
+
+    function getResume() {
+        return $this->resume;
+    }
+
+    function getId() {
+        return $this->id;
+    }
+
+    function getIdCours() {
+        return $this->idCours;
+    }
+
+    function setNom($nom) {
+        $this->nom = $nom;
+    }
+
+    function setNumero($numero) {
+        $this->numero = $numero;
+    }
+
+    function setDescription($description) {
+        $this->description = $description;
+    }
+
+    function setResume($resume) {
+        $this->resume = $resume;
+    }
+
+    function setId($id) {
+        $this->id = $id;
+    }
+
+    function setIdCours(\Tesseract\UserBundle\Entity\Cours $idCours) {
+        $this->idCours = $idCours;
+    }
+
 
 
 }

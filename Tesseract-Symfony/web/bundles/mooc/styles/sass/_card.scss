@@ -1,6 +1,5 @@
 .card {
     opacity: 0;
-    @include transform(translate3d(0, 150px, 0));
     @include transition(all .4s $ease-out-circ);
 
     &.animate {

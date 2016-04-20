@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Character set configuration -->
+        <meta charset="UTF-8">
+
+        <!-- Viewport configuration, scaling options -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <!-- Hide the browser UI -->
+        <meta name="apple-mobile-web-app-capable" content="yes">
+
+        <!-- MS tile icons -->
+        <meta name="msapplication-TileColor" content="#69f0ae">
+        <meta name="msapplication-TileImage" content="{{asset('bundles/mooc/favicons/mstile-144x144.png')}}">
+
+        <!-- Android toolbar color -->
+        <meta name="theme-color" content="#69f0ae">
+
+        <!-- Apple touch icons -->
+        <link rel="apple-touch-icon" sizes="57x57" href="{{asset('bundles/mooc/favicons/apple-touch-icon-57x57.png')}}">
+        <link rel="apple-touch-icon" sizes="60x60" href="{{asset('bundles/mooc/favicons/apple-touch-icon-60x60.png')}}">
+        <link rel="apple-touch-icon" sizes="72x72" href="{{asset('bundles/mooc/favicons/apple-touch-icon-72x72.png')}}">
+        <link rel="apple-touch-icon" sizes="76x76" href="{{asset('bundles/mooc/favicons/apple-touch-icon-76x76.png')}}">
+        <link rel="apple-touch-icon" sizes="114x114" href="{{asset('bundles/mooc/favicons/apple-touch-icon-114x114.png')}}">
+        <link rel="apple-touch-icon" sizes="120x120" href="{{asset('bundles/mooc/favicons/apple-touch-icon-120x120.png')}}">
+        <link rel="apple-touch-icon" sizes="144x144" href="{{asset('bundles/mooc/favicons/apple-touch-icon-144x144.png')}}">
+        <link rel="apple-touch-icon" sizes="152x152" href="{{asset('bundles/mooc/favicons/apple-touch-icon-152x152.png')}}">
+        <link rel="apple-touch-icon" sizes="180x180" href="{{asset('bundles/mooc/favicons/apple-touch-icon-180x180.png')}}">
+
+        <!-- Android touch icons -->
+        <link rel="icon" type="image/png" href="{{asset('bundles/mooc/favicons/favicon-32x32.png')}}" sizes="32x32">
+        <link rel="icon" type="image/png" href="{{asset('bundles/mooc/favicons/android-chrome-192x192.png')}}" sizes="192x192">
+        <link rel="icon" type="image/png" href="{{asset('bundles/mooc/favicons/favicon-96x96.png')}}" sizes="96x96">
+        <link rel="icon" type="image/png" href="{{asset('bundles/mooc/favicons/favicon-16x16.png')}}" sizes="16x16">
+
+        <!-- Web app manifest file -->
+        <link rel="manifest" href="{{asset('bundles/mooc/favicons/manifest.json')}}">
+
+        <!-- Stylesheets -->
+        <link rel="stylesheet" href="{{asset('bundles/mooc/libs/materialize/css/materialize.min.css')}}">
+        <link rel="stylesheet" href="{{asset('bundles/mooc/libs/font-awesome/css/font-awesome.min.css')}}">
+        <link rel="stylesheet" href="{{asset('bundles/mooc/styles/css/wata.min.css')}}">
+        <link rel="stylesheet" href="{{asset('bundles/mooc/styles/css/wata.css')}}">
+        <link rel="stylesheet" href="{{asset('bundles/mooc/styles/forum.css')}}">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!-- Site title -->
+        <title>Tesseract coding</title>
+        {% block scripting %}
+        {% endblock %}
+    </head>
+    <body>
+        <div id="wrapper">
+
+
+
+            <!-- Navigation bar -->
+            <div class="navbar-fixed" id="nav">
+                <nav>
+                    <div class="nav-wrapper">
+
+                        <!-- Site name -->
+                        <a href="/" class="brand-logo"><span><img src="{{asset('bundles/mooc/images/tcwlogo.png')}}"></span></a>
+
+                        <!-- Mobile menu button -->
+                        <a href="#" data-activates="mobile-menu" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+
+                        <!-- Static menu -->
+                        <ul class="right hide-on-med-and-down table-of-contents">
+                            {% block menu %}
+                            {% endblock %}
+                        </ul>
+
+                        <!-- Mobile menu, make sure it is equal to the statis menu -->
+                        <ul class="side-nav" id="mobile-menu">
+                            <li><a href="#triangles">Home</a></li>
+                            <li><a href="#services">Services</a></li>
+                            <li><a href="#works">Works</a></li>
+                            <li><a href="#about">About</a></li>
+                            <li><a href="#prices">Organisation</a></li>
+                            <li><a href="#blog">Blog</a></li>
+                            <li><a href="#contact">Contact</a></li>
+                            
+        </div>
+                            
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            
+            {% block cont %}{% endblock %}
+            
+            <!-- Footer section -->
+            <footer class="page-footer">
+                <div class="footer-copyright">
+                    <div class="container">
+                        © 2016 tesseract | <a href="{{asset('bundles/mooc/ajax/pages/privacy-policy.html')}}" class="ajax-link">Privacy policy</a>
+
+                        <!-- Social icons -->
+                        <span class="social right">
+                            <a href="#!"><i class="fa fa-facebook"></i></a>
+                            <a href="#!"><i class="fa fa-vk"></i></a>
+                            <a href="#!"><i class="fa fa-google-plus"></i></a>
+                            <a href="#!"><i class="fa fa-github"></i></a>
+                            <a href="#!"><i class="fa fa-deviantart"></i></a>
+                        </span>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+
+        <!-- Ajax box container, waiting for its turn -->
+        <div id="ajax-box" class="translate"></div>
+
+        <!-- Scripts -->
+        <script src="https://maps.googleapis.com/maps/api/js"></script>
+        <script src="{{asset('bundles/mooc/scripts/config.js')}}"></script>
+        <script src="{{asset('bundles/mooc/scripts/build.js')}}"></script>
+              <script src="{{asset('bundles/mooc/scripts/mooc.js')}}"></script>
+    </body>
+</html>

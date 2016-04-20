@@ -55,5 +55,45 @@ class CommentaireCours
      */
     private $idCours;
 
+    function getCommentaire() {
+        return $this->commentaire;
+    }
+
+    function getDate() {
+        return $this->date;
+    }
+
+    function getId() {
+        return $this->id;
+    }
+
+    function getIdUtilisateur() {
+        return $this->idUtilisateur;
+    }
+
+    function getIdCours() {
+        return $this->idCours;
+    }
+
+    function setCommentaire($commentaire) {
+        $this->commentaire = $commentaire;
+    }
+
+    function setDate(\DateTime $date) {
+        $this->date = $date;
+    }
+
+    function setId($id) {
+        $this->id = $id;
+    }
+
+    function setIdUtilisateur(\Tesseract\MOOCBundle\Entity\Utilisateur $idUtilisateur) {
+        $this->idUtilisateur = $idUtilisateur;
+    }
+
+    function setIdCours(\Tesseract\MOOCBundle\Entity\Cours $idCours) {
+        $this->idCours = $idCours;
+    }
+
 
 }
