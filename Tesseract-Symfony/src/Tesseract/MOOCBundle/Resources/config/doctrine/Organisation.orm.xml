@@ -12,5 +12,6 @@
     <field name="email" type="string" column="email" length="255" nullable="false"/>
     <field name="matricule" type="string" column="matricule" length="45" nullable="true"/>
     <field name="photo" type="string" column="photo" length="45" nullable="true"/>
+    <field name="enabled" type="integer" column="enabled" nullable="true"/>
   </entity>
 </doctrine-mapping>

@@ -50,9 +50,9 @@ class Chapitre
     private $id;
 
     /**
-     * @var \Tesseract\UserBundle\Entity\Cours
+     * @var \Tesseract\MOOCBundle\Entity\Cours
      *
-     * @ORM\ManyToOne(targetEntity="Tesseract\UserBundle\Entity\Cours")
+     * @ORM\ManyToOne(targetEntity="Tesseract\MOOCBundle\Entity\Cours")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_cours", referencedColumnName="id")
      * })
@@ -60,4 +60,129 @@ class Chapitre
     private $idCours;
 
 
+
+    /**
+     * Set nom
+     *
+     * @param string $nom
+     * @return Chapitre
+     */
+    public function setNom($nom)
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    /**
+     * Get nom
+     *
+     * @return string 
+     */
+    public function getNom()
+    {
+        return $this->nom;
+    }
+
+    /**
+     * Set numero
+     *
+     * @param integer $numero
+     * @return Chapitre
+     */
+    public function setNumero($numero)
+    {
+        $this->numero = $numero;
+
+        return $this;
+    }
+
+    /**
+     * Get numero
+     *
+     * @return integer 
+     */
+    public function getNumero()
+    {
+        return $this->numero;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return Chapitre
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string 
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set resume
+     *
+     * @param string $resume
+     * @return Chapitre
+     */
+    public function setResume($resume)
+    {
+        $this->resume = $resume;
+
+        return $this;
+    }
+
+    /**
+     * Get resume
+     *
+     * @return string 
+     */
+    public function getResume()
+    {
+        return $this->resume;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set idCours
+     *
+     * @param \Tesseract\MOOCBundle\Entity\Cours $idCours
+     * @return Chapitre
+     */
+    public function setIdCours(\Tesseract\MOOCBundle\Entity\Cours $idCours = null)
+    {
+        $this->idCours = $idCours;
+
+        return $this;
+    }
+
+    /**
+     * Get idCours
+     *
+     * @return \Tesseract\MOOCBundle\Entity\Cours 
+     */
+    public function getIdCours()
+    {
+        return $this->idCours;
+    }
 }

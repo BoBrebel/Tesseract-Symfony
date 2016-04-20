@@ -16,10 +16,40 @@ tesseract_mooc_admin_dashboard:
     path:     /admin
     defaults: { _controller: TesseractMOOCBundle:Admin:index }
 
+tesseract_mooc_admin_tickets:
+    path:     /admin/tickets
+    defaults: { _controller: TesseractMOOCBundle:Tickets:index }
+
+tesseract_mooc_admin_tickets_reply:
+    path:     /admin/tickets/{id}
+    defaults: { _controller: TesseractMOOCBundle:TicketReply:index }
+tesseract_mooc_admin_tickets_sendMail:
+    path:     /admin/tickets/sendMail/{mail}
+    defaults: { _controller: TesseractMOOCBundle:TicketReplySent:index }
+
+tesseract_mooc_admin_org_qry:
+    path:     /admin/orgquery
+    defaults: { _controller: TesseractMOOCBundle:OrganisationQueries:index }
+
+tesseract_mooc_admin_block_users:
+    path:     /admin/blockusers
+    defaults: { _controller: TesseractMOOCBundle:BlockUsers:index }
+
+tesseract_mooc_admin_social_media:
+    path:     /admin/social
+    defaults: { _controller: TesseractMOOCBundle:SocialMedia:index }
+    
+tesseract_mooc_admin_forum_bans:
+    path:     /admin/forumbans
+    defaults: { _controller: TesseractMOOCBundle:ForumBans:index }
+
+tesseract_mooc_admin_chart:
+    path:     /admin/chart
+    defaults: { _controller: TesseractMOOCBundle:Graphe:index }
+
 tesseract_mooc_oranisation_register_interface:
     path:     /registerorg
     defaults: { _controller: TesseractMOOCBundle:Organisation:inscriptionOrganisation }
-
 
 tesseract_profile_apprenant:
     path:    /profileapprenant

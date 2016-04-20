@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Tesseract\MOOCBundle\Entity\BlogPost" table="BlogPost">
+    <indexes>
+      <index name="IDX_EB9769ED50EAE44" columns="id_utilisateur"/>
+      <index name="IDX_EB9769ED9014574A" columns="matiere"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="titre" type="string" column="titre" length="45" nullable="true"/>
+    <field name="description" type="text" column="description" nullable="true"/>
+    <field name="img" type="text" column="img" nullable="true"/>
+    <field name="vdo" type="text" column="vdo" nullable="true"/>
+    <field name="date" type="datetime" column="date" nullable="true"/>
+    <many-to-one field="idUtilisateur" target-entity="Utilisateur">
+      <join-columns>
+        <join-column name="id_utilisateur" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="matiere" target-entity="Matiere">
+      <join-columns>
+        <join-column name="matiere" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

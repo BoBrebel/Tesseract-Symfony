@@ -16,6 +16,7 @@
             <link type="text/css" rel="stylesheet" href="{{ asset('bundles/mooc/AdminAssets/css/theme-default/material-design-iconic-font.min.css') }}" /> <!--Material Design Iconic Font-->
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        {% block script %}{% endblock %}
     </head>
     <body class="menubar-hoverable header-fixed ">
         <header id="header">
@@ -26,7 +27,7 @@
 			
                         
 		</div>
-		<div id="content">
+		<div id="content" class="container-fluid">
 			{% block content %}{% endblock %}
 		</div>
 		<div id="menubar" class="menubar-inverse ">
@@ -44,6 +45,7 @@
             <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/jquery/jquery-migrate-1.2.1.min.js') }}"></script>
             <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/bootstrap/bootstrap.min.js') }}"></script>
             <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/nanoscroller/jquery.nanoscroller.min.js') }}"></script>
+            <script src="{{ asset('bundles/mooc/AdminAssets/js/Admin.js') }}"></script>
 
             <!-- Put App.js last in your javascript imports -->
             <script src="{{ asset('bundles/mooc/AdminAssets/js/core/source/App.min.js') }}"></script>

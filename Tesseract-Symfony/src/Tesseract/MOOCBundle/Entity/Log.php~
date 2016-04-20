@@ -1,0 +1,56 @@
+<?php
+
+namespace Tesseract\MOOCBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Log
+ *
+ * @ORM\Table(name="log", indexes={@ORM\Index(name="fk_log_utilisateur1_idx", columns={"id_utilisateur"})})
+ * @ORM\Entity
+ */
+class Log
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="tache", type="string", length=45, nullable=true)
+     */
+    private $tache;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date", type="datetime", nullable=true)
+     */
+    private $date;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="cible", type="string", length=20, nullable=true)
+     */
+    private $cible;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var \Tesseract\MOOCBundle\Entity\Utilisateur
+     *
+     * @ORM\ManyToOne(targetEntity="Tesseract\MOOCBundle\Entity\Utilisateur")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_utilisateur", referencedColumnName="id")
+     * })
+     */
+    private $idUtilisateur;
+
+
+}

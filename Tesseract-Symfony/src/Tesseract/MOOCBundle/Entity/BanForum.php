@@ -43,9 +43,9 @@ class BanForum
     private $id;
 
     /**
-     * @var \Tesseract\UserBundle\Entity\Utilisateur
+     * @var \Tesseract\MOOCBundle\Entity\Utilisateur
      *
-     * @ORM\ManyToOne(targetEntity="Tesseract\UserBundle\Entity\Utilisateur")
+     * @ORM\ManyToOne(targetEntity="Tesseract\MOOCBundle\Entity\Utilisateur")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_utilisateur", referencedColumnName="id")
      * })
@@ -53,4 +53,106 @@ class BanForum
     private $idUtilisateur;
 
 
+
+    /**
+     * Set cause
+     *
+     * @param string $cause
+     * @return BanForum
+     */
+    public function setCause($cause)
+    {
+        $this->cause = $cause;
+
+        return $this;
+    }
+
+    /**
+     * Get cause
+     *
+     * @return string 
+     */
+    public function getCause()
+    {
+        return $this->cause;
+    }
+
+    /**
+     * Set date
+     *
+     * @param \DateTime $date
+     * @return BanForum
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return \DateTime 
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * Set duree
+     *
+     * @param integer $duree
+     * @return BanForum
+     */
+    public function setDuree($duree)
+    {
+        $this->duree = $duree;
+
+        return $this;
+    }
+
+    /**
+     * Get duree
+     *
+     * @return integer 
+     */
+    public function getDuree()
+    {
+        return $this->duree;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set idUtilisateur
+     *
+     * @param \Tesseract\MOOCBundle\Entity\Utilisateur $idUtilisateur
+     * @return BanForum
+     */
+    public function setIdUtilisateur(\Tesseract\MOOCBundle\Entity\Utilisateur $idUtilisateur = null)
+    {
+        $this->idUtilisateur = $idUtilisateur;
+
+        return $this;
+    }
+
+    /**
+     * Get idUtilisateur
+     *
+     * @return \Tesseract\MOOCBundle\Entity\Utilisateur 
+     */
+    public function getIdUtilisateur()
+    {
+        return $this->idUtilisateur;
+    }
 }

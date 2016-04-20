@@ -16,7 +16,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class AdminController extends Controller {
     public function indexAction() {
         
+        $em = $this->getDoctrine()->getManager();
+        $notifications = $em->getRepository("TesseractMOOCBundle:Notification")->findAll();
         
-        return $this->render('TesseractMOOCBundle:Admin:Admindashboard.html.twig');
+        $nbr=count($notifications);
+        return $this->render('TesseractMOOCBundle:Admin:Admindashboard.html.twig',array('notifications'=>$notifications,
+                                                                                        'nbrnot'=>$nbr));
     }
 }

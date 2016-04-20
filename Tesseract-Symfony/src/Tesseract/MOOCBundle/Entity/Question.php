@@ -29,9 +29,9 @@ class Question
     private $id;
 
     /**
-     * @var \Tesseract\UserBundle\Entity\Epreuve
+     * @var \Tesseract\MOOCBundle\Entity\Epreuve
      *
-     * @ORM\ManyToOne(targetEntity="Tesseract\UserBundle\Entity\Epreuve")
+     * @ORM\ManyToOne(targetEntity="Tesseract\MOOCBundle\Entity\Epreuve")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_epreuve", referencedColumnName="id")
      * })
@@ -39,4 +39,60 @@ class Question
     private $idEpreuve;
 
 
+
+    /**
+     * Set question
+     *
+     * @param string $question
+     * @return Question
+     */
+    public function setQuestion($question)
+    {
+        $this->question = $question;
+
+        return $this;
+    }
+
+    /**
+     * Get question
+     *
+     * @return string 
+     */
+    public function getQuestion()
+    {
+        return $this->question;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set idEpreuve
+     *
+     * @param \Tesseract\MOOCBundle\Entity\Epreuve $idEpreuve
+     * @return Question
+     */
+    public function setIdEpreuve(\Tesseract\MOOCBundle\Entity\Epreuve $idEpreuve = null)
+    {
+        $this->idEpreuve = $idEpreuve;
+
+        return $this;
+    }
+
+    /**
+     * Get idEpreuve
+     *
+     * @return \Tesseract\MOOCBundle\Entity\Epreuve 
+     */
+    public function getIdEpreuve()
+    {
+        return $this->idEpreuve;
+    }
 }

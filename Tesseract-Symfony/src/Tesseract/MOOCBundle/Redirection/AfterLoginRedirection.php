@@ -52,7 +52,9 @@ class AfterLoginRedirection implements AuthenticationSuccessHandlerInterface {
         if (in_array('ROLE_APR', $rolesTab, true))
             $redirection = new RedirectResponse($this->router->generate('tesseract_mooc_apprenant_interface'));
         // otherwise we redirect user to the member area
-       
+        if (in_array('ROLE_SUPER_ADMIN', $rolesTab, true))
+            $redirection = new RedirectResponse($this->router->generate('tesseract_mooc_admin_dashboard'));
+
 
         return $redirection;
     }

@@ -82,7 +82,7 @@ class Utilisateur extends BaseUser {
      *
      * @ORM\Column(name="role", type="string", length=3, nullable=true)
      */
-    protected $roles;
+    protected $role;
 
     /**
      * @var integer
@@ -122,9 +122,9 @@ class Utilisateur extends BaseUser {
     protected $id;
 
     /**
-     * @var \Tesseract\AccessBundle\Entity\Organisation
+     * @var \Tesseract\MOOCBundle\Entity\Organisation
      *
-     * @ORM\ManyToOne(targetEntity="Tesseract\AccessBundle\Entity\Organisation")
+     * @ORM\ManyToOne(targetEntity="Tesseract\MOOCBundle\Entity\Organisation")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_organisation", referencedColumnName="id")
      * })
@@ -290,6 +290,30 @@ class Utilisateur extends BaseUser {
         $this->file = $file;
     }
 
+    function getUsername() {
+        return $this->username;
+    }
+
+    
+
+    
+    function getRole() {
+        return $this->role;
+    }
+
+   
 
 
+    /**
+     * Set role
+     *
+     * @param string $role
+     * @return Utilisateur
+     */
+    public function setRole($role)
+    {
+        $this->role = $role;
+
+        return $this;
+    }
 }

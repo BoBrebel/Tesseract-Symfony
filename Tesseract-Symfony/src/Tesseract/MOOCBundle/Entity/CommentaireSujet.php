@@ -36,9 +36,9 @@ class CommentaireSujet
     private $id;
 
     /**
-     * @var \Tesseract\UserBundle\Entity\Utilisateur
+     * @var \Tesseract\MOOCBundle\Entity\Utilisateur
      *
-     * @ORM\ManyToOne(targetEntity="Tesseract\UserBundle\Entity\Utilisateur")
+     * @ORM\ManyToOne(targetEntity="Tesseract\MOOCBundle\Entity\Utilisateur")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_utilisateur", referencedColumnName="id")
      * })
@@ -46,9 +46,9 @@ class CommentaireSujet
     private $idUtilisateur;
 
     /**
-     * @var \Tesseract\UserBundle\Entity\SujetForum
+     * @var \Tesseract\MOOCBundle\Entity\SujetForum
      *
-     * @ORM\ManyToOne(targetEntity="Tesseract\UserBundle\Entity\SujetForum")
+     * @ORM\ManyToOne(targetEntity="Tesseract\MOOCBundle\Entity\SujetForum")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_sujet", referencedColumnName="id")
      * })
@@ -56,4 +56,106 @@ class CommentaireSujet
     private $idSujet;
 
 
+
+    /**
+     * Set contenu
+     *
+     * @param string $contenu
+     * @return CommentaireSujet
+     */
+    public function setContenu($contenu)
+    {
+        $this->contenu = $contenu;
+
+        return $this;
+    }
+
+    /**
+     * Get contenu
+     *
+     * @return string 
+     */
+    public function getContenu()
+    {
+        return $this->contenu;
+    }
+
+    /**
+     * Set date
+     *
+     * @param \DateTime $date
+     * @return CommentaireSujet
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return \DateTime 
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set idUtilisateur
+     *
+     * @param \Tesseract\MOOCBundle\Entity\Utilisateur $idUtilisateur
+     * @return CommentaireSujet
+     */
+    public function setIdUtilisateur(\Tesseract\MOOCBundle\Entity\Utilisateur $idUtilisateur = null)
+    {
+        $this->idUtilisateur = $idUtilisateur;
+
+        return $this;
+    }
+
+    /**
+     * Get idUtilisateur
+     *
+     * @return \Tesseract\MOOCBundle\Entity\Utilisateur 
+     */
+    public function getIdUtilisateur()
+    {
+        return $this->idUtilisateur;
+    }
+
+    /**
+     * Set idSujet
+     *
+     * @param \Tesseract\MOOCBundle\Entity\SujetForum $idSujet
+     * @return CommentaireSujet
+     */
+    public function setIdSujet(\Tesseract\MOOCBundle\Entity\SujetForum $idSujet = null)
+    {
+        $this->idSujet = $idSujet;
+
+        return $this;
+    }
+
+    /**
+     * Get idSujet
+     *
+     * @return \Tesseract\MOOCBundle\Entity\SujetForum 
+     */
+    public function getIdSujet()
+    {
+        return $this->idSujet;
+    }
 }
