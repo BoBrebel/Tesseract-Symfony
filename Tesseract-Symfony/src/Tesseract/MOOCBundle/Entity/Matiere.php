@@ -25,7 +25,13 @@ class Matiere
      * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
-
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="photo", type="text", nullable=true)
+     */
+    private $photo;
+    
     /**
      * @var integer
      *
@@ -58,6 +64,14 @@ class Matiere
     function setId($id) {
         $this->id = $id;
     }
+    function getPhoto() {
+        return $this->photo;
+    }
+
+    function setPhoto($photo) {
+        $this->photo = $photo;
+    }
+
 
 
 }

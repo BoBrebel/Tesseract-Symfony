@@ -43,9 +43,9 @@ class Invitations
     private $id;
 
     /**
-     * @var \Tesseract\UserBundle\Entity\Utilisateur
+     * @var \Tesseract\MOOCBundle\Entity\Utilisateur
      *
-     * @ORM\ManyToOne(targetEntity="Tesseract\UserBundle\Entity\Utilisateur")
+     * @ORM\ManyToOne(targetEntity="Tesseract\MOOCBundle\Entity\Utilisateur")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_utilisateur", referencedColumnName="id")
      * })
@@ -53,9 +53,9 @@ class Invitations
     private $idUtilisateur;
 
     /**
-     * @var \Tesseract\UserBundle\Entity\Organisation
+     * @var \Tesseract\MOOCBundle\Entity\Organisation
      *
-     * @ORM\ManyToOne(targetEntity="Tesseract\UserBundle\Entity\Organisation")
+     * @ORM\ManyToOne(targetEntity="Tesseract\MOOCBundle\Entity\Organisation")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_organisme", referencedColumnName="id")
      * })
@@ -63,4 +63,129 @@ class Invitations
     private $idOrganisme;
 
 
+
+    /**
+     * Set sens
+     *
+     * @param string $sens
+     * @return Invitations
+     */
+    public function setSens($sens)
+    {
+        $this->sens = $sens;
+
+        return $this;
+    }
+
+    /**
+     * Get sens
+     *
+     * @return string 
+     */
+    public function getSens()
+    {
+        return $this->sens;
+    }
+
+    /**
+     * Set etat
+     *
+     * @param string $etat
+     * @return Invitations
+     */
+    public function setEtat($etat)
+    {
+        $this->etat = $etat;
+
+        return $this;
+    }
+
+    /**
+     * Get etat
+     *
+     * @return string 
+     */
+    public function getEtat()
+    {
+        return $this->etat;
+    }
+
+    /**
+     * Set date
+     *
+     * @param \DateTime $date
+     * @return Invitations
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return \DateTime 
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set idUtilisateur
+     *
+     * @param \Tesseract\MOOCBundle\Entity\Utilisateur $idUtilisateur
+     * @return Invitations
+     */
+    public function setIdUtilisateur(\Tesseract\MOOCBundle\Entity\Utilisateur $idUtilisateur = null)
+    {
+        $this->idUtilisateur = $idUtilisateur;
+
+        return $this;
+    }
+
+    /**
+     * Get idUtilisateur
+     *
+     * @return \Tesseract\MOOCBundle\Entity\Utilisateur 
+     */
+    public function getIdUtilisateur()
+    {
+        return $this->idUtilisateur;
+    }
+
+    /**
+     * Set idOrganisme
+     *
+     * @param \Tesseract\MOOCBundle\Entity\Organisation $idOrganisme
+     * @return Invitations
+     */
+    public function setIdOrganisme(\Tesseract\MOOCBundle\Entity\Organisation $idOrganisme = null)
+    {
+        $this->idOrganisme = $idOrganisme;
+
+        return $this;
+    }
+
+    /**
+     * Get idOrganisme
+     *
+     * @return \Tesseract\MOOCBundle\Entity\Organisation 
+     */
+    public function getIdOrganisme()
+    {
+        return $this->idOrganisme;
+    }
 }

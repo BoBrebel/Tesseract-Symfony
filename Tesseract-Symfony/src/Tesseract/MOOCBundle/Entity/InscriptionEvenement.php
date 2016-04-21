@@ -29,9 +29,9 @@ class InscriptionEvenement
     private $id;
 
     /**
-     * @var \Tesseract\UserBundle\Entity\Utilisateur
+     * @var \Tesseract\MOOCBundle\Entity\Utilisateur
      *
-     * @ORM\ManyToOne(targetEntity="Tesseract\UserBundle\Entity\Utilisateur")
+     * @ORM\ManyToOne(targetEntity="Tesseract\MOOCBundle\Entity\Utilisateur")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_utilisateur", referencedColumnName="id")
      * })
@@ -39,9 +39,9 @@ class InscriptionEvenement
     private $idUtilisateur;
 
     /**
-     * @var \Tesseract\UserBundle\Entity\Evenement
+     * @var \Tesseract\MOOCBundle\Entity\Evenement
      *
-     * @ORM\ManyToOne(targetEntity="Tesseract\UserBundle\Entity\Evenement")
+     * @ORM\ManyToOne(targetEntity="Tesseract\MOOCBundle\Entity\Evenement")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_evenement", referencedColumnName="id")
      * })
@@ -49,4 +49,83 @@ class InscriptionEvenement
     private $idEvenement;
 
 
+
+    /**
+     * Set date
+     *
+     * @param \DateTime $date
+     * @return InscriptionEvenement
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return \DateTime 
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set idUtilisateur
+     *
+     * @param \Tesseract\MOOCBundle\Entity\Utilisateur $idUtilisateur
+     * @return InscriptionEvenement
+     */
+    public function setIdUtilisateur(\Tesseract\MOOCBundle\Entity\Utilisateur $idUtilisateur = null)
+    {
+        $this->idUtilisateur = $idUtilisateur;
+
+        return $this;
+    }
+
+    /**
+     * Get idUtilisateur
+     *
+     * @return \Tesseract\MOOCBundle\Entity\Utilisateur 
+     */
+    public function getIdUtilisateur()
+    {
+        return $this->idUtilisateur;
+    }
+
+    /**
+     * Set idEvenement
+     *
+     * @param \Tesseract\MOOCBundle\Entity\Evenement $idEvenement
+     * @return InscriptionEvenement
+     */
+    public function setIdEvenement(\Tesseract\MOOCBundle\Entity\Evenement $idEvenement = null)
+    {
+        $this->idEvenement = $idEvenement;
+
+        return $this;
+    }
+
+    /**
+     * Get idEvenement
+     *
+     * @return \Tesseract\MOOCBundle\Entity\Evenement 
+     */
+    public function getIdEvenement()
+    {
+        return $this->idEvenement;
+    }
 }

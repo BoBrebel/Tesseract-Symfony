@@ -1,0 +1,30 @@
+log:
+    path:     /
+    defaults: { _controller: "TesseractMOOCBundle:Log:index" }
+
+log_show:
+    path:     /{id}/show
+    defaults: { _controller: "TesseractMOOCBundle:Log:show" }
+
+log_new:
+    path:     /new
+    defaults: { _controller: "TesseractMOOCBundle:Log:new" }
+
+log_create:
+    path:     /create
+    defaults: { _controller: "TesseractMOOCBundle:Log:create" }
+    requirements: { _method: post }
+
+log_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "TesseractMOOCBundle:Log:edit" }
+
+log_update:
+    path:     /{id}/update
+    defaults: { _controller: "TesseractMOOCBundle:Log:update" }
+    requirements: { _method: post|put }
+
+log_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "TesseractMOOCBundle:Log:delete" }
+    requirements: { _method: post|delete }

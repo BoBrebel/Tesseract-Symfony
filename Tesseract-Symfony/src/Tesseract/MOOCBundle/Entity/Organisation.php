@@ -48,6 +48,12 @@ class Organisation
     private $photo;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="enabled", type="integer", nullable=true)
+     */
+    private $enabled;
+    /**
      * @var integer
      *
      * @ORM\Column(name="id", type="integer")
@@ -102,6 +108,14 @@ class Organisation
     function setId($id) {
         $this->id = $id;
     }
+    function getEnabled() {
+        return $this->enabled;
+    }
+
+    function setEnabled($enabled) {
+        $this->enabled = $enabled;
+    }
+
 
 
 

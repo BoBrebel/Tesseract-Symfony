@@ -66,11 +66,14 @@ doctrine:
 
 # Swiftmailer Configuration
 swiftmailer:
-    transport: "%mailer_transport%"
-    host:      "%mailer_host%"
-    username:  "%mailer_user%"
-    password:  "%mailer_password%"
-    spool:     { type: memory }
+    transport: gmail
+    encryption: ssl
+    auth_mode: login
+    host:      smtp.gmail.com
+    username:  tesseractcorpesprit@gmail.com
+    password:  'tesseract123'
+
+    
 
 fos_user:
     db_driver: orm 
