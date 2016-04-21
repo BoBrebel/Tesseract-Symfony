@@ -8,6 +8,8 @@
             <tr>
                 <th>Contenu</th>
                 <th>Date</th>
+                <th>Code</th>
+                <th>Link</th>
                 <th>Id</th>
                 <th>Actions</th>
             </tr>
@@ -17,6 +19,8 @@
             <tr>
                 <td><a href="{{ path('commentairesujet_show', { 'id': entity.id }) }}">{{ entity.contenu }}</a></td>
                 <td>{% if entity.date %}{{ entity.date|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.code }}</td>
+                <td>{{ entity.link }}</td>
                 <td>{{ entity.id }}</td>
                 <td>
                 <ul>

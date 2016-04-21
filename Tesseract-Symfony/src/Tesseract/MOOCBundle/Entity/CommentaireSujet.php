@@ -25,6 +25,20 @@ class CommentaireSujet
      * @ORM\Column(name="date", type="date", nullable=false)
      */
     private $date;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="code", type="text", nullable=true)
+     */
+    private $code;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="link", type="text", nullable=true)
+     */
+    private $link;
 
     /**
      * @var integer
@@ -158,4 +172,21 @@ class CommentaireSujet
     {
         return $this->idSujet;
     }
+    function getCode() {
+        return $this->code;
+    }
+
+    function getLink() {
+        return $this->link;
+    }
+
+    function setCode($code) {
+        $this->code = $code;
+    }
+
+    function setLink($link) {
+        $this->link = $link;
+    }
+
+
 }

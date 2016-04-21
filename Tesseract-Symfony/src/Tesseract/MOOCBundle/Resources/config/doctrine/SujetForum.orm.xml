@@ -9,6 +9,9 @@
     </id>
     <field name="titre" type="string" column="titre" length="45" nullable="true"/>
     <field name="description" type="text" column="description" nullable="true"/>
+    <field name="img" type="text" column="img" nullable="true"/>
+    <field name="code" type="text" column="code" nullable="true"/>
+    <field name="link" type="text" column="link" nullable="true"/>
     <field name="date" type="datetime" column="date" nullable="true"/>
     <many-to-one field="idUtilisateur" target-entity="Utilisateur">
       <join-columns>

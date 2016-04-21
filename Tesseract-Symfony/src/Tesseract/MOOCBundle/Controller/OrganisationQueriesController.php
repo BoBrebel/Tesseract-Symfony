@@ -16,8 +16,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class OrganisationQueriesController extends Controller {
     public function indexAction() {
+        $em = $this->getDoctrine()->getManager();
+        $notifications = $em->getRepository("TesseractMOOCBundle:Notification")->findAll();
+        
+        $nbr=count($notifications);
        
-        return $this->render("TesseractMOOCBundle:Admin:OrganisationQueries.html.twig");
+        return $this->render("TesseractMOOCBundle:Admin:OrganisationQueries.html.twig",array('notifications'=>$notifications,
+                                                                                        'nbrnot'=>$nbr));
         
         
     }

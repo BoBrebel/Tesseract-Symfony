@@ -25,6 +25,27 @@ class SujetForum
      * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="img", type="text", nullable=true)
+     */
+    private $img;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="code", type="text", nullable=true)
+     */
+    private $code;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="link", type="text", nullable=true)
+     */
+    private $link;
 
     /**
      * @var \DateTime
@@ -155,4 +176,29 @@ class SujetForum
     {
         return $this->idUtilisateur;
     }
+    function getImg() {
+        return $this->img;
+    }
+
+    function getCode() {
+        return $this->code;
+    }
+
+    function getLink() {
+        return $this->link;
+    }
+
+    function setImg($img) {
+        $this->img = $img;
+    }
+
+    function setCode($code) {
+        $this->code = $code;
+    }
+
+    function setLink($link) {
+        $this->link = $link;
+    }
+
+
 }

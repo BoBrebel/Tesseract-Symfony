@@ -11,6 +11,8 @@
     </id>
     <field name="contenu" type="text" column="contenu" nullable="false"/>
     <field name="date" type="date" column="date" nullable="false"/>
+    <field name="code" type="text" column="code" nullable="true"/>
+    <field name="link" type="text" column="link" nullable="true"/>
     <many-to-one field="idSujet" target-entity="SujetForum">
       <join-columns>
         <join-column name="id_sujet" referenced-column-name="id"/>
