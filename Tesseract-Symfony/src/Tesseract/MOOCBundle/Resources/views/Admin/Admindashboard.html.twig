@@ -194,17 +194,7 @@
                         <div class="tile-text"><strong>A</strong></div>
                     </div>
                 </li>
-                <li class="tile">
-                    <a class="tile-content ink-reaction" href="#offcanvas-chat" data-toggle="offcanvas" data-backdrop="false">
-                        <div class="tile-icon">
-                            <img src="../../assets/img/avatar4.jpg?1404026791" alt="" />
-                        </div>
-                        <div class="tile-text">
-                            Alex Nelson
-                            <small>123-123-3210</small>
-                        </div>
-                    </a>
-                </li>
+                {% render controller('TesseractMOOCBundle:Utilisateur:list') %}
             </ul>
         </div><!--end .offcanvas-body -->
     </div>
@@ -243,13 +233,14 @@
 
 {% endblock %}
 {% block jsdependencies %}
-    <script src="assets/js/libs/flot/jquery.flot.min.js"></script>
+    <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/flot/jquery.flot.min.js') }}"></script>
     <!--
             Flot provides different JavaScript files some charts. Check their website to see which ones you need.
             The example page uses the following additional includes.
     -->
-    <script src="assets/js/libs/flot/jquery.flot.time.min.js"></script>
-    <script src="assets/js/libs/flot/jquery.flot.resize.min.js"></script>
-    <script src="assets/js/libs/flot/jquery.flot.orderBars.min.js"></script>
-    <script src="assets/js/libs/flot/jquery.flot.pie.min.js"></script>
+    <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/flot/jquery.flot.time.min.js') }}"></script>
+    <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/flot/jquery.flot.resize.min.js') }}"></script>
+    <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/flot/jquery.flot.orderBars.min.js') }}"></script>
+    <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/flot/jquery.flot.pie.min.js') }}"></script>
+    <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/jquery/jquery-1.11.2.min.js') }}"></script>
 {% endblock %}

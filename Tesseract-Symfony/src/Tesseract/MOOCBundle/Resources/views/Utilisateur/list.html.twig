@@ -1,0 +1,17 @@
+
+    {% for entity in entities %}
+        <li class="tile">
+            <a class="tile-content ink-reaction" href="#offcanvas-chat" data-toggle="offcanvas" data-backdrop="false">
+                <div class="tile-icon">
+                    <img src="{{ asset(entity.photo) }}" alt="" />
+                </div>
+                <div class="tile-text">
+                    {{ entity.nom }} {{ entity.prenom }}
+                    <small>{{ entity.telephone }}</small>
+                </div>
+            </a>
+        </li>
+
+
+    {% endfor %}
+

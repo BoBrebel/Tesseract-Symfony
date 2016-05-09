@@ -1,11 +1,14 @@
 {% extends "TesseractMOOCBundle:Admin:Admindashboard.html.twig" %}
+{% block addstylesheets %}
+<link type="text/css" rel="stylesheet" href="{{ asset('bundles/mooc/AdminAssets/css/theme-default/libs/DataTables/jquery.dataTables.css') }}" />
+{% endblock %}
 {% block content %}
     <div class="row">
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table no-margin">
+                    <table class="table no-margin" id="table1">
                         <thead>
                             <tr>
                                 <th>Username</th>
@@ -37,4 +40,13 @@
         </div><!--end .card -->
     </div><!--end .col -->
 </div>
+{% endblock %}
+{% block addjavascripts %}
+    <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/DataTables/jquery.dataTables.min.js') }}"></script>
+    <script text="text/javascript">
+        $(document).ready(function(){
+            $('#table1').DataTable();
+    });
+        
+    </script>
 {% endblock %}

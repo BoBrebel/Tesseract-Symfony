@@ -244,4 +244,13 @@ class UtilisateurController extends Controller
             ->getForm()
         ;
     }
+    public function listAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entities = $em->getRepository('TesseractMOOCBundle:Utilisateur')->findAll();
+
+       
+        return $this->render('TesseractMOOCBundle:Utilisateur:list.html.twig', array('entities' => $entities)); 
+    }
 }

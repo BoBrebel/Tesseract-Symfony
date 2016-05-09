@@ -14,6 +14,8 @@
             <link type="text/css" rel="stylesheet" href="{{ asset('bundles/mooc/AdminAssets/css/theme-default/materialadmin.css') }}" />
             <link type="text/css" rel="stylesheet" href="{{ asset('bundles/mooc/AdminAssets/css/theme-default/font-awesome.min.css') }}" /> <!--Font Awesome Icon Font-->
             <link type="text/css" rel="stylesheet" href="{{ asset('bundles/mooc/AdminAssets/css/theme-default/material-design-iconic-font.min.css') }}" /> <!--Material Design Iconic Font-->
+        {% block addstylesheets %}
+        {% endblock %}    
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         {% block script %}{% endblock %}
@@ -49,6 +51,7 @@
 
             <!-- Put App.js last in your javascript imports -->
             <script src="{{ asset('bundles/mooc/AdminAssets/js/core/source/App.min.js') }}"></script>
+            {% block addjavascripts %}{% endblock %}
         {% endblock %}
     </body>
 </html>

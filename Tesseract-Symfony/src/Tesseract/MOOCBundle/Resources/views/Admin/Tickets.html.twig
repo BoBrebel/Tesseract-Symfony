@@ -1,11 +1,13 @@
 {% extends "TesseractMOOCBundle:Admin:Admindashboard.html.twig" %}
-
+{% block addstylesheets %}
+<link type="text/css" rel="stylesheet" href="{{ asset('bundles/mooc/AdminAssets/css/theme-default/libs/DataTables/jquery.dataTables.css') }}" />
+{% endblock %}
 {% block content %}
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table no-margin">
+                    <table class="table no-margin" id="table1">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -24,7 +26,7 @@
                                     <td>{{t.getId()}}</td>
                                     <td>{{t.getIdUtilisateur()}}</td>
                                     <td>{{t.getSujet()}}</td>
-                                    <td>{{t.getDate()|date('Y-m-d')}}</td>
+                                    <td class="sort-numeric">{{t.getDate()|date('Y-m-d')}}</td>
                                     <td>{{t.getEtat()}}</td>
                                     <td>{{t.getDescription()}}</td>
                                     <td><a class= "btn ink-reaction btn-floating-action btn-primary" href="{{ path('tesseract_mooc_admin_tickets_reply',{'id':t.getId()})}}"><i class="fa fa-reply"></i></a></td>
@@ -40,3 +42,13 @@
 
 
 {% endblock %}
+{% block addjavascripts %}
+    <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/DataTables/jquery.dataTables.min.js') }}"></script>
+    <script text="text/javascript">
+        $(document).ready(function(){
+            $('#table1').DataTable();
+    });
+        
+    </script>
+{% endblock %}
+
