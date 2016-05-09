@@ -18,7 +18,8 @@ class BlockUsersController extends Controller {
     public function indexAction() {
        $em = $this->getDoctrine()->getManager();
         $users = $em->getRepository("TesseractMOOCBundle:Utilisateur")->findBy(array('locked' => '0'));
-        $notifications = $em->getRepository("TesseractMOOCBundle:Notification")->findAll();
+        $notifications = $em->getRepository("TesseractMOOCBundle:Notification")->findBy(array('idUtilisateur' =>$this->getUser()->getId(),
+                                                                                           'vue'=>'non' ));
         
         $nbr=count($notifications);
         

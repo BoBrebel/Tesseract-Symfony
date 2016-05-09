@@ -19,7 +19,8 @@ class TicketReplyController extends Controller {
         $em = $this->getDoctrine()->getManager();
         $ticket = $em->getRepository("TesseractMOOCBundle:Reclamation")->find($id);
         $mail = $ticket->getIdUtilisateur()->getEmail();
-        $notifications = $em->getRepository("TesseractMOOCBundle:Notification")->findAll();
+        $notifications = $em->getRepository("TesseractMOOCBundle:Notification")->findBy(array('idUtilisateur' =>$this->getUser()->getId(),
+                                                                                           'vue'=>'non' ));
         $nbr=count($notifications);
         
         return $this->render("TesseractMOOCBundle:Admin:TicketReply.html.twig",array('ticket'=>$ticket,
