@@ -17,8 +17,29 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class BlockUsersController extends Controller {
     public function indexAction() {
        $em = $this->getDoctrine()->getManager();
-        $users = $em->getRepository("TesseractMOOCBundle:Utilisateur")->findAll();
+        $users = $em->getRepository("TesseractMOOCBundle:Utilisateur")->findBy(array('locked' => '0'));
         $notifications = $em->getRepository("TesseractMOOCBundle:Notification")->findAll();
+        
+        $nbr=count($notifications);
+        
+        return $this->render("TesseractMOOCBundle:Admin:BlockUsers.html.twig",array('users'=>$users,
+                                                                                    'notifications'=>$notifications,
+                                                                                        'nbrnot'=>$nbr));
+        
+        
+    }
+    
+    public function blockAction($id) {
+         
+       $em = $this->getDoctrine()->getManager();
+        $users = $em->getRepository("TesseractMOOCBundle:Utilisateur")->findBy(array('locked' => '0'));
+        $notifications = $em->getRepository("TesseractMOOCBundle:Notification")->findAll();
+        $user = $em->getRepository("TesseractMOOCBundle:Utilisateur")->find($id);
+        $user->setLocked(true);
+        $em->persist($user);
+        $em->flush();
+        
+     
         
         $nbr=count($notifications);
         

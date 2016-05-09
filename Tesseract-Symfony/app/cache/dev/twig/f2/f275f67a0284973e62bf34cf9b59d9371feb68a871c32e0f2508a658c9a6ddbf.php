@@ -83,9 +83,12 @@ class __TwigTemplate_0c32f529639593e1d2f997d291573ff8c19452250b0ec9053ff02b95bf3
             echo "</td>
                                     <td>";
             // line 30
-            echo twig_escape_filter($this->env, $this->getAttribute($context["u"], "isSuperAdmin", array()), "html", null, true);
+            echo twig_escape_filter($this->env, $this->getAttribute($context["u"], "isSuperAdmin", array(), "method"), "html", null, true);
             echo "</td>
-                                    <td><a class= \"btn ink-reaction btn-floating-action btn-primary\" href=\"#\"><i class=\"fa fa-ban\"></i></a></td>
+                                    <td><a class= \"btn ink-reaction btn-floating-action btn-primary\" href=\"";
+            // line 31
+            echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("tesseract_mooc_admin_block_user", array("id" => $this->getAttribute($context["u"], "getId", array(), "method"))), "html", null, true);
+            echo "\"><i class=\"fa fa-ban\"></i></a></td>
                                     <td><a class= \"btn ink-reaction btn-floating-action btn-primary\" href=\"#\"><i class=\"fa fa-user\"></i></a></td>
                                 </tr>
                             ";
@@ -133,7 +136,7 @@ class __TwigTemplate_0c32f529639593e1d2f997d291573ff8c19452250b0ec9053ff02b95bf3
 
     public function getDebugInfo()
     {
-        return array (  112 => 45,  109 => 44,  97 => 35,  86 => 30,  82 => 29,  78 => 28,  74 => 27,  70 => 26,  67 => 25,  63 => 24,  43 => 6,  40 => 5,  33 => 3,  30 => 2,  11 => 1,);
+        return array (  115 => 45,  112 => 44,  100 => 35,  90 => 31,  86 => 30,  82 => 29,  78 => 28,  74 => 27,  70 => 26,  67 => 25,  63 => 24,  43 => 6,  40 => 5,  33 => 3,  30 => 2,  11 => 1,);
     }
 }
 /* {% extends "TesseractMOOCBundle:Admin:Admindashboard.html.twig" %}*/
@@ -165,8 +168,8 @@ class __TwigTemplate_0c32f529639593e1d2f997d291573ff8c19452250b0ec9053ff02b95bf3
 /*                                     <td>{{u.getEmail()}}</td>*/
 /*                                     <td>{{u.getPrenom()}}</td>*/
 /*                                     <td>{{u.getNom()}}</td>*/
-/*                                     <td>{{u.isSuperAdmin}}</td>*/
-/*                                     <td><a class= "btn ink-reaction btn-floating-action btn-primary" href="#"><i class="fa fa-ban"></i></a></td>*/
+/*                                     <td>{{u.isSuperAdmin()}}</td>*/
+/*                                     <td><a class= "btn ink-reaction btn-floating-action btn-primary" href="{{ path('tesseract_mooc_admin_block_user',{'id':u.getId()})}}"><i class="fa fa-ban"></i></a></td>*/
 /*                                     <td><a class= "btn ink-reaction btn-floating-action btn-primary" href="#"><i class="fa fa-user"></i></a></td>*/
 /*                                 </tr>*/
 /*                             {%endfor%}*/

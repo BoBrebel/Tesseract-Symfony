@@ -237,9 +237,17 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                         return array (  '_controller' => 'Tesseract\\MOOCBundle\\Controller\\OrganisationQueriesController::indexAction',  '_route' => 'tesseract_mooc_admin_org_qry',);
                     }
 
-                    // tesseract_mooc_admin_block_users
-                    if ($pathinfo === '/tesseract/admin/blockusers') {
-                        return array (  '_controller' => 'Tesseract\\MOOCBundle\\Controller\\BlockUsersController::indexAction',  '_route' => 'tesseract_mooc_admin_block_users',);
+                    if (0 === strpos($pathinfo, '/tesseract/admin/block')) {
+                        // tesseract_mooc_admin_block_users
+                        if ($pathinfo === '/tesseract/admin/blockusers') {
+                            return array (  '_controller' => 'Tesseract\\MOOCBundle\\Controller\\BlockUsersController::indexAction',  '_route' => 'tesseract_mooc_admin_block_users',);
+                        }
+
+                        // tesseract_mooc_admin_block_user
+                        if (preg_match('#^/tesseract/admin/block/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                            return $this->mergeDefaults(array_replace($matches, array('_route' => 'tesseract_mooc_admin_block_user')), array (  '_controller' => 'Tesseract\\MOOCBundle\\Controller\\BlockUsersController::blockAction',));
+                        }
+
                     }
 
                     // tesseract_mooc_admin_social_media
