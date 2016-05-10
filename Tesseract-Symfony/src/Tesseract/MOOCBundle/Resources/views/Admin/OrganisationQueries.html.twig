@@ -1,5 +1,24 @@
 {% extends "TesseractMOOCBundle:Admin:Admindashboard.html.twig" %}
+{% block addstylesheets %}
+{% endblock %}
 {% block content %}
-    <h1>hey org</h1>
+    <ul class="list-comments">
+        {% for o in orgs%}
+            <li style="margin-bottom:5px">
+                <div class="card style-default-light">
+                    <div class="comment-avatar"><img src="{{ asset(o.getPhoto()) }}"></div>
+                    <div class="card-body">
+                        <h4 class="comment-title">{{o.getNom()}} <small>{{o.getEmail()}}</small></h4>
+                        <a class="btn btn-default-dark stick-top-right" href="#"style="background-color:#0aa89e;border-color:#0aa89e;height: 100%;width: 20%;padding-top: 3%">Reply</a>
+                        <p>{{o.getAdress()}}</p>
+                    </div>
+                </div>
+            </li>
+           
+
+            {%endfor%}
+    </ul>
+{% endblock %}
+{% block addjavascripts %}
 
 {% endblock %}

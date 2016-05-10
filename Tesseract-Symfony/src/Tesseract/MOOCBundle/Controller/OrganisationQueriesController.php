@@ -16,13 +16,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class OrganisationQueriesController extends Controller {
     public function indexAction() {
-        $em = $this->getDoctrine()->getManager();
+       $em = $this->getDoctrine()->getManager();
+        $orgs = $em->getRepository("TesseractMOOCBundle:Organisation")->findBy(array('enabled' => '0'));
         $notifications = $em->getRepository("TesseractMOOCBundle:Notification")->findBy(array('idUtilisateur' =>$this->getUser()->getId(),
                                                                                            'vue'=>'non' ));
         
         $nbr=count($notifications);
        
-        return $this->render("TesseractMOOCBundle:Admin:OrganisationQueries.html.twig",array('notifications'=>$notifications,
+        return $this->render("TesseractMOOCBundle:Admin:OrganisationQueries.html.twig",array('orgs'=> $orgs ,
+                                                                                            'notifications'=>$notifications,
                                                                                         'nbrnot'=>$nbr));
         
         
