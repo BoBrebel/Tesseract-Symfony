@@ -22,4 +22,11 @@ class GrapheController  extends Controller{
     return $this->render('TesseractMOOCBundle:Admin:LineChart.html.twig', array('chart' => $ob,
                                                                                 'nbr' => $nbr)); 
 } 
+
+
+
+
+
+
+
 }

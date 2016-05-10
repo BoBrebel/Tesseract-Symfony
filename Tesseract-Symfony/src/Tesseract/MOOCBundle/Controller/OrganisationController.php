@@ -9,14 +9,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Tesseract\MOOCBundle\Entity\Organisation;
 use Tesseract\MOOCBundle\Form\OrganisationType;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Organisation controller.
  *
  * @Route("/organisation")
  */
-class OrganisationController extends Controller
-{
+class OrganisationController extends Controller {
 
     /**
      * Lists all Organisation entities.
@@ -25,16 +25,37 @@ class OrganisationController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function indexAction()
-    {
+    public function indexAction() {
+        $usr = $this->get('security.context')->getToken()->getUser();
+        $currentOrg = $usr->getIdOrganisation();
+
         $em = $this->getDoctrine()->getManager();
+        $query2= $em->createQuery(
+                        'SELECT c
+   FROM TesseractMOOCBundle:Utilisateur c'
+//  WHERE c.role = :role'  )->setParameter('role','FOR'
+            );
+         $allCoaches = $query2->getResult();
+         $allCoachesNbr=count($allCoaches);
+       
+        
+        
+        $query1= $em->createQuery(
+                        'SELECT c
+    FROM TesseractMOOCBundle:Utilisateur c
+    WHERE c.idOrganisation= :id'
+                )->setParameter('id', $currentOrg->getId());
+        $coaches = $query1->getResult();
+        $coachesNbr = count($coaches);
+        $coachP= round(($coachesNbr*100)/$allCoachesNbr); 
 
-        $entities = $em->getRepository('TesseractMOOCBundle:Organisation')->findAll();
 
-        return array(
-            'entities' => $entities,
-        );
+        return $this->render("TesseractMOOCBundle:Organisation:index.html.twig", array('thisOrg' => $currentOrg,
+            'coaches' => $coaches,
+            'coachesNbr'=>$coachesNbr,
+            'coachP'=>$coachP));
     }
+
     /**
      * Creates a new Organisation entity.
      *
@@ -42,8 +63,7 @@ class OrganisationController extends Controller
      * @Method("POST")
      * @Template("TesseractMOOCBundle:Organisation:new.html.twig")
      */
-    public function createAction(Request $request)
-    {
+    public function createAction(Request $request) {
         $entity = new Organisation();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
@@ -58,7 +78,7 @@ class OrganisationController extends Controller
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         );
     }
 
@@ -69,8 +89,7 @@ class OrganisationController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Organisation $entity)
-    {
+    private function createCreateForm(Organisation $entity) {
         $form = $this->createForm(new OrganisationType(), $entity, array(
             'action' => $this->generateUrl('organisation_create'),
             'method' => 'POST',
@@ -88,14 +107,13 @@ class OrganisationController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function newAction()
-    {
+    public function newAction() {
         $entity = new Organisation();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity);
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         );
     }
 
@@ -106,8 +124,7 @@ class OrganisationController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function showAction($id)
-    {
+    public function showAction($id) {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('TesseractMOOCBundle:Organisation')->find($id);
@@ -119,7 +136,7 @@ class OrganisationController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
+            'entity' => $entity,
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -131,8 +148,7 @@ class OrganisationController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function editAction($id)
-    {
+    public function editAction($id) {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('TesseractMOOCBundle:Organisation')->find($id);
@@ -145,21 +161,20 @@ class OrganisationController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
 
     /**
-    * Creates a form to edit a Organisation entity.
-    *
-    * @param Organisation $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
-    private function createEditForm(Organisation $entity)
-    {
+     * Creates a form to edit a Organisation entity.
+     *
+     * @param Organisation $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createEditForm(Organisation $entity) {
         $form = $this->createForm(new OrganisationType(), $entity, array(
             'action' => $this->generateUrl('organisation_update', array('id' => $entity->getId())),
             'method' => 'PUT',
@@ -169,6 +184,7 @@ class OrganisationController extends Controller
 
         return $form;
     }
+
     /**
      * Edits an existing Organisation entity.
      *
@@ -176,8 +192,7 @@ class OrganisationController extends Controller
      * @Method("PUT")
      * @Template("TesseractMOOCBundle:Organisation:edit.html.twig")
      */
-    public function updateAction(Request $request, $id)
-    {
+    public function updateAction(Request $request, $id) {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('TesseractMOOCBundle:Organisation')->find($id);
@@ -197,19 +212,19 @@ class OrganisationController extends Controller
         }
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
+
     /**
      * Deletes a Organisation entity.
      *
      * @Route("/{id}", name="organisation_delete")
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, $id)
-    {
+    public function deleteAction(Request $request, $id) {
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
 
@@ -235,13 +250,13 @@ class OrganisationController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm($id)
-    {
+    private function createDeleteForm($id) {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('organisation_delete', array('id' => $id)))
-            ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
+                        ->setAction($this->generateUrl('organisation_delete', array('id' => $id)))
+                        ->setMethod('DELETE')
+                        ->add('submit', 'submit', array('label' => 'Delete'))
+                        ->getForm()
         ;
     }
+
 }

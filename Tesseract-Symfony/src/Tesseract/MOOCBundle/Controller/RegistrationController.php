@@ -46,6 +46,8 @@ class RegistrationController extends BaseController {
                 $user->addRole("ROLE_FOR");
             } else if (strcmp((string) $user->getType(), "student") == 0) {
                 $user->addRole("ROLE_APR");
+            } else if (strcmp((string) $user->getType(), "admin org") == 0) {
+                $user->addRole("ROLE_AOR");
             }
             $user->uploadProfilePicture();
             $event = new FormEvent($form, $request);

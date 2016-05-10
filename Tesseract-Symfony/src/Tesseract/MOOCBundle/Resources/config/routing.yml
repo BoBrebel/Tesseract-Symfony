@@ -2,12 +2,6 @@ tesseract_mooc_log:
     resource: "@TesseractMOOCBundle/Resources/config/routing/log.yml"
     prefix:   /log
 
-tesseract_mooc_homepage:
-    path:     /
-    defaults: { _controller: TesseractMOOCBundle:Organisation:inscriptionOrganisation }
-tesseract_mooc_homepage_2:
-    path:     /home
-    defaults: { _controller: TesseractMOOCBundle:Default:index }
 tesseract_mooc_apprenant_interface:
     path:     /apprenant
     defaults: { _controller: TesseractMOOCBundle:Apprenant:index }
@@ -76,4 +70,24 @@ afficher_cours_chap_appr:
 terminer_cours_chap_appr:
     path:     /nextsession
     defaults: { _controller: TesseractMOOCBundle:Apprenant:terminerCours }
+    
+tesseract_mooc_organisation_home:
+    path:     /orgHome
+    defaults: { _controller: TesseractMOOCBundle:Organisation:index}
+    
+organisation_show:
+    path:     /1/{id}
+    defaults: { _controller: TesseractMOOCBundle:Organisation:show}
+    
+organisation_edit:
+    path:     /2/{id}
+    defaults: { _controller: TesseractMOOCBundle:Organisation:edit}
+    
+organisation_delete:
+    path:     /3/{id}
+    defaults: { _controller: TesseractMOOCBundle:Organisation:delete}
+    
+organisation_new:
+    path:     /4
+    defaults: { _controller: TesseractMOOCBundle:Organisation:new}
    
