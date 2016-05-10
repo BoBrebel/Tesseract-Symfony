@@ -1,4 +1,203 @@
-{% extends '::base.html.twig' %}
+{% extends "TesseractMOOCBundle:Admin:Layout.html.twig" %}
+
+
+
+
+
+{% block header %}
+    <div class="headerbar">
+        <div class="headerbar-left">
+            <ul class="header-nav header-nav-options">
+                <li class="header-nav-brand" >
+                    <div class="brand-holder">
+                        <a href="#">
+                            <span class="text-lg text-bold text-primary">{{thisOrg.Nom}}</span>
+                        </a>
+                    </div>
+                </li>
+                <li>
+                    <a class="btn btn-icon-toggle menubar-toggle" data-toggle="menubar" href="javascript:void(0);">
+                        <i class="fa fa-bars"></i>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+        <div class="headerbar-right">
+
+            <ul class="header-nav header-nav-profile">
+                <li class="dropdown">
+                    <a href="javascript:void(0);" class="dropdown-toggle ink-reaction" data-toggle="dropdown">
+                        <img src="{{ asset('Resources/userbob.jpg') }}" alt="" />
+                        <span class="profile-info">
+                            {{ app.user.username }}
+                            <small>{{ app.user.email }}</small>
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu animation-dock">
+                        <li class="dropdown-header">Config</li>
+                        <li><a href="./profile">My profile</a></li> {#Verify and change !!!!!#}
+                        <li class="divider"></li>
+                        <li><a href="../../html/pages/locked.html"><i class="fa fa-fw fa-lock"></i> Lock</a></li>
+                        <li><a href="../../html/pages/login.html"><i class="fa fa-fw fa-power-off text-danger"></i> Logout</a></li>
+                    </ul><!--end .dropdown-menu -->
+                </li>
+
+            </ul>
+        </div>
+    </div>
+{% endblock %}
+
+{% block menubar %}
+    <div class="menubar-fixed-panel">
+        <div>
+            <a class="btn btn-icon-toggle btn-default menubar-toggle" data-toggle="menubar" href="javascript:void(0);">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
+        <div class="expanded">
+            <a href="../../html/dashboards/dashboard.html">
+                <span class="text-lg text-bold text-primary ">MATERIAL&nbsp;ADMIN</span>
+            </a>
+        </div>
+    </div>
+    <div class="menubar-scroll-panel">
+        <ul id="main-menu" class="gui-controls ">
+            <li>
+                <a href="{{ path('tesseract_mooc_admin_dashboard') }}" class="active">
+                    <div class="gui-icon"><i class="fa fa-home"></i></div>
+                    <span class="title">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('tesseract_mooc_admin_org_qry') }}" >
+                    <div class="gui-icon"><i class="fa fa-flag"></i></div>
+                    <span class="title">Organisation Queries</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('tesseract_mooc_admin_block_users') }}" >
+                    <div class="gui-icon"><i class="fa fa-ban"></i></div>
+                    <span class="title">Block Users</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('tesseract_mooc_admin_social_media') }}" >
+                    <div class="gui-icon"><i class="fa fa-share-alt"></i></div>
+                    <span class="title">Social Media</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('tesseract_mooc_admin_tickets') }}" id="btn-tickets" >
+                    <div class="gui-icon"><i class="fa fa-ticket"></i></div>
+                    <span class="title">Tickets</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('tesseract_mooc_admin_forum_bans') }}" >
+                    <div class="gui-icon"><i class="fa fa-comment-o"></i></div>
+                    <span class="title">Forum Bans</span>
+                </a>
+            </li>
+        </ul>
+        <div class="menubar-foot-panel">
+            <small class="no-linebreak hidden-folded">
+                <span class="opacity-75">Copyright &copy; 2014</span> <strong>Tesseract Corp</strong>
+            </small>
+        </div>
+    </div><!--end .menubar-scroll-panel-->
+
+{% endblock %}
+
+{% block content %}
+
+
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="card">
+
+                <div class="col-md-8">
+
+
+
+                </div>
+                <div class="col-md-4">
+                    <div class="card-head">
+                        <header>Analytics</header>
+                    </div>
+                    <div class="card-body height-8">
+                        <strong>{{coachesNbr}}</strong> Coach Members
+                        <span class="pull-right text-success text-sm">{{coachP}}% <i class="md md-trending-up"></i></span>
+                        <div class="progress progress-hairline">
+                            <div class="progress-bar progress-bar-primary-dark" style="width:{{coachP}}%"></div>
+                        </div>
+                        {{myCoursesNumber}} Total Belonging Courses 
+                        <span class="pull-right text-danger text-sm">{{courseP}}% <i class="md md-trending-down"></i></span>
+                        <div class="progress progress-hairline">
+                            <div class="progress-bar progress-bar-danger" style="width:{{courseP}}%"></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <ul class="timeline">
+        {% for tl in timeline %}
+
+            <li class="timeline-inverted">
+            <li> <div class="timeline-circ"> </div>
+                <div class="timeline-entry">
+                    <div class="card style-primary">
+
+                        <div class="card-head">
+                            <header> {{tl.tache }}</header>
+                        </div>
+                        <div class="card-body">
+                            {% if tl.date %}{{ tl.date|date('Y-m-d H:i:s') }}{% endif %}
+                        </div>
+                    </div>
+                </div>
+
+            </li>
+
+
+
+
+
+
+
+
+        {% endfor %}
+
+    </ul>
+
+{% endblock %}
+{% block jsdependencies %}
+    <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/flot/jquery.flot.min.js') }}"></script>
+    <!--
+            Flot provides different JavaScript files some charts. Check their website to see which ones you need.
+            The example page uses the following additional includes.
+    -->
+    <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/flot/jquery.flot.time.min.js') }}"></script>
+    <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/flot/jquery.flot.resize.min.js') }}"></script>
+    <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/flot/jquery.flot.orderBars.min.js') }}"></script>
+    <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/flot/jquery.flot.pie.min.js') }}"></script>
+    <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/jquery/jquery-1.11.2.min.js') }}"></script>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+{#{% extends '::base.html.twig' %}
 
 {% block body -%}
     <h1>Organisation list</h1>
@@ -49,3 +248,4 @@
         </li>
     </ul>
     {% endblock %}
+#}

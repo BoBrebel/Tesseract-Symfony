@@ -27,7 +27,7 @@
                                     <td>{{u.getEmail()}}</td>
                                     <td>{{u.getPrenom()}}</td>
                                     <td>{{u.getNom()}}</td>
-                                    <td>{{u.getScore()}}</td>
+                                    <td>{{u.isSuperAdmin()}}</td>
                                     <td><a class= "btn ink-reaction btn-floating-action btn-primary" href="{{ path('tesseract_mooc_admin_block_user',{'id':u.getId()})}}"><i class="fa fa-ban"></i></a></td>
                                     <td><a class= "btn ink-reaction btn-floating-action btn-primary" href="#"><i class="fa fa-user"></i></a></td>
                                 </tr>
