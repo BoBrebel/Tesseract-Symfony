@@ -188,6 +188,20 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
             }
 
+            // tesseract_mooc_homepage
+            if (rtrim($pathinfo, '/') === '/tesseract') {
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'tesseract_mooc_homepage');
+                }
+
+                return array (  '_controller' => 'Tesseract\\MOOCBundle\\Controller\\OrganisationController::inscriptionOrganisationAction',  '_route' => 'tesseract_mooc_homepage',);
+            }
+
+            // tesseract_mooc_homepage_2
+            if ($pathinfo === '/tesseract/home') {
+                return array (  '_controller' => 'Tesseract\\MOOCBundle\\Controller\\DefaultController::indexAction',  '_route' => 'tesseract_mooc_homepage_2',);
+            }
+
             if (0 === strpos($pathinfo, '/tesseract/a')) {
                 // tesseract_mooc_apprenant_interface
                 if ($pathinfo === '/tesseract/apprenant') {
@@ -291,31 +305,6 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             // terminer_cours_chap_appr
             if ($pathinfo === '/tesseract/nextsession') {
                 return array (  '_controller' => 'Tesseract\\MOOCBundle\\Controller\\ApprenantController::terminerCoursAction',  '_route' => 'terminer_cours_chap_appr',);
-            }
-
-            // tesseract_mooc_organisation_home
-            if ($pathinfo === '/tesseract/orgHome') {
-                return array (  '_controller' => 'Tesseract\\MOOCBundle\\Controller\\OrganisationController::indexAction',  '_route' => 'tesseract_mooc_organisation_home',);
-            }
-
-            // organisation_show
-            if (0 === strpos($pathinfo, '/tesseract/1') && preg_match('#^/tesseract/1/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'organisation_show')), array (  '_controller' => 'Tesseract\\MOOCBundle\\Controller\\OrganisationController::showAction',));
-            }
-
-            // organisation_edit
-            if (0 === strpos($pathinfo, '/tesseract/2') && preg_match('#^/tesseract/2/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'organisation_edit')), array (  '_controller' => 'Tesseract\\MOOCBundle\\Controller\\OrganisationController::editAction',));
-            }
-
-            // organisation_delete
-            if (0 === strpos($pathinfo, '/tesseract/3') && preg_match('#^/tesseract/3/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'organisation_delete')), array (  '_controller' => 'Tesseract\\MOOCBundle\\Controller\\OrganisationController::deleteAction',));
-            }
-
-            // organisation_new
-            if ($pathinfo === '/tesseract/4') {
-                return array (  '_controller' => 'Tesseract\\MOOCBundle\\Controller\\OrganisationController::newAction',  '_route' => 'organisation_new',);
             }
 
         }

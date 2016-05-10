@@ -80,7 +80,7 @@ class Utilisateur extends BaseUser {
     /**
      * @var string
      *
-     * @ORM\Column(name="roles", type="string", length=3, nullable=true)
+     * @ORM\Column(name="role", type="string", length=3, nullable=true)
      */
     protected $role;
 

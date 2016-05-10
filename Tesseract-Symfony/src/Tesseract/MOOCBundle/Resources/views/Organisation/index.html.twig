@@ -1,196 +1,51 @@
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>  
-<script src="//code.highcharts.com/4.0.1/highcharts.js"></script> 
-<script src="//code.highcharts.com/4.0.1/modules/exporting.js"></script> 
-<script type="text/javascript">
-   
-</script>  
+{% extends '::base.html.twig' %}
 
-{% extends "TesseractMOOCBundle:Admin:Layout.html.twig" %}
+{% block body -%}
+    <h1>Organisation list</h1>
 
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Adress</th>
+                <th>Email</th>
+                <th>Matricule</th>
+                <th>Photo</th>
+                <th>Enabled</th>
+                <th>Id</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('organisation_show', { 'id': entity.id }) }}">{{ entity.nom }}</a></td>
+                <td>{{ entity.adress }}</td>
+                <td>{{ entity.email }}</td>
+                <td>{{ entity.matricule }}</td>
+                <td>{{ entity.photo }}</td>
+                <td>{{ entity.enabled }}</td>
+                <td>{{ entity.id }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('organisation_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('organisation_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
-{% block header %}
-    <div class="headerbar">
-        <div class="headerbar-left">
-            <ul class="header-nav header-nav-options">
-                <li class="header-nav-brand" >
-                    <div class="brand-holder">
-                        <a href="#">
-                            <span class="text-lg text-bold text-primary">{{thisOrg.Nom}}</span>
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <a class="btn btn-icon-toggle menubar-toggle" data-toggle="menubar" href="javascript:void(0);">
-                        <i class="fa fa-bars"></i>
-                    </a>
-                </li>
-
-            </ul>
-        </div>
-        <div class="headerbar-right">
-
-            <ul class="header-nav header-nav-profile">
-                <li class="dropdown">
-                    <a href="javascript:void(0);" class="dropdown-toggle ink-reaction" data-toggle="dropdown">
-                        <img src="{{ asset('Resources/userbob.jpg') }}" alt="" />
-                        <span class="profile-info">
-                            {{ app.user.username }}
-                            <small>{{ app.user.email }}</small>
-                        </span>
-                    </a>
-                    <ul class="dropdown-menu animation-dock">
-                        <li class="dropdown-header">Config</li>
-                        <li><a href="./profile">My profile</a></li> {#Verify and change !!!!!#}
-                        <li class="divider"></li>
-                        <li><a href="../../html/pages/locked.html"><i class="fa fa-fw fa-lock"></i> Lock</a></li>
-                        <li><a href="../../html/pages/login.html"><i class="fa fa-fw fa-power-off text-danger"></i> Logout</a></li>
-                    </ul><!--end .dropdown-menu -->
-                </li>
-
-            </ul>
-        </div>
-    </div>
-{% endblock %}
-
-{% block menubar %}
-    <div class="menubar-fixed-panel">
-        <div>
-            <a class="btn btn-icon-toggle btn-default menubar-toggle" data-toggle="menubar" href="javascript:void(0);">
-                <i class="fa fa-bars"></i>
+        <ul>
+        <li>
+            <a href="{{ path('organisation_new') }}">
+                Create a new entry
             </a>
-        </div>
-        <div class="expanded">
-            <a href="../../html/dashboards/dashboard.html">
-                <span class="text-lg text-bold text-primary ">MATERIAL&nbsp;ADMIN</span>
-            </a>
-        </div>
-    </div>
-    <div class="menubar-scroll-panel">
-        <ul id="main-menu" class="gui-controls ">
-            <li>
-                <a href="{{ path('tesseract_mooc_admin_dashboard') }}" class="active">
-                    <div class="gui-icon"><i class="fa fa-home"></i></div>
-                    <span class="title">Dashboard</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ path('tesseract_mooc_admin_org_qry') }}" >
-                    <div class="gui-icon"><i class="fa fa-flag"></i></div>
-                    <span class="title">Organisation Queries</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ path('tesseract_mooc_admin_block_users') }}" >
-                    <div class="gui-icon"><i class="fa fa-ban"></i></div>
-                    <span class="title">Block Users</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ path('tesseract_mooc_admin_social_media') }}" >
-                    <div class="gui-icon"><i class="fa fa-share-alt"></i></div>
-                    <span class="title">Social Media</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ path('tesseract_mooc_admin_tickets') }}" id="btn-tickets" >
-                    <div class="gui-icon"><i class="fa fa-ticket"></i></div>
-                    <span class="title">Tickets</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ path('tesseract_mooc_admin_forum_bans') }}" >
-                    <div class="gui-icon"><i class="fa fa-comment-o"></i></div>
-                    <span class="title">Forum Bans</span>
-                </a>
-            </li>
-        </ul>
-        <div class="menubar-foot-panel">
-            <small class="no-linebreak hidden-folded">
-                <span class="opacity-75">Copyright &copy; 2014</span> <strong>Tesseract Corp</strong>
-            </small>
-        </div>
-    </div><!--end .menubar-scroll-panel-->
-
-{% endblock %}
-
-{% block content %}
-    {#{% render controller('TesseractMOOCBundle:Graphe:index') %}#}
-
-  
-
-
-
+        </li>
+    </ul>
     {% endblock %}
-    {% block jsdependencies %}
-        <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/flot/jquery.flot.min.js') }}"></script>
-        <!--
-                Flot provides different JavaScript files some charts. Check their website to see which ones you need.
-                The example page uses the following additional includes.
-        -->
-        <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/flot/jquery.flot.time.min.js') }}"></script>
-        <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/flot/jquery.flot.resize.min.js') }}"></script>
-        <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/flot/jquery.flot.orderBars.min.js') }}"></script>
-        <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/flot/jquery.flot.pie.min.js') }}"></script>
-        <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/jquery/jquery-1.11.2.min.js') }}"></script>
-    {% endblock %}
-
-
-
-
-
-
-
-
-
-    {#{% extends '::base.html.twig' %}
-    
-    {% block body -%}
-        <h1>Organisation list</h1>
-    
-        <table class="records_list">
-            <thead>
-                <tr>
-                    <th>Nom</th>
-                    <th>Adress</th>
-                    <th>Email</th>
-                    <th>Matricule</th>
-                    <th>Photo</th>
-                    <th>Enabled</th>
-                    <th>Id</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for entity in entities %}
-                <tr>
-                    <td><a href="{{ path('organisation_show', { 'id': entity.id }) }}">{{ entity.nom }}</a></td>
-                    <td>{{ entity.adress }}</td>
-                    <td>{{ entity.email }}</td>
-                    <td>{{ entity.matricule }}</td>
-                    <td>{{ entity.photo }}</td>
-                    <td>{{ entity.enabled }}</td>
-                    <td>{{ entity.id }}</td>
-                    <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('organisation_show', { 'id': entity.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('organisation_edit', { 'id': entity.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    
-            <ul>
-            <li>
-                <a href="{{ path('organisation_new') }}">
-                    Create a new entry
-                </a>
-            </li>
-        </ul>
-        {% endblock %}
-    #}

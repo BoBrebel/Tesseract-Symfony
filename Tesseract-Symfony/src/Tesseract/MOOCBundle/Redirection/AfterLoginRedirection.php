@@ -13,7 +13,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationSuccessHandlerInterface;
-
 /**
  * Description of AfterLoginRedirection
  *
@@ -55,8 +54,6 @@ class AfterLoginRedirection implements AuthenticationSuccessHandlerInterface {
         // otherwise we redirect user to the member area
         if (in_array('ROLE_SUPER_ADMIN', $rolesTab, true))
             $redirection = new RedirectResponse($this->router->generate('tesseract_mooc_admin_dashboard'));
-        if (in_array('ROLE_AOR', $rolesTab, true))
-            $redirection = new RedirectResponse($this->router->generate('tesseract_mooc_organisation_home'));
 
 
         return $redirection;
