@@ -17,6 +17,26 @@ use Tesseract\MOOCBundle\Form\OrganisationType;
  */
 class OrganisationController extends Controller
 {
+    
+    
+        function inscriptionOrganisationAction(\Symfony\Component\HttpFoundation\Request $request) {
+        $organisation = new \Tesseract\MOOCBundle\Entity\Organisation();
+        $form = $this->createForm(new \Tesseract\MOOCBundle\Form\OrganisationForm(), $organisation);
+
+        // $requet = $this->get('request');
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($organisation);
+            $em->flush();
+
+            return $this->render("TesseractMOOCBundle::layoutwada.html.twig", array('formm' => $form->createView()));
+        }
+
+        return $this->render("TesseractMOOCBundle::layoutwada.html.twig", array('formm' => $form->createView(), 'test' => "hakim"));
+    }
+    
 
     /**
      * Lists all Organisation entities.

@@ -19,7 +19,8 @@ class TicketsController extends Controller {
         $em = $this->getDoctrine()->getManager();
         $tickets = $em->getRepository("TesseractMOOCBundle:Reclamation")->findAll();
          
-        $notifications = $em->getRepository("TesseractMOOCBundle:Notification")->findAll();
+        $notifications = $em->getRepository("TesseractMOOCBundle:Notification")->findBy(array('idUtilisateur' =>$this->getUser()->getId(),
+                                                                                           'vue'=>'non' ));
         
         $nbr=count($notifications);
         return $this->render("TesseractMOOCBundle:Admin:Tickets.html.twig",array('tickets'=>$tickets,

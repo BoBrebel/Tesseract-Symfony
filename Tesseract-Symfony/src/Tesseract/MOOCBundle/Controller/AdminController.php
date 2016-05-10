@@ -17,7 +17,8 @@ class AdminController extends Controller {
     public function indexAction() {
         
         $em = $this->getDoctrine()->getManager();
-        $notifications = $em->getRepository("TesseractMOOCBundle:Notification")->findAll();
+        $notifications = $em->getRepository("TesseractMOOCBundle:Notification")->findBy(array('idUtilisateur' =>$this->getUser()->getId(),
+                                                                                           'vue'=>'non' ));
         
         $nbr=count($notifications);
         return $this->render('TesseractMOOCBundle:Admin:Admindashboard.html.twig',array('notifications'=>$notifications,

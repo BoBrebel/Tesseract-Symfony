@@ -23,6 +23,7 @@ tesseract_mooc_admin_tickets:
 tesseract_mooc_admin_tickets_reply:
     path:     /admin/tickets/{id}
     defaults: { _controller: TesseractMOOCBundle:TicketReply:index }
+    
 tesseract_mooc_admin_tickets_sendMail:
     path:     /admin/tickets/sendMail/{mail}
     defaults: { _controller: TesseractMOOCBundle:TicketReplySent:index }
@@ -34,6 +35,10 @@ tesseract_mooc_admin_org_qry:
 tesseract_mooc_admin_block_users:
     path:     /admin/blockusers
     defaults: { _controller: TesseractMOOCBundle:BlockUsers:index }
+
+tesseract_mooc_admin_block_user:
+    path:     /admin/block/{id}
+    defaults: { _controller: TesseractMOOCBundle:BlockUsers:block }
 
 tesseract_mooc_admin_social_media:
     path:     /admin/social

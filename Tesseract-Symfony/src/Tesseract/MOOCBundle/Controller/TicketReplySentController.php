@@ -20,7 +20,8 @@ class TicketReplySentController extends Controller {
     public function indexAction($mail) {
         
         $em = $this->getDoctrine()->getManager();
-        $notifications = $em->getRepository("TesseractMOOCBundle:Notification")->findAll();
+        $notifications = $em->getRepository("TesseractMOOCBundle:Notification")->findBy(array('idUtilisateur' =>$this->getUser()->getId(),
+                                                                                           'vue'=>'non' ));
         $nbr = count($notifications);
 
         $message = \Swift_Message::newInstance()

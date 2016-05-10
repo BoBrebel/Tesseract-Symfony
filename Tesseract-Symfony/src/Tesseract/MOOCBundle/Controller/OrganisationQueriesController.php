@@ -17,7 +17,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class OrganisationQueriesController extends Controller {
     public function indexAction() {
         $em = $this->getDoctrine()->getManager();
-        $notifications = $em->getRepository("TesseractMOOCBundle:Notification")->findAll();
+        $notifications = $em->getRepository("TesseractMOOCBundle:Notification")->findBy(array('idUtilisateur' =>$this->getUser()->getId(),
+                                                                                           'vue'=>'non' ));
         
         $nbr=count($notifications);
        
