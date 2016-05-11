@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html>{% block head %}
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Admin Dashboard{% endblock %}</title>
@@ -8,6 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="keywords" content="your,keywords">
         <meta name="description" content="Short explanation about this website">
+        {% block scr %}{% endblock %}
         {% block stylesheets %}
             <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,300,400,600,700,800' rel='stylesheet' type='text/css'/>
             <link type="text/css" rel="stylesheet" href="{{ asset('bundles/mooc/AdminAssets/css/theme-default/bootstrap.css') }}" />
@@ -18,8 +19,9 @@
         {% endblock %}    
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-        {% block script %}{% endblock %}
+        {% block script %}{% endblock %}{% endblock %}
     </head>
+    
     <body class="menubar-hoverable header-fixed ">
         <header id="header">
             {% block header %}{% endblock %}

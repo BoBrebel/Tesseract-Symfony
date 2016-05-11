@@ -1,21 +1,44 @@
 {% extends "TesseractMOOCBundle:Organisation:index.html.twig" %}
 
+       
+{% block scr %}
+    <script type="text/javascript">
+        $(document).ready(
+	function() {
+		$("#inv").click(function()
+		{
+			$("#inv").hide();
+			
+		})
+
+})
+    </script>
+
+
+
+   
+{% endblock %}
+{% block addstylesheets %}
+{% endblock %}
+
 {% block content %}
-    <ul>
+    <ul class="list-comments">
         {% for c in coaches%}
-
-
             <li style="margin-bottom:5px">
-                <div class="card style-default-light">
+                <div id='inv' class="card style-default-light">
                     <div class="comment-avatar"><img src="{{ asset(c.photo) }}"></div>
                     <div class="card-body">
-                        <a class="comment-title" >{{c.prenom ~ c.nom |capitalize }} </a>
-
-                        <a class="btn  ink-reaction btn-raised btn-primary " style=" position:absolute;  left: 92%;" href="{{ path('tesseract_mooc_org_accept', {'id': inv[i].id}) }}">Invite </a>
-
+                        <h4 class="comment-title">{{c.prenom~'    '~c.nom|capitalize}} </h4>
+                        <small><a href="#">{{c.email}}</a></small> 
+                            {#afficher formateur#}
+                        <a class="btn  ink-reaction btn-raised btn-primary " style=" position:absolute;  left: 92%;" href="{{ path('tesseract_mooc_organisation_invite', {'id': c.id}) }}">Invite </a>
+                        <p>{{c.score}}</p>
                     </div>
                 </div>
             </li>
+
+
+
 
         {%endfor%}
     </ul>
