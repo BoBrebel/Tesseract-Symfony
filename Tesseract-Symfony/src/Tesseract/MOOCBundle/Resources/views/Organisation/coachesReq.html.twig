@@ -1,0 +1,29 @@
+{% extends "TesseractMOOCBundle:Organisation:index.html.twig" %}
+{% block addstylesheets %}
+{% endblock %}
+{% block content %}
+    {% set i=0 %}
+    <ul class="list-comments">
+        {% for c in coaches%}
+
+            
+            <li style="margin-bottom:5px">
+                <div class="card style-default-light">
+                    <div class="comment-avatar"><img src="{{ asset(c.photo) }}"></div>
+                    <div class="card-body">
+                        <a class="comment-title" >{{c.prenom ~ c.nom |capitalize }} <small>{{inv[i].date|date('Y-m-d')}}</small></a>
+                       
+                        <a class="btn  ink-reaction btn-raised btn-primary " style=" position:absolute;  left: 92%;" href="{{ path('tesseract_mooc_org_accept', {'id': inv[i].id}) }}">Accept </a>
+                        <a class="btn  ink-reaction btn-raised  btn-danger " style=" position:absolute;  left: 84%;"  href="{{ path('tesseract_mooc_org_refuse', {'id': inv[i].id}) }}">Refuse</a>
+
+                    </div>
+                </div>
+            </li>
+
+ {% set i=i+1%}
+        {%endfor%}
+    </ul>
+{% endblock %}
+{% block addjavascripts %}
+
+{% endblock %}

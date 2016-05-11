@@ -98,4 +98,16 @@ organisation_delete:
 organisation_new:
     path:     /4
     defaults: { _controller: TesseractMOOCBundle:Organisation:new}
+tesseract_mooc_Org_coach_req:
+     path:     /Org_coach_req
+     defaults: { _controller: TesseractMOOCBundle:Organisation:respond}
+tesseract_mooc_org_accept:
+     path:     /accept/{id}
+     defaults: { _controller: TesseractMOOCBundle:Organisation:accept}
+
+tesseract_mooc_org_refuse:
+     path:     /refuse/{id}
+     defaults: { _controller: TesseractMOOCBundle:Organisation:refuse}
+
+    
    

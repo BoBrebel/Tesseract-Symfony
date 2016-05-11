@@ -87,14 +87,14 @@ class OrganisationController extends Controller {
         foreach ($coaches as $i) {
 
             $timeline2 = $em->getRepository('TesseractMOOCBundle:Log')->findBy(array('idUtilisateur' => $i->getId()));
-            foreach ($timeline2 as $t){
-                $tache=$t->getTache();
-                 $t->setTache($i->getUsername().' '.$tache);
+            foreach ($timeline2 as $t) {
+                $tache = $t->getTache();
+                $t->setTache($i->getUsername() . ' ' . $tache);
             }
-           
+
             $timeline1 = array_merge($timeline1, $timeline2);
         }
-     
+
 
 
         return $this->render("TesseractMOOCBundle:Organisation:index.html.twig", array('thisOrg' => $currentOrg,
@@ -104,6 +104,50 @@ class OrganisationController extends Controller {
                     'courseP' => $courseP,
                     'myCoursesNumber' => $myCoursesNbr,
                     'timeline' => $timeline1));
+    }
+
+    public function respondAction() {
+        $currentOrg = $this->getUser()->getIdOrganisation();
+        $em = $this->getDoctrine()->getManager();
+        $inv = $em->getRepository("TesseractMOOCBundle:Invitations")
+                ->findBy(array('idOrganisme' => $currentOrg->getId(),
+            'sens' => 'f',
+            'etat' => 'ATT'));
+
+        $coaches = array();
+        foreach ($inv as $i) {
+
+            $c = $em->getRepository("TesseractMOOCBundle:Utilisateur")->find($i->getIdUtilisateur());
+            array_push($coaches, $c);
+        }
+
+
+        return $this->render("TesseractMOOCBundle:Organisation:coachesReq.html.twig", array('coaches' => $coaches,
+                    'thisOrg' => $currentOrg,
+                    'inv' => $inv));
+    }
+
+    public function refuseAction($id) {
+        $em = $this->getDoctrine()->getManager();
+        $inv = $em->getRepository("TesseractMOOCBundle:Invitations")->find($id);
+        $inv->setEtat('REF');
+        $em->persist($inv);
+        $em->flush();
+        return $this->redirectToRoute('tesseract_mooc_Org_coach_req');
+    }
+
+    public function acceptAction($id) {
+        $em = $this->getDoctrine()->getManager();
+        $inv = $em->getRepository("TesseractMOOCBundle:Invitations")->find($id);
+        $inv->setEtat('ACC');
+        $em->persist($inv);
+        $em->flush();
+        $userId=$inv->getIdUtilisateur()->getId();
+        $coach = $em->getRepository("TesseractMOOCBundle:Utilisateur")->find($userId);
+        $coach->setIdOrganisation($inv->getIdOrganisme());
+        $em->persist($coach);
+        $em->flush();
+        return $this->redirectToRoute('tesseract_mooc_Org_coach_req');
     }
 
     /**

@@ -55,48 +55,39 @@
                 <i class="fa fa-bars"></i>
             </a>
         </div>
-        <div class="expanded">
-            <a href="../../html/dashboards/dashboard.html">
-                <span class="text-lg text-bold text-primary ">MATERIAL&nbsp;ADMIN</span>
-            </a>
-        </div>
+      
     </div>
     <div class="menubar-scroll-panel">
         <ul id="main-menu" class="gui-controls ">
             <li>
-                <a href="{{ path('tesseract_mooc_admin_dashboard') }}" class="active">
+                <a href="{{ path('tesseract_mooc_organisation_home') }}" class="active">
                     <div class="gui-icon"><i class="fa fa-home"></i></div>
-                    <span class="title">Dashboard</span>
+                    <span class="title">Home</span>
                 </a>
             </li>
+         
             <li>
-                <a href="{{ path('tesseract_mooc_admin_org_qry') }}" >
-                    <div class="gui-icon"><i class="fa fa-flag"></i></div>
-                    <span class="title">Organisation Queries</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ path('tesseract_mooc_admin_block_users') }}" >
-                    <div class="gui-icon"><i class="fa fa-ban"></i></div>
-                    <span class="title">Block Users</span>
+                <a href="{{ path('tesseract_mooc_Org_coach_req') }}" >
+                    <div class="gui-icon"><i class="glyphicon glyphicon-envelope"></i></div>
+                    <span class="title">Coaches' Requests</span>
                 </a>
             </li>
             <li>
                 <a href="{{ path('tesseract_mooc_admin_social_media') }}" >
-                    <div class="gui-icon"><i class="fa fa-share-alt"></i></div>
-                    <span class="title">Social Media</span>
+                    <div class="gui-icon"><i class="glyphicon glyphicon-send"></i></div>
+                    <span class="title">Affiliate Coaches</span>
                 </a>
             </li>
             <li>
                 <a href="{{ path('tesseract_mooc_admin_tickets') }}" id="btn-tickets" >
-                    <div class="gui-icon"><i class="fa fa-ticket"></i></div>
-                    <span class="title">Tickets</span>
+                    <div class="gui-icon"><i class="glyphicon glyphicon-calendar"></i></div>
+                    <span class="title">Events</span>
                 </a>
             </li>
             <li>
                 <a href="{{ path('tesseract_mooc_admin_forum_bans') }}" >
-                    <div class="gui-icon"><i class="fa fa-comment-o"></i></div>
-                    <span class="title">Forum Bans</span>
+                    <div class="gui-icon"><i class="fa fa-gamepad"></i></div>
+                    <span class="title">Challenges</span>
                 </a>
             </li>
         </ul>
