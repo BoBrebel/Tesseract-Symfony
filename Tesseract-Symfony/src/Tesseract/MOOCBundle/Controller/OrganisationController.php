@@ -8,6 +8,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Tesseract\MOOCBundle\Entity\Organisation;
+use Tesseract\MOOCBundle\Entity\Invitations;
+use Tesseract\MOOCBundle\Entity\Utilisateur;
 use Tesseract\MOOCBundle\Form\OrganisationType;
 
 /**
@@ -151,17 +153,52 @@ class OrganisationController extends Controller {
     }
 
     public function affiliateAction() {
+        $currentOrg = $this->getUser()->getIdOrganisation();
         $em = $this->getDoctrine()->getManager();
-        $users = $em->getRepository("TesseractMOOCBundle:Utilisateur")
-                ->findBy(array('idOrganisation' => null));
-        $coaches=array();
-          foreach ($users as $u) {
+
+        $query1 = $em->createQuery('SELECT c FROM TesseractMOOCBundle:Utilisateur c WHERE c.idOrganisation IS NULL AND c.id NOT IN ( SELECT IDENTITY(i.idUtilisateur) FROM TesseractMOOCBundle:Invitations i WHERE i.idOrganisme= :x)')
+                ->setParameter('x', $currentOrg->getId());
+        $users = $query1->getResult();
+
+        $coaches = array();
+        foreach ($users as $u) {
             if ($u->getRoles()[0] == 'ROLE_FOR') {
                 array_push($coaches, $u);
-                    return $this->render("TesseractMOOCBundle:Organisation:affiliateCoaches.html.twig", array('coaches' => $coaches));
             }
         }
+
+        if (count($coaches) == 0) {
+            return new \Symfony\Component\HttpFoundation\Response('All coaches are already affiliated ');
+        } else
+            return $this->render("TesseractMOOCBundle:Organisation:affiliateCoaches.html.twig", array('coaches' => $coaches,
+                        'thisOrg' => $currentOrg));
     }
+
+    public function inviteAction($id) {
+        $currentOrg = $this->getUser()->getIdOrganisation();
+
+        $invite = new Invitations();
+        $invite->setIdOrganisme($currentOrg);
+
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository("TesseractMOOCBundle:Utilisateur")
+                ->find($id);
+        $invite->setIdUtilisateur($user);
+        $invite->setSens('o');
+        $invite->setEtat('ATT');
+
+        $d = date('m/d/Y h:i', time());
+        $date = \DateTime::createFromFormat("d/m/Y H:i", $d);
+        $invite->setDate($date);
+        $em->persist($invite);
+        $em->flush();
+        return $this->redirectToRoute('tesseract_mooc_Org_affiliate');
+    }
+    
+    
+    
+    
+    
 
     /**
      * Creates a new Organisation entity.

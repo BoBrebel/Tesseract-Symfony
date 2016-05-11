@@ -115,6 +115,9 @@ tesseract_mooc_org_refuse:
 tesseract_mooc_Org_affiliate:
      path:     /affiliate
      defaults: { _controller: TesseractMOOCBundle:Organisation:affiliate}
+tesseract_mooc_organisation_invite:
+     path:     /invite/{id}
+     defaults: { _controller: TesseractMOOCBundle:Organisation:invite}
 
     
    
