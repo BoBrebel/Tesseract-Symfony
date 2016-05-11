@@ -30,6 +30,10 @@ tesseract_mooc_admin_org_qry:
     path:     /admin/orgquery
     defaults: { _controller: TesseractMOOCBundle:OrganisationQueries:index }
 
+tesseract_mooc_admin_org_qry_reply:
+    path:     /admin/orgquery/{reply}/{id}
+    defaults: { _controller: TesseractMOOCBundle:OrganisationQueries:reply }
+
 tesseract_mooc_admin_block_users:
     path:     /admin/blockusers
     defaults: { _controller: TesseractMOOCBundle:BlockUsers:index }

@@ -1,5 +1,64 @@
 {% extends "TesseractMOOCBundle:Admin:Admindashboard.html.twig" %}
-{% block content %}
-    <h1>hey Forum</h1>
+{% block addstylesheets %}
 
+{%endblock%}
+
+
+{% block content %}
+    <div class="card-block">
+        <h4 class="card-title">You can see all the forum subjects and their comments</h4>
+    </div>
+    {% set  suj=''%}
+    {% set comm=0%}
+    {% for s in suj_com%}
+
+
+        {%if(comm==0)%}
+            <ul class="list-comments">
+                <li>
+                    <div class="card style-default-light">
+                        <div class="comment-avatar"><img src="{{ asset(s.getIdSujet().getIdUtilisateur().getPhoto())}}"></i></div>
+                        <div class="card-body">
+                            <h4 class="comment-title">{{s.getIdSujet().getTitre()}}<small>{{s.getIdSujet().getDate()|date('Y-mm-d-h-m-s')}}</small></h4>
+                            <a class="btn btn-default-dark stick-top-right" href="#">Reply</a>
+                            <p>{{s.getIdSujet().getDescription()}}</p>
+                            <p>{% if(s.getIdSujet().getImg() != null)%}<img src="{{ asset(s.getIdSujet().getImg())}}">{%endif%}</p>
+                        </div>
+                    </div>
+
+                    {% set suj=s.getIdSujet()%}
+                {%endif%}
+                {%if(s.getIdSujet()==suj)%}
+                    {% set comm=1%}
+                    <ul>
+                        <li>
+                            <div class="card style-default-light">
+                                <div class="comment-avatar"><img src="{{ asset(s.getIdUtilisateur().getPhoto())}}"></i></div>
+                                <div class="card-body">
+                                    <h4 class="comment-title">{{s.getIdUtilisateur().getUsername()}}<small>{{s.getDate()|date('Y-mm-d-h-m-s')}}</small></h4>
+                                    <a class="btn btn-default-dark stick-top-right" href="#">Reply</a>
+                                    <p>...</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                {%else%}
+                    {% set comm=0%}
+                {%endif%}
+                {%if(comm==0)%}
+
+                </li>
+            </ul>
+        {%endif%}
+
+    {%endfor%}
+
+{% endblock %}
+{% block addjavascripts %}
+    <script text="text/javascript">
+        $(document).ready(function () {
+
+        });
+
+    </script>
 {% endblock %}

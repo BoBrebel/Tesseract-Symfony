@@ -10,7 +10,8 @@
                     <div class="comment-avatar"><img src="{{ asset(o.getPhoto()) }}"></div>
                     <div class="card-body">
                         <h4 class="comment-title">{{o.getNom()}} <small>{{o.getEmail()}}</small></h4>
-                        <a class="btn btn-default-dark stick-top-right" href="#"style="background-color:#0aa89e;border-color:#0aa89e;height: 100%;width: 20%;padding-top: 3%">Reply</a>
+                        <a class="btn btn-default-dark stick-top-right" href="{{ path('tesseract_mooc_admin_org_qry_reply',{'reply':'Accept','id':o.getId()})}}"style="background-color:#0aa89e;border-color:#0aa89e;height: 100%;width: 20%;padding-top: 3%;right: 20%">Accept</a>
+                        <a class="btn btn-default-dark stick-top-right" href="{{ path('tesseract_mooc_admin_org_qry_reply',{'reply':'Refuse','id':o.getId()})}}"style="background-color:#f44336;border-color:#f44336;height: 100%;width: 20%;padding-top: 3%">Deny</a>
                         <p>{{o.getAdress()}}</p>
                     </div>
                 </div>
