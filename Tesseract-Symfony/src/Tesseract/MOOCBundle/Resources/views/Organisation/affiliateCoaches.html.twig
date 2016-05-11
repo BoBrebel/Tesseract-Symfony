@@ -1,0 +1,38 @@
+{% extends "TesseractMOOCBundle:Organisation:index.html.twig" %}
+
+{% block content %}
+    <ul>
+        {% for c in coaches%}
+
+
+            <li style="margin-bottom:5px">
+                <div class="card style-default-light">
+                    <div class="comment-avatar"><img src="{{ asset(c.photo) }}"></div>
+                    <div class="card-body">
+                        <a class="comment-title" >{{c.prenom ~ c.nom |capitalize }} </a>
+
+                        <a class="btn  ink-reaction btn-raised btn-primary " style=" position:absolute;  left: 92%;" href="{{ path('tesseract_mooc_org_accept', {'id': inv[i].id}) }}">Invite </a>
+
+                    </div>
+                </div>
+            </li>
+
+        {%endfor%}
+    </ul>
+{% endblock %}
+{% block jsdependencies %}
+    <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/flot/jquery.flot.min.js') }}"></script>
+    <!--
+            Flot provides different JavaScript files some charts. Check their website to see which ones you need.
+            The example page uses the following additional includes.
+    -->
+    <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/flot/jquery.flot.time.min.js') }}"></script>
+    <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/flot/jquery.flot.resize.min.js') }}"></script>
+    <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/flot/jquery.flot.orderBars.min.js') }}"></script>
+    <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/flot/jquery.flot.pie.min.js') }}"></script>
+    <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/jquery/jquery-1.11.2.min.js') }}"></script>
+{% endblock %}
+
+
+
+

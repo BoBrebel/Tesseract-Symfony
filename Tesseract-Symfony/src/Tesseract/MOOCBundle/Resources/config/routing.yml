@@ -108,6 +108,9 @@ tesseract_mooc_org_accept:
 tesseract_mooc_org_refuse:
      path:     /refuse/{id}
      defaults: { _controller: TesseractMOOCBundle:Organisation:refuse}
+tesseract_mooc_Org_affiliate:
+     path:     /affiliate
+     defaults: { _controller: TesseractMOOCBundle:Organisation:affiliate}
 
     
    

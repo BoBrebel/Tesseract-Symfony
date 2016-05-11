@@ -142,12 +142,25 @@ class OrganisationController extends Controller {
         $inv->setEtat('ACC');
         $em->persist($inv);
         $em->flush();
-        $userId=$inv->getIdUtilisateur()->getId();
+        $userId = $inv->getIdUtilisateur()->getId();
         $coach = $em->getRepository("TesseractMOOCBundle:Utilisateur")->find($userId);
         $coach->setIdOrganisation($inv->getIdOrganisme());
         $em->persist($coach);
         $em->flush();
         return $this->redirectToRoute('tesseract_mooc_Org_coach_req');
+    }
+
+    public function affiliateAction() {
+        $em = $this->getDoctrine()->getManager();
+        $users = $em->getRepository("TesseractMOOCBundle:Utilisateur")
+                ->findBy(array('idOrganisation' => null));
+        $coaches=array();
+          foreach ($users as $u) {
+            if ($u->getRoles()[0] == 'ROLE_FOR') {
+                array_push($coaches, $u);
+                    return $this->render("TesseractMOOCBundle:Organisation:affiliateCoaches.html.twig", array('coaches' => $coaches));
+            }
+        }
     }
 
     /**
