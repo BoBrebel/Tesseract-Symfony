@@ -145,12 +145,6 @@
                 </a>
             </li>
             <li>
-                <a href="{{ path('tesseract_mooc_admin_social_media') }}" >
-                    <div class="gui-icon"><i class="fa fa-share-alt"></i></div>
-                    <span class="title">Social Media</span>
-                </a>
-            </li>
-            <li>
                 <a href="{{ path('tesseract_mooc_admin_tickets') }}" id="btn-tickets" >
                     <div class="gui-icon"><i class="fa fa-ticket"></i></div>
                     <span class="title">Tickets</span>
@@ -173,7 +167,12 @@
 {% endblock %}
 
 {% block content %}
+    
 {% render controller('TesseractMOOCBundle:Graphe:index') %}
+
+{% render controller('TesseractMOOCBundle:Log:index') %}
+
+
 
 {% endblock %}
 {% block offcanvas %}

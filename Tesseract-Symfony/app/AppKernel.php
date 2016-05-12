@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new Tesseract\MOOCBundle\TesseractMOOCBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(), 
             new Ob\HighchartsBundle\ObHighchartsBundle(),
+            new Nomaya\SocialBundle\NomayaSocialBundle(),
             
         );
 

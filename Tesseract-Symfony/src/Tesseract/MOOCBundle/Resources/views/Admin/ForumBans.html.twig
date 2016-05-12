@@ -19,7 +19,7 @@
                     <div class="card style-default-light">
                         <div class="comment-avatar"><img src="{{ asset(s.getIdSujet().getIdUtilisateur().getPhoto())}}"></i></div>
                         <div class="card-body">
-                            <h4 class="comment-title">{{s.getIdSujet().getTitre()}}<small>{{s.getIdSujet().getDate()|date('Y-mm-d-h-m-s')}}</small></h4>
+                            <h4 class="comment-title">{{s.getIdSujet().getTitre()}}<small>{{s.getIdSujet().getDate()|date('Y/mm/d\\a\\t h:m:s')}}</small></h4>
                             <a class="btn btn-default-dark stick-top-right" href="#">Reply</a>
                             <p>{{s.getIdSujet().getDescription()}}</p>
                             <p>{% if(s.getIdSujet().getImg() != null)%}<img src="{{ asset(s.getIdSujet().getImg())}}">{%endif%}</p>
@@ -35,7 +35,7 @@
                             <div class="card style-default-light">
                                 <div class="comment-avatar"><img src="{{ asset(s.getIdUtilisateur().getPhoto())}}"></i></div>
                                 <div class="card-body">
-                                    <h4 class="comment-title">{{s.getIdUtilisateur().getUsername()}}<small>{{s.getDate()|date('Y-mm-d-h-m-s')}}</small></h4>
+                                    <h4 class="comment-title">{{s.getIdUtilisateur().getUsername()}}<small>{{s.getDate()|date('Y/mm/d\\a\\t h:m:s')}}</small></h4>
                                     <a class="btn btn-default-dark stick-top-right" href="#">Reply</a>
                                     <p>...</p>
                                 </div>
