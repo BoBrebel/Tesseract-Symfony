@@ -21,7 +21,7 @@ class ForumBansController extends Controller {
         $em = $this->getDoctrine()->getManager();
         
         
-        $query = $em->createQuery('Select s,c  from TesseractMOOCBundle:CommentaireSujet c join c.idSujet s ');
+        $query = $em->createQuery('Select s,c  from TesseractMOOCBundle:CommentaireSujet c join c.idSujet s order by s.date');
         $suj_com=$query->getResult();
         $notifications = $em->getRepository("TesseractMOOCBundle:Notification")->findBy(array('idUtilisateur' => $this->getUser()->getId(),
             'vue' => 'non'));

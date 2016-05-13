@@ -41,10 +41,6 @@ tesseract_mooc_admin_block_users:
 tesseract_mooc_admin_block_user:
     path:     /admin/block/{id}
     defaults: { _controller: TesseractMOOCBundle:BlockUsers:block }
-
-tesseract_mooc_admin_social_media:
-    path:     /admin/social
-    defaults: { _controller: TesseractMOOCBundle:SocialMedia:index }
     
 tesseract_mooc_admin_forum_bans:
     path:     /admin/forumbans

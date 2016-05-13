@@ -6,8 +6,11 @@ use Ob\HighchartsBundle\Highcharts\Highchart;
 class GrapheController  extends Controller{ 
     public function indexAction(){
         $em = $this->getDoctrine()->getManager();
-        $users = $em->getRepository("TesseractMOOCBundle:Utilisateur")->findAll();
-        $nbr=count($users);
+     
+        //$requette = $em->createQuery("select count(l.tache) from TesseractMOOCBundle:Log l where l.tache= 'signup'group by l.date");
+        //$requette->setParameter(0, 'signup');
+        //$signup=$requette->getResult();
+        $nbr=5;
 	$series = array(
          array("name" => "Number of Users","data" => array(1,2,4,5,6,3,$nbr))
          );  
