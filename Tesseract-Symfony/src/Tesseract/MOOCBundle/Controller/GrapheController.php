@@ -9,21 +9,21 @@ class GrapheController  extends Controller{
         $users=$em->getRepository('TesseractMOOCBundle:Utilisateur')->findAll();
         $nbr=count($users);
      
-        $requette = $em->createQuery("select count(l.tache) as total ,l.date from TesseractMOOCBundle:Log l  where l.tache= 'signup' group by l.date order by l.date DESC");
-        $signup=$requette->getResult();
-        $stat= array();
-        $dates = array();
+        $requette = $em->createQuery("select  count(l.tache) as total ,l.date from TesseractMOOCBundle:Log l  where l.tache= 'signup' group by l.date order by l.date ASC");
+        $signup=$requette->setMaxResults(7)->getResult();
+        $stat= array(null,null,null,null,null,null,null);
+        $dates = array(null,null,null,null,null,null,null);
         $i=0;
         foreach($signup as $s){
-            $stat[$i]=$s['total'];
-            $dates[$i]=$s['date'];
+            if($s['total']!=0){
+                $stat[$i]=$s['total'];
+            }
+            
+            $dates[$i]=$s['date']->format("d/m/Y");
             $i++;
         }
-       
-
-        
 	$series = array(
-         array("name" => "Number of Users","data" => $stat)
+         array("name" => "Number of Users","data" => array(intval($stat[0]),intval($stat[1]),intval($stat[2]),intval($stat[3]),intval($stat[4]),intval($stat[5]),intval($stat[6])))
          );  
     $days = $dates;
     $ob = new Highchart();     

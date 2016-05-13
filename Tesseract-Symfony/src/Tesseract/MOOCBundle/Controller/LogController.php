@@ -23,7 +23,8 @@ class LogController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('TesseractMOOCBundle:Log')->findAll();
+        $requette =$em->createQuery("select l from TesseractMOOCBundle:Log l order by l.date DESC");
+        $entities=$requette->setMaxResults(6)->getResult();
         foreach ($entities as $e){
             if($e->getTache() == 'MDF'){
                 $e->SetTache("modified");
