@@ -11,6 +11,7 @@ use Tesseract\MOOCBundle\Entity\Organisation;
 use Tesseract\MOOCBundle\Entity\Invitations;
 use Tesseract\MOOCBundle\Entity\Utilisateur;
 use Tesseract\MOOCBundle\Form\OrganisationType;
+use Tesseract\MOOCBundle\Entity\Evenement;
 
 /**
  * Organisation controller.
@@ -194,11 +195,62 @@ class OrganisationController extends Controller {
         $em->flush();
         return $this->redirectToRoute('tesseract_mooc_Org_affiliate');
     }
-    
-    
-    
-    
-    
+
+    public function eventAction(Request $req) {
+        $currentOrg = $this->getUser()->getIdOrganisation();
+        if ($req->getMethod() == "POST") {
+            $e = new Evenement();
+            $e->setNom($req->get("nom"));
+
+            $date = $req->get("date");
+            $time = $req->get("time");
+            $dateTime = \DateTime::createFromFormat("d/m/Y H:i", $date . $time);
+            $e->setDate($dateTime);
+            $e->setIdOrganisation($currentOrg);
+            $e->setNbrMax(intval($req->get("seats")));
+            $address = $req->get("address") . '  ' . $req->get("State") . '  ' . $req->get("City");
+            $e->setDescription($req->get("desc") . '  @ ' . $address);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($e);
+            $em->flush();
+            return $this->render("TesseractMOOCBundle:Organisation:previewevent.html.twig", array('id' => $e->getId()));
+        }
+
+
+
+
+
+        return $this->render("TesseractMOOCBundle:Organisation:event.html.twig", array('thisOrg' => $currentOrg));
+    }
+
+    public function previeweventAction($id) {
+        $currentOrg = $this->getUser()->getIdOrganisation();
+        $em = $this->getDoctrine()->getManager();
+        $e = $em->getRepository("TesseractMOOCBundle:Evenement")
+                ->find($id);
+        $d = $e->getDate();
+        $date = $d->format('d F Y H:i:s');
+        $pos = strrpos($e->getDescription(), '@');
+        $len = strlen($e->getDescription());
+        $venue = substr($e->getDescription(), $pos + 1);
+        $desc = substr($e->getDescription(), 0, $pos);
+
+        return $this->render("TesseractMOOCBundle:Organisation:previewevent.html.twig", array('e' => $e,
+                    'desc' => $desc,
+                    'date' => $date,
+                    'venue' => $venue,
+                    'thisOrg' => $currentOrg,
+                    'venue' => $venue));
+    }
+
+    public function IniteventAction() {
+        $currentOrg = $this->getUser()->getIdOrganisation();
+        $em = $this->getDoctrine()->getManager();
+        $events = $em->getRepository("TesseractMOOCBundle:Evenement")
+                ->findBy(array('idOrganisation' => $currentOrg->getId()));
+        return $this->render("TesseractMOOCBundle:Organisation:initevent.html.twig", array('events' => $events,
+                    'thisOrg' => $currentOrg));
+    }
 
     /**
      * Creates a new Organisation entity.

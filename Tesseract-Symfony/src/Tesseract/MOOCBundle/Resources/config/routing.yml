@@ -118,6 +118,16 @@ tesseract_mooc_Org_affiliate:
 tesseract_mooc_organisation_invite:
      path:     /invite/{id}
      defaults: { _controller: TesseractMOOCBundle:Organisation:invite}
+tesseract_mooc_Org_events:
+     path:     /events
+     defaults: { _controller: TesseractMOOCBundle:Organisation:Initevent}
+tesseract_mooc_Org_eventadd:
+     path:     /eventadd
+     defaults: { _controller: TesseractMOOCBundle:Organisation:event}
+tesseract_mooc_Org_previewevent:
+     path:     /previewevent/{id}
+     defaults: { _controller: TesseractMOOCBundle:Organisation:previewevent}
+    
 
     
    
