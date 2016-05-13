@@ -1,27 +1,99 @@
+
 {% extends "TesseractMOOCBundle:Organisation:index.html.twig" %}
-
-       
-{% block scr %}
-    <script type="text/javascript">
-        $(document).ready(
-	function() {
-		$("#inv").click(function()
-		{
-			$("#inv").hide();
-			
-		})
-
-})
-    </script>
-
-
-
-   
-{% endblock %}
 {% block addstylesheets %}
+    <link type="text/css" rel="stylesheet" href="{{ asset('bundles/mooc/AdminAssets/css/theme-default/libs/DataTables/jquery.dataTables.css') }}" />
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table no-margin" id="table1">
+                            <thead>
+                                <tr>
+                                    <th>Username</th>
+                                    <th>Mail</th>
+                                    <th>Name</th>
+                                    <th>Last Name</th>
+                                    <th>Score</th>
+                                    <th>Invite</th>
+                                   
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for c in coaches%}
+                                    <tr>
+                                        <td>{{c.username}}</td>
+                                        <td>{{c.email}}</td>
+                                        <td>{{c.prenom}}</td>
+                                        <td>{{c.nom}}</td>
+                                        <td>{{c.score}}</td>
+                                        <td><a class= "btn ink-reaction btn-floating-action btn-primary" href="{{ path('tesseract_mooc_organisation_invite', {'id': c.id}) }}"><i class="fa fa-level-up"></i></a></td>
+                                       </tr>
+                                {%endfor%}
+
+                            </tbody>
+                        </table>
+                    </div><!--end .table-responsive -->
+                </div><!--end .card-body -->
+            </div><!--end .card -->
+        </div><!--end .col -->
+    </div>
+{% endblock %}
+{% block addjavascripts %}
+    <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/DataTables/jquery.dataTables.min.js') }}"></script>
+    <script text="text/javascript">
+        $(document).ready(function () {
+            $('#table1').DataTable();
+        });
+
+    </script>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{#
+
+
+
+{% block addstylesheets %}
+    <link type="text/css" rel="stylesheet" href="{{ asset('bundles/mooc/AdminAssets/css/theme-default/libs/DataTables/jquery.dataTables.css') }}" />
 {% endblock %}
 
 {% block content %}
+
+    <div class="card-body style-primary no-y-padding" style="background-color: #0aa89e;">
+        <form class="form form-inverse">
+            <div class="form-group">
+                <div class="input-group input-group-lg">
+                    <div class="input-group-content">
+                        <input type="text" class="form-control" id="searchInput" placeholder="Enter your search here">
+                        <div class="form-control-line"></div>
+                    </div>
+                    <div class="input-group-btn">
+                        <button class="btn btn-floating-action btn-default-bright" type="button"><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
+            </div><!--end .form-group -->
+        </form>
+    </div>
     <ul class="list-comments">
         {% for c in coaches%}
             <li style="margin-bottom:5px">
@@ -30,7 +102,7 @@
                     <div class="card-body">
                         <h4 class="comment-title">{{c.prenom~'    '~c.nom|capitalize}} </h4>
                         <small><a href="#">{{c.email}}</a></small> 
-                            {#afficher formateur#}
+
                         <a class="btn  ink-reaction btn-raised btn-primary " style=" position:absolute;  left: 92%;" href="{{ path('tesseract_mooc_organisation_invite', {'id': c.id}) }}">Invite </a>
                         <p>{{c.score}}</p>
                     </div>
@@ -54,8 +126,18 @@
     <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/flot/jquery.flot.orderBars.min.js') }}"></script>
     <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/flot/jquery.flot.pie.min.js') }}"></script>
     <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/jquery/jquery-1.11.2.min.js') }}"></script>
+    {% block addjavascripts %}
+        <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/DataTables/jquery.dataTables.min.js') }}"></script>
+        <script text="text/javascript">
+        $(document).ready(function () {
+            $('#table1').DataTable();
+        });
+
+        </script>
+    {% endblock %}
 {% endblock %}
 
 
 
 
+#}

@@ -1,0 +1,71 @@
+{% extends "TesseractMOOCBundle:Organisation:index.html.twig" %}
+{% block addstylesheets %}
+{% endblock %}
+{% block content %}
+    <div class="card ">
+        <span>
+        </span>
+    </div>
+    <div class="card style-primary col-md-8">
+        <div class="card-head">
+            <header>Past Events</header>
+        </div>
+        <div class="card-body">
+            <ul class="list-comments">
+                {% for c in events %}
+                    <li id="x" style="margin-bottom:5px">
+                        <div class="card style-default-light">
+                            <div class="comment-avatar"><img src="../../uploads/pictures/{{c.affiche}}"></div>
+                            <div class="card-body">
+                                <a class="title" >{{ c.nom |capitalize }} <p class="comment-title">{{c.date|date('Y-m-d H:i')}}</p></a>
+                            </div>
+                        </div>
+                    </li>
+
+                {%endfor%}
+            </ul>
+        </div>
+    </div>
+    <div class="card style-transparent col-md-4">  
+        
+    <div class="card" >  
+    </div>
+        <div id="floater" style="
+    position: absolute;
+    top: 50px;
+    right: 1px;
+    width: 400px;
+    height: 300px;
+    -webkit-transition: all 2s ease-in-out;
+    transition: all 2s ease-in-out;
+    z-index: 1;">
+        <a  href="{{ path('tesseract_mooc_Org_eventadd') }}" class="btn btn-raised  btn-default-light btn-labeled"    style=" padding-top: 10%; width: 80% ; height: 30%; left: 10%  ; " >
+            Add Event 
+            <span class="label label-warning text-bold text-gl">+</span> 
+        </a>       </div>
+    </div>
+
+
+
+
+
+
+
+{% endblock %}
+
+
+{% block addjavascripts %}
+    <script type="text/javascript">
+$(window).scroll(function() {
+    var winScrollTop = $(window).scrollTop();
+    var winHeight = $(window).height()/2;
+    var floaterHeight = $('#floater').outerHeight(true);
+   
+    var fromBottom = 20;
+
+   var top = winScrollTop + winHeight - floaterHeight - fromBottom;
+    $('#floater').css({'top': top + 'px'});
+});
+
+</script>
+{% endblock %}

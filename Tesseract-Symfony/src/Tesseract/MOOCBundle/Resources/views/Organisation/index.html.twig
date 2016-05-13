@@ -79,7 +79,7 @@
                 </a>
             </li>
             <li>
-                <a href="{{ path('tesseract_mooc_admin_tickets') }}" id="btn-tickets" >
+                <a href="{{ path('tesseract_mooc_Org_events') }}" id="btn-tickets" >
                     <div class="gui-icon"><i class="glyphicon glyphicon-calendar"></i></div>
                     <span class="title">Events</span>
                 </a>
@@ -179,64 +179,3 @@
     <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/flot/jquery.flot.pie.min.js') }}"></script>
     <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/jquery/jquery-1.11.2.min.js') }}"></script>
 {% endblock %}
-
-
-
-
-
-
-
-
-
-{#{% extends '::base.html.twig' %}
-
-{% block body -%}
-    <h1>Organisation list</h1>
-
-    <table class="records_list">
-        <thead>
-            <tr>
-                <th>Nom</th>
-                <th>Adress</th>
-                <th>Email</th>
-                <th>Matricule</th>
-                <th>Photo</th>
-                <th>Enabled</th>
-                <th>Id</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for entity in entities %}
-            <tr>
-                <td><a href="{{ path('organisation_show', { 'id': entity.id }) }}">{{ entity.nom }}</a></td>
-                <td>{{ entity.adress }}</td>
-                <td>{{ entity.email }}</td>
-                <td>{{ entity.matricule }}</td>
-                <td>{{ entity.photo }}</td>
-                <td>{{ entity.enabled }}</td>
-                <td>{{ entity.id }}</td>
-                <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('organisation_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('organisation_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-        <ul>
-        <li>
-            <a href="{{ path('organisation_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
-    {% endblock %}
-#}
