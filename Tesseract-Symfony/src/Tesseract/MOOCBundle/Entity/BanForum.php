@@ -139,11 +139,9 @@ class BanForum
      * @param \Tesseract\MOOCBundle\Entity\Utilisateur $idUtilisateur
      * @return BanForum
      */
-    public function setIdUtilisateur(\Tesseract\MOOCBundle\Entity\Utilisateur $idUtilisateur = null)
+    public function setIdUtilisateur($idUtilisateur)
     {
         $this->idUtilisateur = $idUtilisateur;
-
-        return $this;
     }
 
     /**

@@ -17,10 +17,10 @@
             <ul class="list-comments">
                 <li>
                     <div class="card style-default-light">
-                        <div class="comment-avatar"><img src="{{ asset(s.getIdSujet().getIdUtilisateur().getPhoto())}}"></i></div>
+                        <div class="comment-avatar"><img src="{{ asset(s.getIdSujet().getIdUtilisateur().getPhoto())}}"></div>
                         <div class="card-body">
                             <h4 class="comment-title">{{s.getIdSujet().getTitre()}}<small>{{s.getIdSujet().getDate()|date('Y/mm/d\\a\\t h:m:s')}}</small></h4>
-                            <a class="btn btn-default-dark stick-top-right" href="#">Reply</a>
+                            <a class="btn ink-reaction btn-floating-action btn-primary" href="{{ path('tesseract_mooc_admin_forum_ban',{'id':s.getIdSujet().getIdUtilisateur().getId()})}}" style="background-color:#f44336;border-color:#f44336; position: absolute; top: 10px;right: 5px; width: 10%;"><i class="fa fa-lock"></i></a>
                             <p>{{s.getIdSujet().getDescription()}}</p>
                             <p>{% if(s.getIdSujet().getImg() != null)%}<img src="{{ asset(s.getIdSujet().getImg())}}">{%endif%}</p>
                         </div>
@@ -33,10 +33,10 @@
                     <ul>
                         <li>
                             <div class="card style-default-light">
-                                <div class="comment-avatar"><img src="{{ asset(s.getIdUtilisateur().getPhoto())}}"></i></div>
+                                <div class="comment-avatar"><img src="{{ asset(s.getIdUtilisateur().getPhoto())}}"></div>
                                 <div class="card-body">
                                     <h4 class="comment-title">{{s.getIdUtilisateur().getUsername()}}<small>{{s.getDate()|date('Y/mm/d\\a\\t h:m:s')}}</small></h4>
-                                    <a class="btn btn-default-dark stick-top-right" href="#">Reply</a>
+                                    <a class="btn ink-reaction btn-floating-action btn-primary" href="{{ path('tesseract_mooc_admin_forum_ban',{'id':s.getIdUtilisateur().getId()}) }}" style="background-color:#f44336;border-color:#f44336; position: absolute; top: 10px;right: 5px; width: 10%;"><i class="fa fa-lock"></i></a>
                                     <p>...</p>
                                 </div>
                             </div>

@@ -46,6 +46,10 @@ tesseract_mooc_admin_forum_bans:
     path:     /admin/forumbans
     defaults: { _controller: TesseractMOOCBundle:ForumBans:index }
 
+tesseract_mooc_admin_forum_ban:
+    path:     /admin/forumban/{id}
+    defaults: { _controller: TesseractMOOCBundle:ForumBans:ban }
+
 tesseract_mooc_admin_chart:
     path:     /admin/chart
     defaults: { _controller: TesseractMOOCBundle:Graphe:index }
