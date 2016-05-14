@@ -213,8 +213,7 @@ class OrganisationController extends Controller {
             $em = $this->getDoctrine()->getManager();
             $em->persist($e);
             $em->flush();
-            return $this->render("TesseractMOOCBundle:Organisation:previewevent.html.twig", array('id' => $e->getId()));
-        }
+          return $this->redirectToRoute('tesseract_mooc_Org_events');  }
 
 
 
