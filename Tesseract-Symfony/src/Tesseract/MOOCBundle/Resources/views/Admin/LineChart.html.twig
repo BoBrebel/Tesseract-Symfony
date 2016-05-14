@@ -23,17 +23,17 @@
                         <header>Today's stats</header>
                     </div>
                     <div class="card-body height-8">
-                        <strong>{{nbr}}</strong> members
-                        <span class="pull-right text-success text-sm">0,18% <i class="md md-trending-up"></i></span>
+                        <strong>{{nbrcoaches}}</strong> Coaches
+                        <span class="pull-right text-success text-sm">{{(nbrcoaches/nbr)*100}}% <i class="md md-trending-up"></i></span>
                         <div class="progress progress-hairline">
                             <div class="progress-bar progress-bar-primary-dark" style="width:10%"></div>
                         </div>
-                        291 bounce rates
-                        <span class="pull-right text-danger text-sm">21,08% <i class="md md-trending-down"></i></span>
+                        <strong>{{nbrstudents}}</strong> Students
+                        <span class="pull-right text-danger text-sm">{{(nbrstudents/nbr)*100}}%<i class="md md-trending-down"></i></span>
                         <div class="progress progress-hairline">
                             <div class="progress-bar progress-bar-danger" style="width:93%"></div>
                         </div>
-                        132 pages
+                        <strong>{{nbr}}</strong> Users
                         <span class="pull-right text-success text-sm">0,18% <i class="md md-trending-up"></i></span>
                         <div class="progress progress-hairline">
                             <div class="progress-bar progress-bar-primary-dark" style="width:47%"></div>

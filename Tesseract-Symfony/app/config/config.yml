@@ -97,7 +97,7 @@ nomaya_social:
             url:            null
             locale:         "fr"
             message:        "Je veux partager ça avec vous"
-            text:           "Tweet"
+            text:           "Tweet About it"
             via:            "Tesseractcorp"
             tag:            "Tesseractcorp"
         googleplus:

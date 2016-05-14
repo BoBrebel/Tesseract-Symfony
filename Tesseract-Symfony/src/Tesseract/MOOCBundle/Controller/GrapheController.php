@@ -7,7 +7,24 @@ class GrapheController  extends Controller{
     public function indexAction(){
         $em = $this->getDoctrine()->getManager();
         $users=$em->getRepository('TesseractMOOCBundle:Utilisateur')->findAll();
-        $nbr=count($users);
+        $nbr=  count($users);
+        
+        $coaches = array();
+        $students = array();
+        $i=0;
+        $j=0;
+        foreach ($users as $u){
+            if($u->getRoles()[0] == 'ROLE_FOR'){
+                $coaches[$i]=$u;
+                $i++;
+            }
+            if($u->getRoles()[0] == 'ROLE_APR'){
+                $students[$j]=$u;
+                $j++;
+            }
+        }
+        $nbrcoaches=count($coaches);
+        $nbrstudents=count($students);
      
         $requette = $em->createQuery("select  count(l.tache) as total ,l.date from TesseractMOOCBundle:Log l  where l.tache= 'signup' group by l.date order by l.date ASC");
         $signup=$requette->setMaxResults(7)->getResult();
@@ -34,6 +51,8 @@ class GrapheController  extends Controller{
     $ob->yAxis->title(array('text'  => "Number "));     
     $ob->series($series);  
     return $this->render('TesseractMOOCBundle:Admin:LineChart.html.twig', array('chart' => $ob,
-                                                                                'nbr' => $nbr)); 
+                                                                                'nbr' => $nbr,
+                                                                                 'nbrcoaches'=>$nbrcoaches,
+                                                                                'nbrstudents'=>$nbrstudents)); 
 } 
 }
