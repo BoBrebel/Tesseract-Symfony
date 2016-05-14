@@ -1,0 +1,62 @@
+{% extends "TesseractMOOCBundle:Formateur:CoachDashboard.html.twig" %}
+{% block addstylesheets %}
+    <link type="text/css" rel="stylesheet" href="{{ asset('bundles/mooc/AdminAssets/css/theme-default/libs/DataTables/jquery.dataTables.css') }}" />
+{% endblock %}
+
+{% block content %}
+    <br/>
+    <div class="row">
+        <div class="col-lg-7 col-lg-offset-2">
+            <h4>Quiz List</h4>
+        </div>
+        <div class="col-lg-1">
+            <a class= "btn ink-reaction btn-floating-action btn-primary" href="{{ path('tesseract_mooc_coach_quiz_add') }}"><i class="fa fa-plus"></i></a>
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+    <div class="col-lg-8 col-lg-offset-2">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table no-margin" id="table1">
+                        <thead>
+                            <tr>
+                                <th>Objective</th>
+                                <th>Type</th>
+                                <th>Difficulty</th>
+                                <th>Duration</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for e in epreuves%}
+                                <tr>
+                                    <td>{{e.getIdObjectif().getNom()}}</td>
+                                    <td>{{e.getType()}}</td>
+                                    <td>{{e.getDifficulte()}}</td>
+                                    <td>{{e.getDuree()}}</td>
+                                    <td><a class= "btn ink-reaction btn-floating-action btn-primary" href=""><i class="fa fa-pencil-square-o"></i></a></td>
+                                    <td><a class= "btn ink-reaction btn-floating-action btn-primary" href="{{ path('tesseract_mooc_coach_quiz_delete', {'id':e.getId} ) }}"><i class="fa fa-trash-o"></i></a></td>
+                                </tr>
+                            {%endfor%}
+
+                        </tbody>
+                    </table>
+                </div><!--end .table-responsive -->
+            </div><!--end .card-body -->
+        </div><!--end .card -->
+    </div><!--end .col -->
+</div>
+{% endblock %}
+{% block jsdependencies %}
+    
+    <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/DataTables/jquery.dataTables.min.js') }}"></script>
+    <script text="text/javascript">
+        $(document).ready(function(){
+            $('#table1').DataTable();
+    });
+        
+    </script>
+{% endblock %}

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>{% block head %}
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Coach Dashboard{% endblock %}</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="your,keywords">
+        <meta name="description" content="Short explanation about this website">
+        {% block scr %}{% endblock %}
+        {% block stylesheets %}
+            <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,300,400,600,700,800' rel='stylesheet' type='text/css'/>
+            <link type="text/css" rel="stylesheet" href="{{ asset('bundles/mooc/AdminAssets/css/theme-default/bootstrap.css') }}" />
+            <link type="text/css" rel="stylesheet" href="{{ asset('bundles/mooc/AdminAssets/css/theme-default/materialadmin.css') }}" />
+            <link type="text/css" rel="stylesheet" href="{{ asset('bundles/mooc/AdminAssets/css/theme-default/font-awesome.min.css') }}" /> <!--Font Awesome Icon Font-->
+            <link type="text/css" rel="stylesheet" href="{{ asset('bundles/mooc/AdminAssets/css/theme-default/material-design-iconic-font.min.css') }}" /> <!--Material Design Iconic Font-->
+        {% block addstylesheets %}
+        {% endblock %}    
+        {% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        {% block script %}{% endblock %}{% endblock %}
+    </head>
+    
+    <body class="menubar-hoverable header-fixed ">
+        <header id="header">
+            {% block header %}{% endblock %}
+	</header>
+        <div id="base">
+		<div class="offcanvas">
+			
+                        
+		</div>
+		<div id="content" class="container-fluid">
+			{% block content %}{% endblock %}
+		</div>
+		<div id="menubar" class="menubar-inverse ">
+			
+                        {% block menubar %}{% endblock %}
+		</div>
+		<div class="offcanvas">
+			
+                        {% block offcanvas %}{% endblock %}
+		</div>
+	</div>
+        }
+        {% block javascripts %}
+            <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/jquery/jquery-1.11.2.min.js') }}"></script>
+            <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/jquery/jquery-migrate-1.2.1.min.js') }}"></script>
+            <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/bootstrap/bootstrap.min.js') }}"></script>
+            <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/nanoscroller/jquery.nanoscroller.min.js') }}"></script>
+            <script src="{{ asset('bundles/mooc/AdminAssets/js/Admin.js') }}"></script>
+
+            <!-- Put App.js last in your javascript imports -->
+            <script src="{{ asset('bundles/mooc/AdminAssets/js/core/source/App.min.js') }}"></script>
+            {% block addjavascripts %}{% endblock %}
+        {% endblock %}
+    </body>
+</html>

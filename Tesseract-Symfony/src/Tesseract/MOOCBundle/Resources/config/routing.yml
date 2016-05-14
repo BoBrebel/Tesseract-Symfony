@@ -119,5 +119,38 @@ tesseract_mooc_organisation_invite:
      path:     /invite/{id}
      defaults: { _controller: TesseractMOOCBundle:Organisation:invite}
 
-    
-   
+tesseract_mooc_coach_dashboard:
+    path:     /coach
+    defaults: { _controller: TesseractMOOCBundle:Coach:index }
+
+tesseract_mooc_coach_courses:
+    path:     /coach/course
+    defaults: { _controller: TesseractMOOCBundle:Coach:displayCourse }
+
+tesseract_mooc_coach_tests:
+    path:     /coach/quiz/{id}
+    defaults: { _controller: TesseractMOOCBundle:Coach:displayTests }
+
+tesseract_mooc_coach_committee:
+    path:     /coach/{i}
+    defaults: { _controller: TesseractMOOCBundle:Coach:displayCommittee }
+
+tesseract_mooc_coach_organisations:
+    path:     /coach/organisation
+    defaults: { _controller: TesseractMOOCBundle:Coach:displayOrganisation }
+
+tesseract_mooc_coach_discussion:
+    path:     /coach/discuss
+    defaults: { _controller: TesseractMOOCBundle:Coach:displayMessages }
+
+tesseract_mooc_coach_report:
+    path:     /coach/report
+    defaults: { _controller: TesseractMOOCBundle:Coach:displayReport }
+
+tesseract_mooc_coach_quiz_delete:
+    path:     /coach/delete/{id}
+    defaults: { _controller: TesseractMOOCBundle:Coach:quizDelete }
+
+tesseract_mooc_coach_quiz_add:
+    path:     /coach/quiz/addQuiz/new
+    defaults: { _controller: TesseractMOOCBundle:Coach:quizAdd }

@@ -1,0 +1,234 @@
+{% extends "TesseractMOOCBundle:Formateur:Layout.html.twig" %}
+
+
+{% block header %}
+    <div class="headerbar">
+        <div class="headerbar-left">
+            <ul class="header-nav header-nav-options">
+                <li class="header-nav-brand" >
+                    <div class="brand-holder">
+                        <a href="#">
+                            <span class="text-lg text-bold text-primary">{{ app.user.username }} dashboard</span>
+                        </a>
+                    </div>
+                </li>
+                <li>
+                    <a class="btn btn-icon-toggle menubar-toggle" data-toggle="menubar" href="javascript:void(0);">
+                        <i class="fa fa-bars"></i>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+        <div class="headerbar-right">
+            <ul class="header-nav header-nav-options">
+                <li class="dropdown hidden-xs">
+                    <a href="javascript:void(0);" class="btn btn-icon-toggle btn-default" data-toggle="dropdown">
+                        <i class="fa fa-bell"></i><sup class="badge style-danger">{{nbrnot}}</sup>
+                    </a>
+                    <ul class="dropdown-menu animation-expand">
+                        <li class="dropdown-header">Today's messages</li>
+                         {% for n in notifications%}
+                        <li>
+                            <a class="alert alert-callout alert-warning" href="javascript:void(0);">
+                                <img class="pull-right img-circle dropdown-avatar" src="../../assets/images/avatar-ares.jpg?1404026449" alt="" />
+                                <strong>{{n.getIdUtilisateur()}}</strong><br/>
+                                <small>{{n.getNotification()}}</small>
+                            </a>
+                        </li>
+                        {%endfor%}
+                        <li class="dropdown-header">Options</li>
+                        <li><a href="../../html/pages/login.html">View all messages <span class="pull-right"><i class="fa fa-arrow-right"></i></span></a></li>
+                        <li><a href="../../html/pages/login.html">Mark as read <span class="pull-right"><i class="fa fa-arrow-right"></i></span></a></li>
+                    </ul><!--end .dropdown-menu -->
+                </li><!--end .dropdown -->
+                
+
+            </ul>
+            <ul class="header-nav header-nav-profile">
+                <li class="dropdown">
+                    <a href="javascript:void(0);" class="dropdown-toggle ink-reaction" data-toggle="dropdown">
+                        <img src="{{ asset('assets/images/coaches/avatar-ares.jpg') }}" alt="" />
+                        <span class="profile-info">
+                            {{ app.user.username }}
+                            <small>{{ app.user.email }}</small>
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu animation-dock dropdown-menu-right">
+                        <li class="dropdown-header">Config</li>
+                        <li><a href="./profile">My profile</a></li>
+                        <li><a href="../../html/pages/blog/post.html">My blog <span class="badge style-danger pull-right">16</span></a></li>
+                        <li><a href="../../html/pages/calendar.html">My appointments</a></li>
+                        <li class="divider"></li>
+                        <li><a href="../../html/pages/locked.html"><i class="fa fa-fw fa-lock"></i> Lock</a></li>
+                        <li><a href="../../html/pages/login.html"><i class="fa fa-fw fa-power-off text-danger"></i> Logout</a></li>
+                    </ul><!--end .dropdown-menu -->
+                </li>
+
+            </ul>
+            <ul class="header-nav header-nav-toggle">
+                <li>
+                    <a class="btn btn-icon-toggle btn-default" href="#offcanvas-search" data-toggle="offcanvas" data-backdrop="false">
+                        <i class="fa fa-ellipsis-v"></i>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+{% endblock %}
+
+{% block menubar %}
+    <div class="menubar-fixed-panel">
+        <div>
+            <a class="btn btn-icon-toggle btn-default menubar-toggle" data-toggle="menubar" href="javascript:void(0);">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
+        <div class="expanded">
+            <a href="../../html/dashboards/dashboard.html">
+                <span class="text-lg text-bold text-primary ">MATERIAL&nbsp;COACH</span>
+            </a>
+        </div>
+    </div>
+    <div class="menubar-scroll-panel">
+        <ul id="main-menu" class="gui-controls ">
+            <li>
+                <a href="{{ path('tesseract_mooc_coach_dashboard') }}" class="active">
+                    <div class="gui-icon"><i class="fa fa-home"></i></div>
+                    <span class="title">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('tesseract_mooc_coach_courses') }}" >
+                    <div class="gui-icon"><i class="fa fa-book"></i></div>
+                        <span class="title">My Courses</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('tesseract_mooc_coach_tests', {'id':app.user.id} ) }}" >
+                    <div class="gui-icon"><i class="fa fa-puzzle-piece"></i></div>
+                    <span class="title">My Tests</span>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0);" class="dropdown-toggle ink-reaction" data-toggle="dropdown" >
+                    <div class="gui-icon">
+                        <i class="fa fa-users"></i>
+                        {% if (committeeInvite==1) %}
+                            <sup class="badge style-danger">1</sup>
+                        {% endif %}
+                    </div>
+                    <span class="title">Committtee Queries</span>
+                </a>
+                {% if committeeInvite==1%}
+                <ul class="dropdown-menu animation-dock dropdown-menu-right">
+                        <li class="dropdown-header">Would you like to join the committee </li>
+                        <li><a href="{{ path('tesseract_mooc_coach_committee', {'i':'ACC'} ) }}">Accept</a></li>
+                        <li><a href="{{ path('tesseract_mooc_coach_committee', {'i':'REF'} ) }}">Refuse</a></li>
+                </ul>
+                {% endif %}
+            </li>
+            <li>
+                <a href="{{ path('tesseract_mooc_coach_organisations') }}" >
+                    <div class="gui-icon"><i class="fa fa-building-o"></i></div>
+                        <span class="title">Organistions</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('tesseract_mooc_coach_discussion') }}" >
+                    <div class="gui-icon"><i class="fa fa-comments"></i></div>
+                    <span class="title">Discussions</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('tesseract_mooc_coach_report') }}" >
+                    <div class="gui-icon"><i class="fa fa-exclamation"></i></div>
+                    <span class="title">Report</span>
+                </a>
+            </li>
+            <!--<li>
+                <a href="{{ path('tesseract_mooc_admin_tickets') }}" id="btn-tickets" >
+                    <div class="gui-icon"><i class="fa fa-ticket"></i></div>
+                    <span class="title">Tickets</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('tesseract_mooc_admin_forum_bans') }}" >
+                    <div class="gui-icon"><i class="fa fa-comment-o"></i></div>
+                    <span class="title">Forum Bans</span>
+                </a>
+            </li>-->
+        </ul>
+        <div class="menubar-foot-panel">
+            <small class="no-linebreak hidden-folded">
+                <span class="opacity-75">Copyright &copy; 2015-2016</span> <strong>Tesseract Corp</strong>
+            </small>
+        </div>
+    </div><!--end .menubar-scroll-panel-->
+
+{% endblock %}
+
+{% block content %}
+
+
+{% endblock %}
+{% block offcanvas %}
+
+    <div id="offcanvas-search" class="offcanvas-pane width-8">
+        <div class="offcanvas-head">
+            <header class="text-primary">Search</header>
+            <div class="offcanvas-tools">
+                <a class="btn btn-icon-toggle btn-default-light pull-right" data-dismiss="offcanvas">
+                    <i class="md md-close"></i>
+                </a>
+            </div>
+        </div>
+        <div class="offcanvas-body no-padding">
+            <ul class="list ">
+                <li class="tile divider-full-bleed">
+                    <div class="tile-content">
+                        <div class="tile-text"><strong>A</strong></div>
+                    </div>
+                </li>
+                {% render controller('TesseractMOOCBundle:Utilisateur:list') %}
+            </ul>
+        </div><!--end .offcanvas-body -->
+    </div>
+    <div id="offcanvas-chat" class="offcanvas-pane style-default-light width-12">
+        <div class="offcanvas-head style-default-bright">
+            <header class="text-primary">Chat with Ann Laurens</header>
+            <div class="offcanvas-tools">
+                <a class="btn btn-icon-toggle btn-default-light pull-right" data-dismiss="offcanvas">
+                    <i class="md md-close"></i>
+                </a>
+                <a class="btn btn-icon-toggle btn-default-light pull-right" href="#offcanvas-search" data-toggle="offcanvas" data-backdrop="false">
+                    <i class="md md-arrow-back"></i>
+                </a>
+            </div>
+            <form class="form">
+                <div class="form-group floating-label">
+                    <textarea name="sidebarChatMessage" id="sidebarChatMessage" class="form-control autosize" rows="1"></textarea>
+                    <label for="sidebarChatMessage">Leave a message</label>
+                </div>
+            </form>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="list-chats">
+                <li>
+                    <div class="chat">
+                        <div class="chat-avatar"><img class="img-circle" src="../../assets/img/avatar1.jpg?1403934956" alt="" /></div>
+                        <div class="chat-body">
+                            hello
+                            <small id="time"></small>
+                        </div>
+                    </div><!--end .chat -->
+                </li>
+            </ul>
+        </div><!--end .offcanvas-body -->
+    </div>
+
+{% endblock %}
+{% block jsdependencies %}
+    
+{% endblock %}
