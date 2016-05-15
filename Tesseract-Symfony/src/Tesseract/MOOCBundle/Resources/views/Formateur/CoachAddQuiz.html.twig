@@ -8,7 +8,7 @@
                     <div class="col-lg-6 col-lg-offset-3">
                         <h1>Add Quiz</h1>
                         <div class="form" role="form">
-                            
+
                             <div class="form-group">
                                 <div class="row">
                                     <!--Quiz Type ---------------------------------->
@@ -41,7 +41,7 @@
                                 <input class="form-control" id="quizDuree" type="number">
                                 <label for="dureeQuiz">Duration</label>
                             </div>
-                            <button type="button" class="btn ink-reaction btn-raised btn-primary" onClick="addquiz()">
+                            <button type="button" class="btn ink-reaction btn-raised btn-primary" id="addQuiz">
                                 Send
                                 <i class="fa fa-send"></i>
                             </button>
@@ -49,7 +49,7 @@
                     </div>
                 </div>
             </div>
-            
+
 
             <div id="question_div" style="display: none" >
                 <div class="row">
@@ -104,43 +104,42 @@
 
 {% endblock %}
 {% block jsdependencies %}
-    <script>
+    
+    <script src="https://code.jquery.com/jquery-2.2.3.min.js">
+
+        $(document).ready(
+                #('addQuiz').click(function() {
+                    var quizType1 = $('#quizType1').is(":checked");
+                    var quizType2 = $('#quizType2').is(":checked");
+                    var quizType3 = $('#quizType3').is(":checked");
+                    var quizDiffi = $('#quizDiff').val();
+                    var quizDuree = $('#quizDuree').val();
+                    var quizType = " ";
+                    if (quizType1) {
+                        quizType = "OBJ";
+                    } else if (quizType2) {
+                        quizType = "ENT";
+                    } else if (quizType3) {
+                        quizType = "FIN";
+                    }
 
 
-        function addquiz() {
-            
-            var quizType1 = $('#quizType1').is(":checked");
-            var quizType2 = $('#quizType2').is(":checked");
-            var quizType3 = $('#quizType3').is(":checked");
-            var quizDiffi = $('#quizDiff').val();
-            var quizDuree = $('#quizDuree').val();
-            var quizType = " ";
-            var courseId = $('#courseId').val();
-            if(quizType1){
-                quizType="OBJ";
-            } else if(quizType2){
-                quizType="ENT";
-            } else if(quizType3){
-                quizType="FIN";
-            }
 
-
-
-            $.ajax({
-                type: "post",
-                url: '{{ path('tesseract_mooc_coach_quiz_ajout') }}',
-                data: {
-                    'type': quizType,
-                    'duree': quizDuree,
-                    'difficulty': quizDiffi
-                },
-                success: function () {
-                    $('#quiz_div').hide();
-                    $('#question_div').show();
-                    $('#rep_div').hide();
-                }
-            });
-        }
+                    $.ajax({
+                        type: "post",
+                        url: '{{ path('tesseract_mooc_coach_quiz_ajout') }}',
+                        data: {
+                            'type': quizType,
+                            'duree': quizDuree,
+                            'difficulty': quizDiffi
+                        },
+                        success: function () {
+                            $('#quiz_div').hide();
+                            $('#question_div').show();
+                            $('#rep_div').hide();
+                        }
+                    });
+                });
 
 
 
@@ -201,7 +200,7 @@
 
         function terminer() {
             window.location.href = '{{ path('tesseract_mooc_coach_tests')}}';
-        }
+        });
     </script>
 
 {% endblock %}

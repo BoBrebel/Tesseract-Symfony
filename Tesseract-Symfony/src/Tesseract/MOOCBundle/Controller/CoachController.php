@@ -155,7 +155,8 @@ class CoachController extends Controller{
         $em->persist($em);
         $em->flush();
         
-       
+       echo 'aasba';
+       die();
         
         return new Response('OK => '.$ep->getId());
     }
