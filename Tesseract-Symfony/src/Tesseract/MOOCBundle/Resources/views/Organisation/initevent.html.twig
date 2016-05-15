@@ -17,7 +17,7 @@
                         <div class="card style-default-light">
                             <div class="comment-avatar"><img src="../../uploads/pictures/{{c.affiche}}"></div>
                             <div class="card-body">
-                                <a class="title" >{{ c.nom |capitalize }} <p class="comment-title">{{c.date|date('Y-m-d H:i')}}</p></a>
+                                <a class="title" href="{{ path('tesseract_mooc_Org_previewevent', {'id': c.id}) }} ">{{ c.nom |capitalize }} <p class="comment-title">{{c.date|date('Y-m-d H:i')}}</p></a>
                             </div>
                         </div>
                     </li>
