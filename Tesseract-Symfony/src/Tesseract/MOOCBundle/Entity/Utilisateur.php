@@ -4,6 +4,7 @@ namespace Tesseract\MOOCBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use FOS\MessageBundle\Model\ParticipantInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -12,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="utilisateur", uniqueConstraints={@ORM\UniqueConstraint(name="nom_utilisateur_UNIQUE", columns={"pseudo"})}, indexes={@ORM\Index(name="fk_users_organisations1_idx", columns={"id_organisation"})})
  * @ORM\Entity
  */
-class Utilisateur extends BaseUser {
+class Utilisateur extends BaseUser implements ParticipantInterface{
 
     /**
      * @var string

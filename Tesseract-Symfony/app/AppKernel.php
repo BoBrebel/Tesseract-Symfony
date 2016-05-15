@@ -22,6 +22,7 @@ class AppKernel extends Kernel
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(), 
             new Ob\HighchartsBundle\ObHighchartsBundle(),
             new Nomaya\SocialBundle\NomayaSocialBundle(),
+            new FOS\MessageBundle\FOSMessageBundle(),
             
         );
 

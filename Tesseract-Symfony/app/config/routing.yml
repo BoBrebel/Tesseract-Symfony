@@ -10,3 +10,7 @@ app:
 fos_user:
     prefix:   /tesseract
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+fos_message:
+    resource: "@FOSMessageBundle/Resources/config/routing.xml"
+    prefix: /tesseract_messages

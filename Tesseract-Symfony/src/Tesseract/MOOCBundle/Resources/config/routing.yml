@@ -223,3 +223,6 @@ tesseract_mooc_coach_bind_cours:
     path:     /bind_course_quiz
     defaults: { _controller: TesseractMOOCBundle:Coach:bindToCourse }
 
+tesseract_mooc_message:
+    path:     /message
+    defaults: { _controller: TesseractMOOCBundle:Message:newThread }

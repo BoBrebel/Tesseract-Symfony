@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                  http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <mapped-superclass name="Tesseract\MOOCBundle\Entity\Thread" table="fos_message_thread">
+
+
+        
+        <many-to-one field="createdBy" target-entity="Tesseract\MOOCBundle\Entity\Utilisateur" />
+        <one-to-many field="messages" target-entity="Tesseract\MOOCBundle\Entity\Message" mapped-by="thread" />
+        <one-to-many field="metadata" target-entity="Tesseract\MOOCBundle\Entity\ThreadMetadata" mapped-by="thread">
+            <cascade>
+                <cascade-all />
+            </cascade>
+        </one-to-many>
+        
+
+    </mapped-superclass>
+
+</doctrine-mapping>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                  http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <mapped-superclass name="Tesseract\MOOCBundle\Entity\ThreadMetadata" table="fos_message_thread_metadata">
+
+
+        
+        <many-to-one field="thread" target-entity="Tesseract\MOOCBundle\Entity\Thread" inversed-by="metadata" />
+        <many-to-one field="participant" target-entity="Tesseract\MOOCBundle\Entity\Utilisateur" />
+        
+
+    </mapped-superclass>
+
+</doctrine-mapping>
