@@ -1,0 +1,163 @@
+
+{% extends "TesseractMOOCBundle:Admin:Admindashboard.html.twig" %}
+
+{% block addstylesheets %}
+    <link type="text/css" rel="stylesheet" href="{{ asset('bundles/mooc/AdminAssets/less/materialadmin/timeline.less') }}" />
+{% endblock %}
+{% block content %}
+    <section class="full-bleed">
+        <div class="section-body style-default-dark force-padding text-shadow">
+            <div class="img-backdrop" style="background-image: url('{{ asset(backdrop) }}')"></div>
+            <div class="overlay overlay-shade-top stick-top-left height-3"></div>
+            <div class="row">
+                <div class="col-md-5 col-xs-8 height-6">
+                    <img class="img-circle   img-responsive" style="max-width: 35%;height: auto" src="{{ asset(currentuser.photo) }}" alt="" />
+                    <h2>{{ currentuser.prenom }} {{ currentuser.nom }}<br/>
+                            {% if (currentuser.getRoles()[0]=='ROLE_SUPER_ADMIN')%}
+                                <small> Admin</small></h2>
+                            {% elseif(currentuser.getRoles()[0]=='ROLE_APR') %}
+                                <small> Student</small></h2>
+                            {% elseif(currentuser.getRoles()[0]=='ROLE_FOR') %}
+                                <small> Coach</small></h2>
+                            {% elseif(currentuser.getRoles()[0]=='ROLE_AOR') %}
+                                <small> Organisation Admin</small></h2>
+                            {% endif %}
+                </div><!--end .col -->
+
+            </div><!--end .row -->
+
+        </div><!--end .section-body -->
+    </section>
+    <section>
+        <div class="section-body no-margin">
+            <div class="row">
+                {% if currentuser.role=='Coach' %}
+                <div class="col-md-8">
+                    <h2>Timeline</h2>
+                    <!-- BEGIN MESSAGE ACTIVITY -->
+                    <div class="tab-pane" id="activity">
+                        <ul class="timeline collapse-lg timeline-hairline">
+                            {% for entity in entities %}
+                            <li>
+                                <div class="timeline-circ circ-xl style-primary"><i class="md md-event"></i></div>
+                                <div class="timeline-entry">
+                                    <div class="card style-default-light">
+                                        <div class="card-body small-padding">
+                                            <img class="img-circle img-responsive pull-left width-1" style="width: 8%;" src="{{ asset(entity.getIdUtilisateur.getPhoto) }}" alt="" />
+                                            <span class="text-medium">{{ entity.idutilisateur.prenom}} {{ entity.idutilisateur.nom}} left a comment on <span class="text-primary">{{ entity.idCours.nom }}</span></span><br/>
+														<span class="opacity-50">
+															{{date()|date("d")- entity.getDate()|date("d")}} Days ago
+														</span>
+                                        </div>
+                                        <div class="card-body">
+                                            <p><em>{{ entity.commentaire}}</em></p>
+                                        </div>
+                                    </div>
+                                </div><!--end .timeline-entry -->
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div><!--end #activity -->
+                </div><!--end .col -->
+
+                {% else %}
+                    <div class="col-md-8">
+                        <h2>Timeline</h2>
+                        <!-- BEGIN MESSAGE ACTIVITY -->
+                        <div class="tab-pane" id="activity">
+                            <ul class="timeline collapse-lg timeline-hairline">
+                                {% for entity in entities %}
+                                    <li>
+                                        <div class="timeline-circ circ-xl style-primary"><i class="md md-event"></i></div>
+                                        <div class="timeline-entry">
+                                            <div class="card style-default-light">
+                                                <div class="card-body small-padding">
+                                                    <span class="text-medium"> Notification<span class="text-primary"></span></span><br/>
+														<span class="opacity-50">
+															{{date()|date("d")- entity.getDate()|date("d")}} Days ago
+														</span>
+                                                </div>
+                                                <div class="card-body">
+                                                    <p><em>{{ entity.notification}}</em></p>
+                                                </div>
+                                            </div>
+                                        </div><!--end .timeline-entry -->
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div><!--end #activity -->
+                    </div><!--end .col -->
+                {% endif %}
+                <!-- END MESSAGE ACTIVITY -->
+
+                <!-- BEGIN PROFILE MENUBAR -->
+                <div class="col-lg-offset-1 col-lg-3 col-md-4">
+
+                    <div class="card card-underline style-default-dark">
+                        <div class="card-head">
+                            <header class="opacity-75"><small>Personal info</small></header>
+                            <div class="tools">
+                                <a class="btn btn-icon-toggle ink-reaction"><i class="fa fa-edit"></i></a>
+                            </div><!--end .tools -->
+                        </div><!--end .card-head -->
+                        <div class="card-body no-padding">
+                            <ul class="list">
+                                <li class="tile">
+                                    <a class="tile-content ink-reaction">
+                                        <div class="tile-icon">
+                                            <i class="fa fa-location-arrow"></i>
+                                        </div>
+                                        <div class="tile-text">
+                                           {{ currentuser.adresse }}
+                                            <small>Adresse</small>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="tile">
+                                    <a class="tile-content ink-reaction">
+                                        <div class="tile-icon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                        <div class="tile-text">
+                                           {{ currentuser.dateNaissance|date("d/m/y") }}
+                                            <small>Birth Date</small>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="divider-inset"></li>
+                                <li class="tile">
+                                    <a class="tile-content ink-reaction">
+                                        <div class="tile-icon">
+                                            <i class="fa fa-phone"></i>
+                                        </div>
+                                        <div class="tile-text">
+                                            {{ currentuser.telephone }}
+                                            <small>Phone N°</small>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="tile">
+                                    <a class="tile-content ink-reaction">
+                                        <div class="tile-icon">
+                                            <i class="fa fa-at"></i>
+                                        </div>
+                                        <div class="tile-text">
+                                            {{ currentuser.mailSercours }}
+                                            <small>Urgency Email</small>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div><!--end .card-body -->
+                    </div><!--end .card -->
+                </div><!--end .col -->
+                <!-- END PROFILE MENUBAR -->
+
+            </div><!--end .row -->
+        </div><!--end .section-body -->
+    </section>
+{% endblock %}
+
+
+
+

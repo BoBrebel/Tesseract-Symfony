@@ -9,23 +9,7 @@ class GrapheController  extends Controller{
         $users=$em->getRepository('TesseractMOOCBundle:Utilisateur')->findAll();
         $nbr=  count($users);
         
-        $coaches = array();
-        $students = array();
-        $i=0;
-        $j=0;
-        foreach ($users as $u){
-            if($u->getRoles()[0] == 'ROLE_FOR'){
-                $coaches[$i]=$u;
-                $i++;
-            }
-            if($u->getRoles()[0] == 'ROLE_APR'){
-                $students[$j]=$u;
-                $j++;
-            }
-        }
-        $nbrcoaches=count($coaches);
-        $nbrstudents=count($students);
-     
+
         $requette = $em->createQuery("select  count(l.tache) as total ,l.date from TesseractMOOCBundle:Log l  where l.tache= 'signup' group by l.date order by l.date ASC");
         $signup=$requette->setMaxResults(7)->getResult();
         $stat= array(null,null,null,null,null,null,null);
@@ -49,10 +33,63 @@ class GrapheController  extends Controller{
     $ob->xAxis->title(array('text'  => "Day")); 
     $ob->xAxis->categories($days);
     $ob->yAxis->title(array('text'  => "Number "));     
-    $ob->series($series);  
-    return $this->render('TesseractMOOCBundle:Admin:LineChart.html.twig', array('chart' => $ob,
-                                                                                'nbr' => $nbr,
-                                                                                 'nbrcoaches'=>$nbrcoaches,
-                                                                                'nbrstudents'=>$nbrstudents)); 
-} 
+    $ob->series($series);
+
+
+
+    return $this->render('TesseractMOOCBundle:Admin:LineChart.html.twig', array('chart' => $ob));
+}
+
+
+    public function pieindexAction() {
+
+        $em = $this->getDoctrine()->getManager();
+        $orgs=$em->getRepository('TesseractMOOCBundle:Organisation')->findAll();
+        $users=$em->getRepository('TesseractMOOCBundle:Utilisateur')->findAll();
+        $coaches = array();
+        $students = array();
+        $o=0;
+        $i=0;
+        $j=0;
+        $nbr=  count($users);
+
+        foreach ($users as $u){
+            if($u->getRoles()[0] == 'ROLE_FOR'){
+                $coaches[$i]=$u;
+                $i++;
+            }
+            if($u->getRoles()[0] == 'ROLE_APR'){
+                $students[$j]=$u;
+                $j++;
+            }
+
+        }
+        $nbrcoaches=count($coaches);
+        $nbrstudents=count($students);
+        $nbrorgs=count($orgs);
+        $nbr+=$nbrorgs;
+         
+           
+
+        $ob = new Highchart();
+        $ob->chart->renderTo('piechart');
+        $ob->title->text('Users of the site');
+        $ob->plotOptions->pie(array(
+            'allowPointSelect'  => true,
+            'cursor'    => 'pointer',
+            'dataLabels'    => array('enabled' => false),
+            'showInLegend'  => false
+        ));
+        $ob->tooltip->headerFormat('<span style="font-size:11px">{series.name}</span><br>');
+        $ob->tooltip->pointFormat('<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>');
+
+        $data = array(
+            array('Coaches', ($nbrcoaches/$nbr)*100),
+            array('Students', ($nbrstudents/$nbr)*100),
+            array('Organisations', ($nbrorgs/$nbr)*100),
+        );
+        $ob->series(array(array('type' => 'pie','name' => 'Percent of users', 'data' => $data)));
+
+        return $this->render('TesseractMOOCBundle:Admin:Piechart.html.twig', array('chart' => $ob));
+    }
 }

@@ -5,6 +5,10 @@ tesseract_mooc_log:
 tesseract_mooc_homepage:
     path:     /
     defaults: { _controller: TesseractMOOCBundle:Organisation:inscriptionOrganisation }
+
+tesseract_mooc_profile:
+    path:     /profile/{id}
+    defaults: { _controller: TesseractMOOCBundle:Utilisateur:profile }
     
 tesseract_mooc_apprenant_interface:
     path:     /apprenant
@@ -53,6 +57,10 @@ tesseract_mooc_admin_forum_ban:
 tesseract_mooc_admin_chart:
     path:     /admin/chart
     defaults: { _controller: TesseractMOOCBundle:Graphe:index }
+
+tesseract_mooc_admin_piechart:
+    path:     /admin/piechart
+    defaults: { _controller: TesseractMOOCBundle:Graphe:pieindex }
 tesseract_mooc_admin_user_list:
     path:     /admin/userlist
     defaults: { _controller: TesseractMOOCBundle:Utilisateur:list }

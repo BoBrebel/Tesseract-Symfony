@@ -253,4 +253,42 @@ class UtilisateurController extends Controller
        
         return $this->render('TesseractMOOCBundle:Utilisateur:list.html.twig', array('entities' => $entities)); 
     }
+    public function profileAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $notifications = $em->getRepository("TesseractMOOCBundle:Notification")->findBy(array('idUtilisateur' => $this->getUser()->getId(),
+            'vue' => 'non'));
+
+        $nbr = count($notifications);
+        $entity = $em->getRepository('TesseractMOOCBundle:Utilisateur')->find($id);
+
+        $timeline=array();
+
+        if($entity->getRoles()[0]=='ROLE_FOR'){
+            $requette =$em->createQuery("SELECT Com FROM TesseractMOOCBundle:CommentaireCours Com INNER JOIN TesseractMOOCBundle:Cours C WITH Com.idCours=C.id WHERE C.idUtilisateur = :id");
+            $requette->setParameter('id',$id);
+            $timeline=$requette->getResult();
+            $backdrop='Resources/formateur.jpg';
+            $entity->setRole('Coach');
+
+
+        }
+        else{
+            $em = $this->getDoctrine()->getManager();
+            $timeline = $em->getRepository("TesseractMOOCBundle:Notification")->findBy(array('idUtilisateur' => $id));
+
+            $backdrop='Resources/formateur.jpg';
+            $entity->setRole('Student');
+
+
+        }
+
+        return $this->render('TesseractMOOCBundle:Utilisateur:Profile.html.twig', array('entities' => $timeline,'notifications'=>$notifications,
+            'nbrnot'=>$nbr,'currentuser'=>$entity,'backdrop'=>$backdrop));
+
+
+
+
+
+    }
 }
