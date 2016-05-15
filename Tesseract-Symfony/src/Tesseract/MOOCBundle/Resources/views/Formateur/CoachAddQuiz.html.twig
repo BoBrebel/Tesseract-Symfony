@@ -41,7 +41,7 @@
                                 <input class="form-control" id="quizDuree" type="number">
                                 <label for="dureeQuiz">Duration</label>
                             </div>
-                            <button type="button" class="btn ink-reaction btn-raised btn-primary" id="addQuiz">
+                            <button type="button" class="btn ink-reaction btn-raised btn-primary" onClick="addquiz()">
                                 Send
                                 <i class="fa fa-send"></i>
                             </button>
@@ -95,6 +95,38 @@
                                 Send
                                 <i class="fa fa-send"></i>
                             </button>
+                            <input type="hidden" id="quest" name="questt"  value=0 />
+                        </div>    
+                    </div>
+                </div>
+            </div>
+            
+            
+            
+            <div id="bind_div"  style="display: none">
+                <div class="row">
+                    <div class="col-lg-6 col-lg-offset-3">
+                        <h2>Choose a course</h2>
+                        <div class="form" role="form">
+                            <div class="form-group floating-label">
+                                <select id="courseAll" name="courseAll" class="form-control">
+                                    <option value="">&nbsp;</option>
+                                    {% for c in courses%}
+                                        <option value="{{c.getId()}}">{{c.getNom()}}</option>
+                                    {% endfor %}
+                                </select>
+                                <label for="quizDiff">My Courses</label>
+                            </div>
+                            <div id="objectif">
+                                <div id="toReplace">
+                                    
+                                </div>
+                            </div>
+                            <button type="button" class="btn ink-reaction btn-raised btn-primary" onClick="bindQuiz()">
+                                Send
+                                <i class="fa fa-send"></i>
+                            </button>
+                            <input type="hidden" id="quest" name="questt"  value=0 />
                         </div>    
                     </div>
                 </div>
@@ -103,68 +135,79 @@
     </div>
 
 {% endblock %}
-{% block jsdependencies %}
-    
-    <script src="https://code.jquery.com/jquery-2.2.3.min.js">
+{% block addjavascripts %}
+    <script>
+        var nbrQ = 0;
+        var nbrR = 0;
+        
+        $('#courseAll').change(function(){
+            var coursId = $('#courseAll').val();
+            var quizType1 = $('#quizType1').is(":checked");
+            $('#toReplace').replaceWith('<div id="toReplace"></div>');
+            if(quizType1){
+            $.ajax({
+                type: "post",
+                url: '{{path('tesseract_mooc_coach_select_cours')}}',
+                data: {
+                    'idCour': coursId
+                },
+                success: function (data) {
+                    $('#toReplace').append(data);
+                }
+            });
+            }
+        });
+        function addquiz() {
 
-        $(document).ready(
-                #('addQuiz').click(function() {
-                    var quizType1 = $('#quizType1').is(":checked");
-                    var quizType2 = $('#quizType2').is(":checked");
-                    var quizType3 = $('#quizType3').is(":checked");
-                    var quizDiffi = $('#quizDiff').val();
-                    var quizDuree = $('#quizDuree').val();
-                    var quizType = " ";
-                    if (quizType1) {
-                        quizType = "OBJ";
-                    } else if (quizType2) {
-                        quizType = "ENT";
-                    } else if (quizType3) {
-                        quizType = "FIN";
-                    }
+            var quizType1 = $('#quizType1').is(":checked");
+            var quizType2 = $('#quizType2').is(":checked");
+            var quizType3 = $('#quizType3').is(":checked");
+            var quizDiffi = $('#quizDiff').val();
+            var quizDuree = $('#quizDuree').val();
+            var quizType = " ";
+            if (quizType1) {
+                quizType = "OBJ";
+            } else if (quizType2) {
+                quizType = "ENT";
+            } else if (quizType3) {
+                quizType = "FIN";
+            }
 
-
-
-                    $.ajax({
-                        type: "post",
-                        url: '{{ path('tesseract_mooc_coach_quiz_ajout') }}',
-                        data: {
-                            'type': quizType,
-                            'duree': quizDuree,
-                            'difficulty': quizDiffi
-                        },
-                        success: function () {
-                            $('#quiz_div').hide();
-                            $('#question_div').show();
-                            $('#rep_div').hide();
-                        }
-                    });
-                });
+            $.ajax({
+                type: "post",
+                url: '{{ path('tesseract_mooc_coach_quiz_ajout') }}',
+                data: {
+                    'type': quizType,
+                    'duree': quizDuree,
+                    'difficulty': quizDiffi
+                },
+                success: function (data) {
+                    $('#quiz_div').hide();
+                    $('#question_div').show();
+                    $('#rep_div').hide();
+                    $('#quiz').val(data);
+                }
+            });
+        }
 
 
 
         function addquestion() {
-
+            nbrQ = nbrQ + 1;
             var question = $('#question').val();
             var quiz = $('#quiz').val();
 
             $.ajax({
                 type: "post",
-                url: '',
+                url: '{{ path('tesseract_mooc_coach_quiz_ajout_question') }}',
                 data: {
-                    'question': question
+                    'question': question,
+                    'id' : quiz
                 },
-                success: function () {
-                    $('#question').val("");
-                    $('#quiz').val(quiz + 1);
-                    if ($('#quiz').val() === "01111") {
-                        $('#terminer').removeClass('disabled');
-
-                    }
-
-
+                success: function (data) {
                     $('#question_div').hide();
                     $('#rep_div').show();
+                    $('#quest').val(data);
                 }
 
             });
@@ -174,33 +217,74 @@
 
 
         function addreponse() {
-
+            nbrR = nbrR + 1;
             var answer = $('#answer').val();
             var justi = $('#justi').val();
             var correct = $('#correct').is(":checked");
-
+            var question = $('#quest').val();
+            var etat = "";
+            if(correct){
+                etat="VRAI";
+            }else{
+                etat="FAUX";
+            }
             $.ajax({
                 type: "post",
-                url: '',
+                url: '{{ path('tesseract_mooc_coach_quiz_ajout_choice') }}',
                 data: {
                     'answer': answer,
                     'justi': justi,
-                    'correct': correct
+                    'etat': etat,
+                    'idQuest': question
                 },
                 success: function () {
-                    $('#answer').val("");
-                    $('#justi').val("");
-                    $('#question_div').show();
                     $('#rep_div').hide();
+                    $('#bind_div').show();
+                    
                 }
             });
+        }
+        
+        function bindQuiz() {
+            var quiz = $('#quiz').val();
+            var cour = $('#courseAll').val();
+            var quizType1 = $('#quizType1').is(":checked");
+            if(quizType1){
+                var objectif = $('#objectifsAll').val();
+                $.ajax({
+                type: "post",
+                url: '{{path('tesseract_mooc_coach_bind_cours')}}',
+                data: {
+                    'idQuiz': quiz,
+                    'idCour': cour,
+                    'idObjectif':objectif
+                },
+                success: function () {
+                    
+                }
+            }); 
+            }
+            else{
+               $.ajax({
+                type: "post",
+                url: '{{path('tesseract_mooc_coach_bind_cours')}}',
+                data: {
+                    'idQuiz': quiz,
+                    'idCour': cour
+                },
+                success: function () {
+                    
+                }
+            }); 
+            }
+            
         }
 
 
 
         function terminer() {
-            window.location.href = '{{ path('tesseract_mooc_coach_tests')}}';
-        });
+            window.location.href = '{{ path('tesseract_mooc_coach_tests', {'id':app.user.id})}}';
+        }
     </script>
 
 {% endblock %}

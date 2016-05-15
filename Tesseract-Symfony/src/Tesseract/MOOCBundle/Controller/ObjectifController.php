@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Tesseract\MOOCBundle\Entity\Objectif;
 use Tesseract\MOOCBundle\Form\ObjectifType;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Objectif controller.
@@ -243,5 +244,24 @@ class ObjectifController extends Controller
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
         ;
+    }
+    
+    public function objectifByIdAction(Request $req) {
+        $idCours = $req->get('idCour');
+        
+        $em = $this->getDoctrine()->getManager();
+        $requete = $em->createQuery("SELECT O FROM TesseractMOOCBundle:Objectif O INNER JOIN TesseractMOOCBundle:Chapitre C WITH O.idChapitre=C.id WHERE C.idCours = :id");
+        $requete->setParameter('id',$idCours);
+        $objectifs = $requete->getResult();
+        $str =NULL;
+        if($objectifs!=NULL){
+            $str = "<select id='objectifsAll' name='objectifsAll' class='form-control'> <option value=''>&nbsp;</option>";
+            foreach ($objectifs as $o){
+                $str = $str."<option value='".$o->getId()."'>".$o->getNom()."</option>";
+            }
+            $str = $str."</select><label for='objectifsAll'>Objectifs</label>";
+        }
+        
+        return new Response($str);
     }
 }

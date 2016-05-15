@@ -169,3 +169,23 @@ tesseract_mooc_coach_quiz_ajout:
     path:     /coach/quiz/ajoutQuiz/addquiz
     defaults: { _controller: TesseractMOOCBundle:Coach:quizAjout }
   
+tesseract_mooc_coach_quiz_ajout_question:
+    path:     /coach/quiz/ajoutQuiz/addquest
+    defaults: { _controller: TesseractMOOCBundle:Coach:quizAjoutQuest }
+
+tesseract_mooc_coach_quiz_ajout_choice:
+    path:     /coach/quiz/ajoutQuiz/addchoice
+    defaults: { _controller: TesseractMOOCBundle:Coach:quizAjoutChoice }
+    
+tesseract_mooc_coach_select_cours:
+    path:     /select_course_by_id
+    defaults: { _controller: TesseractMOOCBundle:Objectif:objectifById }
+
+tesseract_mooc_coach_select_cours:
+    path:     /select_course_by_id
+    defaults: { _controller: TesseractMOOCBundle:Objectif:objectifById }
+
+tesseract_mooc_coach_bind_cours:
+    path:     /bind_course_quiz
+    defaults: { _controller: TesseractMOOCBundle:Coach:bindToCourse }
+

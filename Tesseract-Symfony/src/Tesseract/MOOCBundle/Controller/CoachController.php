@@ -9,6 +9,10 @@
 namespace Tesseract\MOOCBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Tesseract\MOOCBundle\Entity\Epreuve;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Tesseract\MOOCBundle\Entity\Question;
+use Tesseract\MOOCBundle\Entity\Reponse;
 /**
  * Description of CoachController
  *
@@ -133,9 +137,11 @@ class CoachController extends Controller{
         $invites = $em->getRepository("TesseractMOOCBundle:Invitations")->findBy(array('idUtilisateur'=>$this->getUser()->getId(), 'sens'=>'F', 'etat'=>'ATT', 'idOrganisme'=>0));
         $invite = 0;
         $invite = count($invites);
+        $cours = $em->getRepository("TesseractMOOCBundle:Cours")->findBy(array('idUtilisateur' =>$this->getUser()->getId()));
         return $this->render('TesseractMOOCBundle:Formateur:CoachAddQuiz.html.twig',array('notifications'=>$notifications, 
                                                                                           'nbrnot'=>$nbr,
-                                                                                          'committeeInvite'=>$invite));
+                                                                                          'committeeInvite'=>$invite,
+                                                                                          'courses'=>$cours));
     }
     
     public function quizAjoutAction(Request $req) {
@@ -152,12 +158,67 @@ class CoachController extends Controller{
         
         
         $em = $this->getDoctrine()->getManager();   
-        $em->persist($em);
+        $em->persist($ep);
         $em->flush();
         
-       echo 'aasba';
-       die();
+        return new Response($ep->getId());
+    }
+    
+    public function quizAjoutQuestAction(Request $req) {
+        $idQuiz = $req->get('id');
+        $question = $req->get('question');
+        $em = $this->getDoctrine()->getManager();
+        $quiz = $em->getRepository("TesseractMOOCBundle:Epreuve")->find($idQuiz);
+        $q = new Question();
+        $q->setIdEpreuve($quiz);
+        $q->setQuestion($question);
         
-        return new Response('OK => '.$ep->getId());
+        
+        $em->persist($q);
+        $em->flush();
+        
+        return new Response($q->getId());
+    }
+    
+    public function quizAjoutChoiceAction(Request $req) {
+        $answer = $req->get('answer');
+        $justif = $req->get('justi');
+        $etat = $req->get('etat');
+        $idQuest = $req->get('idQuest');
+        $em = $this->getDoctrine()->getManager();
+        $quest = $em->getRepository("TesseractMOOCBundle:Question")->find($idQuest);
+        
+        $c = new Reponse();
+        $c->setEtat($etat);
+        $c->setJustification($justif);
+        $c->setReponse($answer);
+        $c->setIdQuestion($quest);
+        
+        $em->persist($c);
+        $em->flush();
+        
+        return new Response($c->getId());
+        
+    }
+    
+    public function bindToCourseAction(Request $req) {
+        $idCour = $req->get('idCour');
+        $idQuiz = $req->get('idQuiz');
+        print_r($idQuiz);
+        print_r('arzeq'.$idCour);
+        if($req->get('idObjectif')!=NULL){
+            $idObjectif =$req->get('idObjectif');
+            print_r('sfsf'.$idObjectif);
+        }
+        $em = $this->getDoctrine()->getManager();
+        $epreuve = $em->getRepository("TesseractMOOCBundle:Epreuve")->find($idQuiz);
+        $obj = $em->getRepository("TesseractMOOCBundle:Objectif")->find($idObjectif);
+        $epreuve->setIdCours($idCour);
+        if($req->get('idObjectif')!=NULL){
+            $epreuve->setIdObjectif($obj);
+        }
+        $em->persist($epreuve);
+        $em->flush();
+        return new Response('');
     }
 }
