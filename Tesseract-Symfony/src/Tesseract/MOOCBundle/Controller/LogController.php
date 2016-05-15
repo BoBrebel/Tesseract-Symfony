@@ -23,7 +23,29 @@ class LogController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('TesseractMOOCBundle:Log')->findAll();
+        $requette =$em->createQuery("select l from TesseractMOOCBundle:Log l order by l.date DESC");
+        $entities=$requette->setMaxResults(6)->getResult();
+        foreach ($entities as $e){
+            if($e->getTache() == 'MDF'){
+                $e->SetTache("modified");
+            }
+            if($e->getTache() == 'signup'){
+                $e->SetTache("signed up to");
+            }
+            if($e->getTache() == 'SPR'){
+                $e->SetTache("Deleted");
+            }
+            if($e->getTache() == 'sub'){
+                $e->SetTache("subscribed to");
+            }
+            if($e->getTache() == 'CRC'){
+                $e->SetTache("added a new course");
+            }
+            if($e->getCible() == 'platforme'){
+                $e->SetCible("The Platform ");
+            }
+            
+        }
 
         return $this->render('TesseractMOOCBundle:Log:index.html.twig', array(
             'entities' => $entities,

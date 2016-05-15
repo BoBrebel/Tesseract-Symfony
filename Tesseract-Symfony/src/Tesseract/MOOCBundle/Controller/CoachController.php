@@ -8,6 +8,7 @@
 
 namespace Tesseract\MOOCBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Tesseract\MOOCBundle\Entity\Epreuve;
 /**
  * Description of CoachController
  *
@@ -135,6 +136,27 @@ class CoachController extends Controller{
         return $this->render('TesseractMOOCBundle:Formateur:CoachAddQuiz.html.twig',array('notifications'=>$notifications, 
                                                                                           'nbrnot'=>$nbr,
                                                                                           'committeeInvite'=>$invite));
+    }
     
+    public function quizAjoutAction(Request $req) {
+        $type= $req->get('type');
+        $duree= $req->get('duree');
+        $diff = $req->get('difficulty');
+            
+      
+        $ep=new Epreuve();
+        $ep->setDuree($duree);
+        $ep->setDifficulte($diff);
+        $ep->setType($type);
+        
+        
+        
+        $em = $this->getDoctrine()->getManager();   
+        $em->persist($em);
+        $em->flush();
+        
+       
+        
+        return new Response('OK => '.$ep->getId());
     }
 }

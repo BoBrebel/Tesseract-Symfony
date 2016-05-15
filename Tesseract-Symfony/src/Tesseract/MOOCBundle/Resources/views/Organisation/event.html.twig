@@ -1,0 +1,149 @@
+{% extends "TesseractMOOCBundle:Organisation:index.html.twig" %}
+{% block addstylesheets %}
+    <!-- BEGIN STYLESHEETS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="your,keywords">
+    <meta name="description" content="Short explanation about this website">
+
+    <link type="text/css" rel="stylesheet" href="{{ asset('bundles/mooc/AdminAssets/css/theme-default/libs/wizard/wizard.css?1425466601') }}" />
+    <link type="text/css" rel="stylesheet" href="{{ asset('bundles/mooc/AdminAssets/css/theme-default/libs/bootstrap-datepicker/datepicker3.css?1424887858') }}" />
+
+{% endblock %} 
+{% block content %}
+
+    <body class="menubar-hoverable header-fixed ">
+        <div id="wizard" class="form-wizard form-wizard-horizontal">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body ">
+                            <div id="rootwizard1" class="form-wizard form-wizard-horizontal">
+                              
+                                
+                                <form method="POST" class="form floating-label">
+                                
+                                    
+                                    <div class="tab-content clearfix">
+                                        <div class="form-wizard-nav">
+                                            <div class="progress"><div class="progress-bar progress-bar-primary"></div></div>
+                                            <ul class="nav nav-justified">
+                                                <li class="active"><a href="#tab1" data-toggle="tab"><span class="step">1</span> <span class="title">General</span></a></li>
+                                                <li><a href="#tab2" data-toggle="tab"><span class="step">2</span> <span class="title">Venue</span></a></li>
+                                                <li><a href="#tab3" data-toggle="tab"><span class="step">3</span> <span class="title">Timing</span></a></li>
+                                                <li><a href="#tab4" data-toggle="tab"><span class="step">4</span> <span class="title">Presence Restrictions</span></a></li>
+                                            </ul>
+                                        </div><!--end .form-wizard-nav -->
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" id="tab1">
+
+                                                <br/><br/>
+                                                <div class="form-group">
+                                                    <input type="text" name="nom" id="nom" class="form-control">
+                                                    <label for="nom" class="control-label">Nom</label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="text" name="desc" id="desc" class="form-control">
+                                                    <label for="desc" class="control-label">Description</label>
+                                                </div>
+                                            </div><!--end #tab1 -->
+                                            <div class="tab-pane" id="tab2">
+
+
+                                                <br/><br/>
+                                                <div class="form-group">
+                                                    <input type="text" name="address" id="Address" class="form-control">
+                                                    <label for="Address" class="control-label">Address</label>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-8">
+                                                        <div class="form-group">
+                                                            <input type="text" name="City" id="City" class="form-control">
+                                                            <label for="City" class="control-label">City</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <input type="text" name="State" id="State" class="form-control">
+                                                            <label for="State" class="control-label">State</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </div><!--end #tab2 -->
+                                            <div class="tab-pane" id="tab3">
+
+                                                <br/><br/>
+                                                <div class="form-group">
+                                                    <input name="date"type="text" class="form-control" id="datepicker" >
+                                                    <label for="desc" class="control-label">Date</label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="text" name="time"  class="form-control" data-inputmask="'mask': 'h:m'">
+                                                    <label>Time </label>
+                                                    <p class="help-block">Time: 24h</p>
+                                                </div>
+                                            </div>
+
+
+                                            <!--end #tab3 -->
+                                            <div class="tab-pane" id="tab4">
+
+                                                <br/><br/>
+                                                <div class="form-group">
+                                                    <input type="text" name="seats" id="seats" class="form-control">
+                                                    <label for="seats" class="control-label">max seats' number</label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <select id="Age1" name=" Max Age" class="form-control">
+                                                        <option value="">&nbsp;</option>
+                                                        <option value="20">20</option>
+                                                        <option value="30">30</option>
+                                                        <option value="40">40</option>
+                                                        <option value="50">50</option>
+                                                        <option value="60">60</option>
+                                                        <option value="70">70</option>
+                                                    </select>
+                                                    <label for="Age1">Age</label>
+                                                    <p class="help-block">This is supporting text for this field.</p>
+                                                </div>
+                                                   <input class="btn btn-primary-dark" style="position: relative;left: 80%;width: 200px;" type="submit" value="SUBMIT">
+         
+                                            </div><!--end #tab4 -->
+                                        </div>
+                                        <!--end .tab-content -->
+                                        <ul class="pager wizard">
+                                            <li class="previous first"><a href="javascript:void(0);">First</a></li>
+                                            <li class="previous"><a href="javascript:void(0);">Previous</a></li>
+                                            <li class="next last"><a href="javascript:void(0);">Last</a></li>
+                                            <li class="next"><a href="javascript:void(0);">Next</a></li>
+                                        </ul>
+                                </form>
+                            </div></div></div></div></div></div>
+                        {% endblock %}
+
+    {% block addjavascripts %}
+        <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/jquery/jquery-1.11.2.min.js') }}"></script>
+        <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/jquery/jquery-migrate-1.2.1.min.js') }}"></script>
+        <script src="{{asset('bundles/mooc/AdminAssets/js/libs/jquery-ui/jquery-ui.min.js')}}"></script>
+        <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/bootstrap/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/wizard/jquery.bootstrap.wizard.min.js') }}"></script>
+        <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/moment/moment.min.js') }}"></script>
+        <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/bootstrap-datepicker/bootstrap-datepicker.js') }}"></script>
+        <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/inputmask/jquery.inputmask.bundle.min.js') }}"></script>
+        <script type="text/javascript" >
+            $(document).ready(
+                    function () {
+                        $('#wizard').bootstrapWizard();
+                        $('#datepicker').datepicker();
+                        $(':input').inputmask();
+                    });
+        </script>
+    {% endblock %}
+
+
+
+
+
+
+

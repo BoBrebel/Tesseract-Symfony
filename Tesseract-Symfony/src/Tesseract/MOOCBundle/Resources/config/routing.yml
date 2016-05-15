@@ -41,14 +41,14 @@ tesseract_mooc_admin_block_users:
 tesseract_mooc_admin_block_user:
     path:     /admin/block/{id}
     defaults: { _controller: TesseractMOOCBundle:BlockUsers:block }
-
-tesseract_mooc_admin_social_media:
-    path:     /admin/social
-    defaults: { _controller: TesseractMOOCBundle:SocialMedia:index }
     
 tesseract_mooc_admin_forum_bans:
     path:     /admin/forumbans
     defaults: { _controller: TesseractMOOCBundle:ForumBans:index }
+
+tesseract_mooc_admin_forum_ban:
+    path:     /admin/forumban/{id}
+    defaults: { _controller: TesseractMOOCBundle:ForumBans:ban }
 
 tesseract_mooc_admin_chart:
     path:     /admin/chart
@@ -118,6 +118,16 @@ tesseract_mooc_Org_affiliate:
 tesseract_mooc_organisation_invite:
      path:     /invite/{id}
      defaults: { _controller: TesseractMOOCBundle:Organisation:invite}
+tesseract_mooc_Org_events:
+     path:     /events
+     defaults: { _controller: TesseractMOOCBundle:Organisation:Initevent}
+tesseract_mooc_Org_eventadd:
+     path:     /eventadd
+     defaults: { _controller: TesseractMOOCBundle:Organisation:event}
+tesseract_mooc_Org_previewevent:
+     path:     /previewevent/{id}
+     defaults: { _controller: TesseractMOOCBundle:Organisation:previewevent}
+    
 
 tesseract_mooc_coach_dashboard:
     path:     /coach
@@ -154,3 +164,8 @@ tesseract_mooc_coach_quiz_delete:
 tesseract_mooc_coach_quiz_add:
     path:     /coach/quiz/addQuiz/new
     defaults: { _controller: TesseractMOOCBundle:Coach:quizAdd }
+    
+tesseract_mooc_coach_quiz_ajout:
+    path:     /coach/quiz/ajoutQuiz/addquiz
+    defaults: { _controller: TesseractMOOCBundle:Coach:quizAjout }
+  

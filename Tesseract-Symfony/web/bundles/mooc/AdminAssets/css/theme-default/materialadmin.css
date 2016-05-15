@@ -7978,5 +7978,26 @@ li.L7,
 li.L8 {
   list-style-type: none;
 }
+.twitter-share-button ,.twitter-share-button > * {
+    min-width: 100% !important; 
+    width: auto !important;
+}
+.btn-o{
+    min-width: 100% !important; 
+    width: auto !important;
+}
+#widget{
+    min-width: 100% !important; 
+    width: auto !important;
+}
+.container-fluid{
+    padding-top: 3%;
+}
+.social-course{
+    position: absolute;
+    right: 0;
+    top: 3px;
+    width: 10%;
+}
 /* Alternate shading for lines */
 

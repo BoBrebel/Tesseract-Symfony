@@ -1,0 +1,114 @@
+{% extends "TesseractMOOCBundle:Organisation:index.html.twig" %}
+
+{% block header %}
+    <meta name="keywords" content="">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+{% endblock %}
+
+{% block addstylesheets %}
+    <link type="text/css" rel="stylesheet" href="{{ asset('bundles/mooc/styles/css/style.css') }}" />
+{% endblock %}
+
+{% block content %}
+
+
+    <img src="{{ asset('bundles/mooc/images/img4.jpg') }}"  alt=""  style=" position: fixed; top: 0;  left: 0;  min-width: 100%; min-height: 100%;">
+    <div id="outercont" >
+        <div id="innercont" >
+
+            <div id="content" style="align-self: center; position: absolute;" >
+
+                <h1 > Coming Soon</h1>
+
+                <div id="countdowncont"  >
+                    <ul id="countscript" >
+                        <li>
+                            <span class="days">00</span>
+                            <p>Days</p>
+                        </li>
+                        <li>
+                            <span class="hours">00</span>
+                            <p>Hours</p>
+                        </li>
+                        <li class="clearbox">
+                            <span class="minutes">00</span>
+                            <p>Minutes</p>
+                        </li>
+                        <li>
+                            <span class="seconds">10</span>
+                            <p>Seconds</p>
+                        </li>
+                    </ul>
+                </div>
+
+                <p style="padding-top: 300px"><br><strong>{{e.nom}}</strong><br>{{desc}}</p>
+
+
+    
+<div id="googleMap" style="width:90%;height:600px; align-self: center;position: relative; "></div>
+            </div>
+
+
+        </div>
+    </div>
+    
+<div id="googleMap" style="width:90%;height:600px; padding-top: 70%; padding-left: 50%; position: static;"></div>
+
+{% endblock %}
+{% block addjavascripts %}
+    <script src="{{ asset('bundles/mooc/libs/jquery/jquery.js') }}"></script>
+    <script src="{{asset('bundles/mooc/libs/jquery/countdown.js')}}"></script>
+    {#    <script src="{{ asset('bundles/mooc/libs/jquery/scripts.js') }}"></script>#}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            "use strict";
+            $("#countdowncont").countdown({
+                date: "{{date}}",
+                format: "on"
+            },
+                    function () {
+
+                    });
+        });
+    </script>
+    <script src="http://maps.googleapis.com/maps/api/js?Key=AIzaSyAER9K8lkEocwryHbLysHeL1gioHeL_yIY"></script>
+    <script>
+        function initialize() {
+
+            var geocoder = new google.maps.Geocoder();
+            var address = "{{venue}}";
+            ;
+
+            geocoder.geocode({'address': address}, function (results, status) {
+
+                if (status == google.maps.GeocoderStatus.OK) {
+
+                    var latitude = results[0].geometry.location.lat();
+                    var longitude = results[0].geometry.location.lng();
+                    var myCenter = new google.maps.LatLng(latitude, longitude);
+                    var mapProp = {
+                        center: new google.maps.LatLng(latitude, longitude),
+                        zoom: 17,
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
+                    };
+                    var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+                    var marker = new google.maps.Marker({
+                        position: myCenter,
+                        animation: google.maps.Animation.BOUNCE
+                    });
+
+                    marker.setMap(map);
+                }
+            });
+
+
+
+
+        }
+        google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+
+
+
+
+{% endblock %}

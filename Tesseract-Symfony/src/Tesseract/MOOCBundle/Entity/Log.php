@@ -155,4 +155,5 @@ class Log
     {
         return $this->idUtilisateur;
     }
+   
 }
