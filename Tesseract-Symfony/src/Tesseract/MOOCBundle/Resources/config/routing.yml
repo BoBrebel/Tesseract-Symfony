@@ -88,9 +88,35 @@ course_comments_id:
 afficher_cours_chap_appr:
     path:     /session
     defaults: { _controller: TesseractMOOCBundle:Apprenant:afficherContenuCours }
+    
+    
 terminer_cours_chap_appr:
     path:     /nextsession
     defaults: { _controller: TesseractMOOCBundle:Apprenant:terminerCours }
+    
+    
+   
+searching_courses:
+    path:     /search
+    defaults: { _controller: TesseractMOOCBundle:Apprenant:searchingCourses }
+    
+    
+#    qdqsdqsdqs
+
+
+tesseract_update_commentaire:
+    path:     /course-commentaire
+    defaults: { _controller: TesseractMOOCBundle:Apprenant:updateData } 
+
+registration_organization:
+    path:     /registration-org
+    defaults: { _controller: TesseractMOOCBundle:Apprenant:registrationOrganisation } 
+
+fos_user_resetting:
+    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+    prefix: /resetting
+    
+    
 tesseract_mooc_organisation_home:
     path:     /orgHome
     defaults: { _controller: TesseractMOOCBundle:Organisation:index}

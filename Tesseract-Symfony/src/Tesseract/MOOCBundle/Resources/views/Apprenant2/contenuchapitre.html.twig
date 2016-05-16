@@ -1,0 +1,16 @@
+
+
+{% for item in objs %}
+ 
+
+<div class="col-md-7 col-lg-8">
+    <div class="text-divider hidden-md hidden-lg"><span>Email</span></div>
+    <h1 class="no-margin">{{item.nom}}</h1>
+   
+{#    <span class="pull-right text-default-light">date</span>#}
+    <strong>{{item.difficulte}}</strong>
+    <hr>
+    <p class="lead">{{item.description}}</p>
+   </div>
+    
+     {% endfor %}

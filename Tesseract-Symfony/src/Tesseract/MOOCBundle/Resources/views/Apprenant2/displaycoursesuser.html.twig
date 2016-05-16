@@ -1,0 +1,91 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>  
+<script src="//code.highcharts.com/4.0.1/highcharts.js"></script> 
+<script src="//code.highcharts.com/4.0.1/modules/exporting.js"></script> 
+<script type="text/javascript">
+{#{{render(controller('AmvMembersBundle:Pages:EditMembers', {
+        'max': 1
+    }))}}#}
+          
+    
+
+</script>  
+
+</br> </br> 
+<ul>
+
+
+
+    {% for course in pagination %}
+
+        <li style="display:inline-block;">
+
+            <div class="card" style="
+                 width: 300px; 
+                 height: 300px; 
+                 margin-right: 10%;
+                 " >
+                <div class="card-image waves-effect waves-block waves-light"  style="width: 300px; height: 200px;">
+                    <img style="height: 200px; width: 300px;" class="activator" src="../../uploads/pictures/{{course.affiche}}">
+                </div>
+                <div class="card-content" >
+                    <span class="card-title activator grey-text text-darken-4"> {{course.nom}}<i style="font-family: 'Material Icons';
+                                                                                                 font-weight: normal;
+                                                                                                 font-style: normal;
+                                                                                                 font-size: 5px;
+                                                                                                 line-height: 1;
+                                                                                                 letter-spacing: normal;
+                                                                                                 text-transform: none;
+                                                                                                 display: inline-block;
+                                                                                                 white-space: nowrap;
+                                                                                                 word-wrap: normal;
+                                                                                                 direction: ltr;
+                                                                                                 -moz-font-feature-settings: 'liga';
+                                                                                                 float: right;"></i></span>
+                    </br>
+                    <a href="{{ path ('course_subscribed_id',{'id':course.id})}}"> Subscribe</a>
+                    |
+                    <a href="{{ path ('course_comments_id',{'id':course.id})}}" id="{{course.id}}" class="modal-trigger"> Comments</a>
+                </div>
+                <div class="card-reveal">
+
+                    <span class="card-title grey-text text-darken-4"> <i style="">x</i></span>
+                    </br>
+                    <span > 
+                        {% if course.difficulte == 'FACILE' %} 
+                            difficuly
+                            <span class="pull-right text-danger text-sm">   10% <i class="md md-trending-down"></i></span>
+                            <div class="progress progress-hairline">
+                                <div class="progress-bar progress-bar-danger" style="width:10%"></div>
+                            </div>
+
+                        {% elseif course.difficulte == 'NORMALE' %}
+
+                            difficuly
+                            <span class="pull-right text-danger text-sm">   50% <i class="md md-trending-down"></i></span>
+                            <div class="progress progress-hairline">
+                                <div class="progress-bar progress-bar-danger" style="width:50%"></div>
+                            </div>
+
+                        {% elseif course.difficulte == 'DIFFICULE' %}
+                            difficuly
+                            <span class="pull-right text-danger text-sm">   90% <i class="md md-trending-down"></i></span>
+                            <div class="progress progress-hairline">
+                                <div class="progress-bar progress-bar-danger" style="width:90%"></div>
+                            </div>
+
+                        {% endif %} 
+
+                    </span>
+                    <p> {{course.description}}</p>
+                </div>
+            </div>
+        </li>
+    {% endfor %}
+
+    <div class="navigation">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+</ul>
+
+{#
+#}

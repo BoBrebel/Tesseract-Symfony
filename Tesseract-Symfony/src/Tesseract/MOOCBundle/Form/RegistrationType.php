@@ -23,7 +23,7 @@ class RegistrationType extends AbstractType {
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
-        $builder->add('nom')->add('prenom')->add('telephone')->add('adresse')->add('photo','file',array('label' => 'Your picture', 'attr' => array('class' => 'photo')))->add('type','choice',array('attr' => array('class' => 'boxxx'),
+        $builder->add('nom')->add('prenom')->add('telephone')->add('adresse')->add('file','file',array('label' => 'Your picture', 'attr' => array('class' => 'photo')))->add('type','choice',array('attr' => array('class' => 'boxxx'),
         'choices' => array(
           'coach' => 'Coach',
           'student' => 'Student'

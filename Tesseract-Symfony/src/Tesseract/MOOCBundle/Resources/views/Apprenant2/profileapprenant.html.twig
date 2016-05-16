@@ -1,0 +1,136 @@
+{% extends "TesseractMOOCBundle:Apprenant2:apprenant.html.twig" %}
+{% block content %}
+
+
+    <!-- BEGIN HEADER-->
+
+    <!-- END HEADER-->
+
+    <!-- BEGIN BASE-->
+    <div id="base">
+
+        <!-- BEGIN OFFCANVAS LEFT -->
+        <div class="offcanvas">
+        </div><!--end .offcanvas-->
+        <!-- END OFFCANVAS LEFT -->
+
+        <!-- BEGIN CONTENT-->
+        <div id="content">
+
+            <!-- BEGIN PROFILE HEADER -->
+            <section class="full-bleed">
+                <div class="section-body style-default-dark force-padding text-shadow">
+                    <div class="img-backdrop" style="background-image: url('../../assets/img/img16.jpg')"></div>
+                    <div class="overlay overlay-shade-top stick-top-left height-3"></div>
+                    <div class="row">
+                        <div class="col-md-3 col-xs-5">
+                            <img class="img-circle border-white border-xl img-responsive auto-width" src="../../uploads/pictures/{{user.photo}}" alt="" />
+                            <h3>{{user.nom|capitalize }}  {{user.prenom|capitalize }}<br/><small>Student</small></h3>
+                        </div><!--end .col -->
+                        <div class="col-md-9 col-xs-7">
+                            <div class="width-3 text-center pull-right">
+                                <strong class="text-xl">643</strong><br/>
+                                <span class="text-light opacity-75">All courses</span>
+                            </div>
+                            <div class="width-3 text-center pull-right">
+                                <strong class="text-xl">108</strong><br/>
+                                <span class="text-light opacity-75">Finished courses</span>
+                            </div>
+                        </div><!--end .col -->
+                    </div><!--end .row -->
+                    <div class="overlay overlay-shade-bottom stick-bottom-left force-padding text-right">
+                        <a class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Contact me"><i class="fa fa-envelope"></i></a>
+                        <a class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Follow me"><i class="fa fa-twitter"></i></a>
+                        <a class="btn btn-icon-toggle" data-toggle="tooltip" data-placement="top" data-original-title="Personal info"><i class="fa fa-facebook"></i></a>
+                    </div>
+                </div><!--end .section-body -->
+            </section>
+            <!-- END PROFILE HEADER  -->
+
+            <section>
+                <div class="section-body no-margin">
+
+
+
+
+
+
+
+
+
+
+
+                    <div class="col-lg-offset-1 col-md-8" style="left: -11%; float: left; width: 60%">
+                        <form class="form">
+                            <div class="card style-default-dark">
+                                <div class="card-head">
+                                    <header>My account</header>
+                                </div>
+                                <div class="card-body form-inverse">
+
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                {{form_widget(form.nom,{ 'id': 'Firstname3','value' : user.nom,'attr': {'class': 'form-control'}})}}
+                                                <label for="Firstname3">Firstname</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                {{form_widget(form.prenom,{ 'id': 'Lastname3','value' : user.prenom,'attr': {'class': 'form-control'}})}}
+                                                <label for="Lastname3">Lastname</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group floating-label">
+                                        {{form_widget(form.mailSercours,{ 'id': 'mailSercours3','value' : user.mailSercours,'attr': {'class': 'form-control'}})}}
+                                        <label for="mailSercours3">Secours mail</label>
+                                    </div>
+                                    <div class="form-group floating-label">
+                                        {{form_widget(form.telephone,{ 'id': 'telephone3','value' : user.telephone,'attr': {'class': 'form-control'}})}}
+                                        <label for="telephone3">Phone</label>
+                                    </div>
+
+                                    <div class="form-group floating-label">
+                                        {{form_widget(form.adresse,{ 'id': 'mailSercours3','value' : user.adresse,'attr': {'class': 'form-control'}})}}
+                                        <label for="adresse3">Adress</label>
+                                    </div>
+
+
+
+
+
+
+
+                                </div><!--end .card-body -->
+                                <div class="card-actionbar">
+                                    <div class="card-actionbar-row">
+                                        {{form_row(form.update,{'attr': {'class': 'btn btn-flat btn-default-light ink-reaction'}})}}
+
+                                    </div>
+                                </div>
+                            </div><!--end .card -->
+
+                        </form>
+                    </div>
+
+
+                                        <div class="card" style="width: 30%; float: right;">
+                        <div class="card-body text-center">
+                            <div class="knob knob-primary knob-default-dark-track size-4"><div style="display:inline;width:160px;height:160px;"><canvas height="160" width="160"></canvas><input style="width: 84px; height: 53px; position: absolute; vertical-align: middle; margin-top: 53px; margin-left: -122px; border: 0px none; background: transparent none repeat scroll 0% 0%; font: bold 32px Arial; text-align: center; color: rgb(10, 168, 158); padding: 0px;" readonly="readonly" class="dial" data-min="0" data-max="100" data-thickness=".1" value="40" data-readonly="true" type="text"></div></div>
+                        </div><!--end .card-body -->
+                    </div>
+
+
+
+                </div><!--end .section-body -->
+            </section>
+        </div><!--end #content-->
+        <!-- END CONTENT -->
+
+        <!-- BEGIN MENUBAR-->
+
+
+
+    {% endblock %}

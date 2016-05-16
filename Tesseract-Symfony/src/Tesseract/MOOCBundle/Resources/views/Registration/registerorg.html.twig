@@ -1,22 +1,120 @@
+{% extends "TesseractMOOCBundle:Login:registerorg.html.twig" %}
 
-     
-                            
-<form method="POST">
-   {# {{ form_widget(formm) }}#}
-   {#  contenu : {{nom}}#}
-        {{form_row(formm.nom)}}
-    
-        {{form_row(formm.adress)}}
-    
-        {{form_row(formm.email)}}
-    
-        {{form_row(formm.matricule)}}
-    
-        {{form_row(formm.photo)}}
-        </br></br>
-        <div  style="text-align:center">
-            {{form_row(formm.Register)}}
+{% block registrationorg %}
+
+    <form class="form form-validate floating-label" method="post">
+        <div style="col-lg-6">
+
+            <div class="col-lg-offset-0 col-md-5">
+                <div class="card">
+                    </br>
+                    <div class="form-group" style="width:  65%;  right: -15%">
+                        {{ form_widget(form.mail,{'attr':{'class':'form-control'}}) }}
+                        <span id="Email1-error" class="help-block">This field is required.</span>
+
+                        <label for="Email1">Email</label>
+                    </div>
+
+                    <div class="form-group" style="width:  65%;  right: -15%">
+                        {{ form_widget(form.pseudo,{'attr':{'class':'form-control'}}) }}
+
+                        <label for="Name1">Username</label>
+                    </div>
+
+                    <div class="form-group" style="width:  65%;  right: -15%">
+                        {{ form_widget(form.mdp,{'attr':{'class':'form-control'}}) }}
+
+                        <label for="Password1">Password</label>
+                    </div>
+
+
+
+                    <div class="form-group" style="width:  65%;  right: -15%">
+                        {{ form_widget(form.nom,{'attr':{'class':'form-control'}}) }}
+
+                        <label for="nom">Name</label>
+                    </div>
+
+
+                    <div class="form-group" style="width:  65%;  right: -15%">
+                        {{ form_widget(form.prenom,{'attr':{'class':'form-control'}}) }}
+
+                        <label for="prenom">Firstname</label>
+
+                    </div>
+
+                    <div class="form-group" style="width:  65%;  right: -15%">
+                        {{ form_widget(form.telephone,{'attr':{'class':'form-control'}}) }}
+                        <label for="number2">Phone</label>
+                        <p class="help-block">Numbers only</p>
+                    </div>
+
+                    <div class="form-group" style="width:  65%;  right: -15%">
+                        {{ form_widget(form.adresse,{'attr':{'class':'form-control'}}) }} 
+                        <label for="textarea1">Adress</label>
+                    </div>
+                    <div class="form-group" style="width:  65%;  right: -15%">
+                        {{ form_widget(form.file,{'attr':{'class':'form-control'}}) }} 
+                    </div>
+                </div>
+            </div>
         </div>
-        
+        <div style="col-lg-6">
+            <div class="col-lg-offset-0 col-md-5">
+                <div class="card">
+                    </br>
+                    <div class="form-group" style="width:  65%;  right: -15%">
+                        {{ form_widget(form.emailO,{'attr':{'class':'form-control'}}) }}
+                        <span id="Email1-error" class="help-block">This field is required.</span>
+                        <label for="Email2">Email organization</label>
+                    </div>
+
+
+                    <div class="form-group" style="width:  65%;  right: -15%">
+                        {{ form_widget(form.nomO,{'attr':{'class':'form-control'}}) }}
+
+                        <label for="prenom">Organization's name</label>
+
+                    </div>
+                    <div class="form-group" style="width:  65%;  right: -15%">
+                        {{ form_widget(form.adressO,{'attr':{'class':'form-control'}}) }}
+
+                        <label for="prenom">Organization's adress</label>
+
+                    </div>
+                    <div class="form-group" style="width:  65%;  right: -15%">
+                        {{ form_widget(form.matriculeO,{'attr':{'class':'form-control'}}) }}
+
+                        <label for="prenom">Organization M</label>
+
+                    </div>
+                    <div class="form-group" style="width:  65%;  right: -15%">
+                        {{ form_widget(form.file2,{'attr':{'class':'form-control'}}) }} 
+                    </div>
+                    <div>
+                        <div class="card-actionbar">
+                            <div class="card-actionbar-row">
+                                <button type="submit"   class="btn btn-flat btn-primary ink-reaction" >  Validate</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
 </form>
-  
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

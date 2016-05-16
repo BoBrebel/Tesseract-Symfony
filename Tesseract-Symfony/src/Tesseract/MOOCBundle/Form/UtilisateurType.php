@@ -26,6 +26,7 @@ class UtilisateurType extends AbstractType
             ->add('etat')
             ->add('mailSercours')
             ->add('idOrganisation')
+                  ->add('update','submit');
         ;
     }
     

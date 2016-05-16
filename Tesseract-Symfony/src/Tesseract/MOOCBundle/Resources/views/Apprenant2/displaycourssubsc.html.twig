@@ -1,0 +1,159 @@
+{% extends "TesseractMOOCBundle:Apprenant2:apprenant.html.twig" %}
+
+{% block stylesheets %}
+
+    <link type="text/css" rel="stylesheet" href="{{ asset('bundles/mooc/styles/css/theme-default/libs/wizard/wizard.css?1425466601') }}" />
+    <link href='http://fonts.googleapis.com/css?family=Roboto:300italic,400italic,300,400,500,700,900' rel='stylesheet' type='text/css'/>
+    <link type="text/css" rel="stylesheet" href="{{ asset('bundles/mooc/AdminAssets/css/theme-default/bootstrap.css?1422792965') }}" />
+    <link type="text/css" rel="stylesheet" href="{{ asset('bundles/mooc/AdminAssets/css/theme-default/materialadmin.css?1425466319') }}" />
+    <link type="text/css" rel="stylesheet" href="{{ asset('bundles/mooc/AdminAssets/css/theme-default/font-awesome.min.css?1422529194') }}" />
+    <link type="text/css" rel="stylesheet" href="{{ asset('bundles/mooc/AdminAssets/css/theme-default/material-design-iconic-font.min.css?1421434286') }}" />
+    <link type="text/css" rel="stylesheet" href="{{ asset('bundles/mooc/AdminAssets/css/theme-default/libs/wizard/wizard.css?1425466601') }}" />
+
+
+{% endblock %}
+{% block content %}
+
+    <div id="base" >
+
+        <!-- BEGIN CONTENT-->
+        <div id="content" style="top: -80px;">
+            <section>
+
+                <div class="section-body contain-lg">
+
+                    <!-- BEGIN INTRO -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h1 class="text-primary">{{course.nom}} Session</h1>
+                        </div><!--end .col -->
+                        <div class="col-lg-8">
+                            <article class="margin-bottom-xxl">
+                                <p class="lead">
+                                    Welcome
+                                </p>
+                            </article>
+                        </div><!--end .col -->
+                    </div><!--end .row -->
+                    <!-- END INTRO -->
+
+                    <!-- BEGIN FORM WIZARD -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-body ">
+                                    <div id="rootwizard1" class="form-wizard form-wizard-horizontal">
+
+                                        <div class="form-wizard-nav">
+                                            <div class="progress"><div class="progress-bar progress-bar-primary"></div></div>
+                                            <ul class="nav nav-justified">
+                                                {% set val =0 %}
+
+                                                {% for chap in chapitres %} 
+                                                    {% set val = val+1 %}
+                                                    <li><a href="#tab{{val}}" data-toggle="tab"><span class="step">{{val}}</span> <span class="title">{{chap.nom}}</span></a></li>
+
+                                                {% endfor %}
+
+                                            </ul>
+                                        </div><!--end .form-wizard-nav -->
+                                        <div class="tab-content clearfix">
+
+
+                                            {% set val =0 %}
+
+                                            {% for chap in chapitres %} 
+                                                {% set val = val+1 %}
+                                                <div class="tab-pane" id="tab{{val}}">
+
+                                                    <article>
+                                                        <div class="card-body style-default-dark">
+                                                            <h2>{{chap.nom}}</h2>
+                                                            <div class="opacity-75">by <a href="#">Coach</a></div>
+                                                        </div>
+                                                        <div style="height: 480px">
+                                                            <img  src="../../../assets/img/img1.jpg?1403934956" alt="">
+                                                            <iframe style="width: 100%; height: 100%" src="https://www.youtube.com/embed/watch?v=BEhMjZGJQ-Y&index=18&list=PLL24PCE8BNk23eR2_tWZ30u8XZ7OEdMom" frameborder="0" allowfullscreen></iframe>
+
+                                                        </div>
+                                                        <div class="card-body style-default-bright">
+                                                            
+                                                                {% render controller('TesseractMOOCBundle:Apprenant:afficherObjectif', { 'idch':chap.id  }) %}
+                                                                
+                                                                
+                                                                </br>
+                                                            <a class="btn btn-default" href="../../../html/pages/blog/post.html">Quiz</a>
+                                                            <a class="btn btn-default" href="../../../html/pages/blog/post.html">Next</a>
+                                                        </div>
+                                                    </article>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                </div>
+                                            {% endfor %}
+
+
+
+
+                                        </div><!--end .tab-content -->
+
+
+                                    </div><!--end #rootwizard -->
+                                </div><!--end .card-body -->
+                            </div><!--end .card -->
+
+                        </div><!--end .col -->
+                    </div><!--end .row -->
+                    <!-- END FORM WIZARD -->
+
+                    <!-- BEGIN VALIDATION FORM WIZARD -->
+
+                    <!-- END VALIDATION FORM WIZARD -->
+
+                </div><!--end .section-body -->
+            </section>
+        </div><!--end #content-->
+        <!-- END CONTENT -->
+
+        <!-- BEGIN MENUBAR-->
+
+        <!-- END MENUBAR -->
+
+        <!-- BEGIN OFFCANVAS RIGHT -->
+
+        <!-- END OFFCANVAS RIGHT -->
+
+    </div><!--end #base-->
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/jquery/jquery-1.11.2.min.js') }}"></script>
+    <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/jquery/jquery-migrate-1.2.1.min.js') }}"></script>
+    <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/bootstrap/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/spin.js/spin.min.js') }}"></script>
+    <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/autosize/jquery.autosize.min.js') }}"></script>
+    <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/nanoscroller/jquery.nanoscroller.min.js') }}"></script>
+    <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/jquery-validation/dist/jquery.validate.min.js') }}"></script>
+    <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/jquery-validation/dist/additional-methods.min.js') }}"></script>
+    <script src="{{ asset('bundles/mooc/AdminAssets/js/libs/wizard/jquery.bootstrap.wizard.min.js') }}"></script>
+    <script src="{{ asset('bundles/mooc/AdminAssets/js/core/source/App.js') }}"></script>
+    <script src="{{ asset('bundles/mooc/AdminAssets/js/core/source/AppNavigation.js') }}"></script>
+    <script src="{{ asset('bundles/mooc/AdminAssets/js/core/source/AppOffcanvas.js') }}"></script>
+    <script src="{{ asset('bundles/mooc/AdminAssets/js/core/source/AppCard.js') }}"></script>
+    <script src="{{ asset('bundles/mooc/AdminAssets/js/core/source/AppForm.js') }}"></script>
+    <script src="{{ asset('bundles/mooc/AdminAssets/js/core/source/AppNavSearch.js') }}"></script>
+    <script src="{{ asset('bundles/mooc/AdminAssets/js/core/source/AppVendor.js') }}"></script>
+    <script src="{{ asset('bundles/mooc/AdminAssets/js/core/demo/Demo.js') }}"></script>
+    <script src="{{ asset('bundles/mooc/AdminAssets/js/core/demo/DemoFormWizard.js') }}"></script>
+{% endblock %}

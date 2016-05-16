@@ -1,10 +1,76 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
-    {{ form_widget(form) }}
-    <div>
-      <div class="clear center-align">
-    <button type="submit" id="mc-embedded-subscribe" class="waves-effect waves-light btn-large green accent-2 indigo-text text-darken-4" >  Register</button>
+{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'form form-validate floating-label','novalidate':'novalidate'}}) }}
+
+<div class="form-group has-error">
+
+    {{ form_widget(form.email,{'attr':{'class':'form-control'}}) }}
+    <span id="Email1-error" class="help-block">This field is required.</span>
+    <label for="Email1">Email</label>
+</div>
+
+<div class="form-group">
+    {{ form_widget(form.username,{'attr':{'class':'form-control'}}) }}
+
+    <label for="Name1">Username</label>
+</div>
+
+<div class="form-group">
+    {{ form_widget(form.plainPassword.first,{'attr':{'class':'form-control'}}) }}
+
+    <label for="Password1">Password</label>
+</div>
+
+<div class="form-group">
+    {{ form_widget(form.plainPassword.second,{'attr':{'class':'form-control'}}) }}
+    <label for="Password2">Repeat password</label>
+</div>
+
+<div class="form-group">
+    {{ form_widget(form.nom,{'attr':{'class':'form-control'}}) }}
+
+    <label for="nom">Name</label>
+</div>
+
+
+<div class="form-group">
+    {{ form_widget(form.prenom,{'attr':{'class':'form-control'}}) }}
+
+    <label for="prenom">Firstname</label>
+
+</div>
+
+<div class="form-group">
+    {{ form_widget(form.telephone,{'attr':{'class':'form-control'}}) }}
+    <label for="number2">Phone</label>
+    <p class="help-block">Numbers only</p>
+</div>
+
+<div class="form-group">
+    {{ form_widget(form.adresse,{'attr':{'class':'form-control'}}) }} 
+    <label for="textarea1">Adress</label>
+</div>
+<div class="form-group">
+    {{ form_widget(form.file,{'attr':{'class':'form-control'}}) }} 
+</div>
+
+
+
+
+{{ form_widget(form.type) }} 
+
+
+
+<div class="form-group">
+    {{ form_widget(form.cv,{'attr':{'class':'form-control'}}) }} 
+</div>
+
+<div>
+    <div class="card-actionbar">
+        <div class="card-actionbar-row">
+            <button type="submit"   class="btn btn-flat btn-primary ink-reaction" >  Validate</button>
+        </div>
     </div>
-    </div>
+</div>
+</div>
 {{ form_end(form) }}

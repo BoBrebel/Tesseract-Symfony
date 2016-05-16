@@ -433,8 +433,11 @@ abstract class User implements UserInterface, GroupableInterface
 
         return $this;
     }
+    function setSalt($salt) {
+        $this->salt = $salt;
+    }
 
-    /**
+        /**
      * Sets this user to expired.
      *
      * @param Boolean $boolean
