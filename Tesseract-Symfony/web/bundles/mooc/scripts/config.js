@@ -5,12 +5,12 @@ var Wata = {
     // Configuration of triangles
     triangles: {
         mesh: {
-            depth: 11,
-            slices: 250
+            depth: 20,
+            slices: 300
         },
         light: {
-            ambient: '#5838e6',
-            diffuse: '#4efa62',
+            ambient: '#263238',
+            diffuse: '#01579B',
             distance: 55
         }
     },

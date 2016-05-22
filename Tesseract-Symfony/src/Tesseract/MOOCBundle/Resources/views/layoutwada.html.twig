@@ -103,6 +103,7 @@
                         <li><a href="#blog">Blog</a></li>
                         <li><a href="#about">About</a></li>
                         <li><a href="#contact">Contact</a></li>
+                        <li><a href="{{ path('fos_user_security_login') }}">Login/Signup</a></li>
                     </ul>
 
                     <!-- Mobile menu, make sure it is equal to the statis menu -->
@@ -114,6 +115,7 @@
                         <li><a href="#blog">Blog</a></li>
                         <li><a href="#about">About</a></li>
                         <li><a href="#contact">Contact</a></li>
+                        <li><a href="{{ path('fos_user_security_login') }}">Login/Signup</a></li>
                     </ul>
                 </div>
             </nav>
@@ -160,7 +162,7 @@
                         <div class="divider"></div>
                         <h5>Learn anywhere</h5>
                         <p>Designed as a mobile-first application, the grid scales to fit even the largest monitors. The content always looks nice and balanced.</p>
-                        <a class="btn waves-effect waves-dark white black-text">Discover</a>
+
                     </div>
 
                     <div class="col s4">
@@ -168,7 +170,7 @@
                         <div class="divider"></div>
                         <h5>Organisations</h5>
                         <p>Find Courses by known organisations</p>
-                        <a class="btn waves-effect waves-dark white black-text">Try it</a>
+
                     </div>
 
 
@@ -177,7 +179,7 @@
                         <div class="divider"></div>
                         <h5>Carefully Created Courses</h5>
                         <p>Our Caoches try their best to create engaging courses with intresting Content</p>
-                        <a class="btn waves-effect waves-dark white black-text">Explore</a>
+
                     </div>
                 </div>
             </div>
@@ -192,47 +194,27 @@
             <div class="container">
                 <div class="row">
                     <h2>Our Courses</h2>
-                    <!-- Category filter buttons -->
-                    <div class="filter-options">
-                        <a class="btn-flat waves-green-accent waves-effect active" id="all" data-group="all">Everything</a>
-                        <a class="btn-flat waves-green-accent waves-effect" data-group="material">Material</a>
-                        <a class="btn-flat waves-green-accent waves-effect" data-group="food">Food</a>
-                        <a class="btn-flat waves-green-accent waves-effect" data-group="digital">Digital</a>
-                    </div>
                 </div>
             </div>
             <div class="wide-container">
                 <!-- Shuffle grid -->
-                <div id="shuffle-grid" class="row">
-                    <a href="ajax/works/heisenberg-ice-cream.html" class="col s12 m6 l4 picture-item ajax-link" data-groups='["food"]'>
-                        <img src="images/works/ice-cream.png" class="responsive-img" alt="Ice cream">
-                        <h5>Heisenberg ice-cream</h5>
-                    </a>
-
+                <div class="row">
+                    {% render controller('TesseractMOOCBundle:Cours:mainIndex') %}
                 </div>
             </div>
         </div>
+
         <div class="section scrollspy" id="coaches">
             <div class="container">
                 <div class="row">
                     <h2>Our Coaches</h2>
                     <!-- Category filter buttons -->
-                    <div class="filter-options">
-                        <a class="btn-flat waves-green-accent waves-effect active" id="all" data-group="all">Everything</a>
-                        <a class="btn-flat waves-green-accent waves-effect" data-group="material">Material</a>
-                        <a class="btn-flat waves-green-accent waves-effect" data-group="food">Food</a>
-                        <a class="btn-flat waves-green-accent waves-effect" data-group="digital">Digital</a>
-                    </div>
+
                 </div>
             </div>
             <div class="wide-container">
-                <!-- Shuffle grid -->
-                <div id="shuffle-grid" class="row">
-                    <a href="ajax/works/heisenberg-ice-cream.html" class="col s12 m6 l4 picture-item ajax-link" data-groups='["food"]'>
-                        <img src="images/works/ice-cream.png" class="responsive-img" alt="Ice cream">
-                        <h5>Heisenberg ice-cream</h5>
-                    </a>
-
+                <div class="row">
+                    {% render controller('TesseractMOOCBundle:Utilisateur:indexformateur') %}
                 </div>
             </div>
         </div>
@@ -241,22 +223,13 @@
                 <div class="row">
                     <h2>Our Organisations</h2>
                     <!-- Category filter buttons -->
-                    <div class="filter-options">
-                        <a class="btn-flat waves-green-accent waves-effect active" id="all" data-group="all">Everything</a>
-                        <a class="btn-flat waves-green-accent waves-effect" data-group="material">Material</a>
-                        <a class="btn-flat waves-green-accent waves-effect" data-group="food">Food</a>
-                        <a class="btn-flat waves-green-accent waves-effect" data-group="digital">Digital</a>
-                    </div>
+
                 </div>
             </div>
             <div class="wide-container">
                 <!-- Shuffle grid -->
-                <div id="shuffle-grid" class="row">
-                    <a href="ajax/works/heisenberg-ice-cream.html" class="col s12 m6 l4 picture-item ajax-link" data-groups='["food"]'>
-                        <img src="images/works/ice-cream.png" class="responsive-img" alt="Ice cream">
-                        <h5>Heisenberg ice-cream</h5>
-                    </a>
-
+                <div class="row">
+                    {% render controller('TesseractMOOCBundle:Organisation:indexorgs') %}
                 </div>
             </div>
         </div>
@@ -418,7 +391,7 @@
                     </form>
                 </div>
             </div>
-            
+
             <div class="container contact-details">
                 <div class="row">
                     <div class="col s12 m6 l4">
@@ -479,6 +452,7 @@
         <script src="https://maps.googleapis.com/maps/api/js"></script>
         <script src="{{asset('bundles/mooc/scripts/config.js')}}"></script>
         <script src="{{asset('bundles/mooc/scripts/build.js')}}"></script>
-              <script src="{{asset('bundles/mooc/scripts/mooc.js')}}"></script>
+
+
     </body>
 </html>

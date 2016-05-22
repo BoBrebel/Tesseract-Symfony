@@ -17,7 +17,11 @@
                                 <div class="tile-text">{{entity.getIdUtilisateur().getUsername()}} {{entity.tache}} {{entity.cible}}</div>
                             </a>
                             <a class="ink-reaction">
-                                <h4>{{date()|date("d")- entity.getDate()|date("d")}} Days ago</h4>
+                                {% if(date()|date("d")== entity.getDate()|date("d")) %}
+                                <h4>{{ date()|date("h")-entity.getDate()|date("h") }}  Hours ago</h4>
+                                {% else %}
+                                <h4>{{ date()|date("d")-entity.getDate()|date("d") }}  Days ago</h4>
+                                {% endif %}
                             </a>
                         </li>
                     {% endfor %}

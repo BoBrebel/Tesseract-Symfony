@@ -291,4 +291,21 @@ class UtilisateurController extends Controller
 
 
     }
+
+    public function indexformateurAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entities = $em->getRepository('TesseractMOOCBundle:Utilisateur')->findAll();
+        $coaches=array();
+        $i=0;
+        foreach($entities as $e){
+            if($e->getRoles()[0]=='ROLE_FOR'){
+                $coaches[$i]=$e;
+            }
+        }
+
+        return $this->render('TesseractMOOCBundle:Utilisateur:mainindex.html.twig',array('entities'=>$coaches));
+
+    }
 }

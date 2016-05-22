@@ -19,7 +19,12 @@
                                 <div class="tile-text"> {{entity.description}} {{entity.difficulte}}</div>
                             </a>
                             <a class="ink-reaction">
-                                <h4>{{date()|date("d")- entity.upload|date("d")}} Days ago</h4>
+
+                                {% if(date()|date("d")== entity.upload|date("d")) %}
+                                    <h4>{{ date()|date("h")-entity.upload|date("h") }}  Hours ago</h4>
+                                {% else %}
+                                    <h4>{{ date()|date("d")-entity.upload|date("d") }}  Days ago</h4>
+                                {% endif %}
                             </a>
                         </li>
                     {% endfor %}

@@ -1,0 +1,10 @@
+{% for entity in entities %}
+    <div class="col s12 m4 l3 " style="height: 20%">
+        <a href="#" class="picture-item">
+            <img src="{{ asset(entity.getPhoto()) }}" class="responsive-img" alt="{{ entity.nom }}">
+            <h5>{{ entity.nom }}</h5>
+        </a>
+    </div>
+
+
+{% endfor %}

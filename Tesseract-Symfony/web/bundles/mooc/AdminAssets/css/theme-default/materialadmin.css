@@ -7991,7 +7991,8 @@ li.L8 {
     width: auto !important;
 }
 .container-fluid{
-    padding-top: 3%;
+    padding-top: 8% !important;
+    width:95% !important;
 }
 .social-course{
     position: absolute;

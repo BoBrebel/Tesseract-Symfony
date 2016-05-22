@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\Validator\Constraints\Null;
 use Tesseract\MOOCBundle\Entity\Cours;
 use Tesseract\MOOCBundle\Form\CoursType;
 
@@ -243,5 +244,16 @@ class CoursController extends Controller
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
         ;
+    }
+    public function mainIndexAction(Request $req){
+
+        $em = $this->getDoctrine()->getManager();
+
+        $entities = $em->getRepository('TesseractMOOCBundle:Cours')->findAll();
+
+
+
+
+        return $this->render('TesseractMOOCBundle:Cours:mainIndex.html.twig',array('entities'=>$entities));
     }
 }

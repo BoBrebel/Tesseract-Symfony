@@ -226,3 +226,9 @@ tesseract_mooc_coach_bind_cours:
 tesseract_mooc_message:
     path:     /message
     defaults: { _controller: TesseractMOOCBundle:Message:newThread }
+tesseract_mooc_course:
+    path:     /course
+    defaults: { _controller: TesseractMOOCBundle:Cours:index }
+tesseract_mooc_main_course:
+    path:     /maincourse
+    defaults: { _controller: TesseractMOOCBundle:Cours:mainIndex }

@@ -454,4 +454,15 @@ class OrganisationController extends Controller {
         ;
     }
 
+    public function indexorgsAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entities = $em->getRepository('TesseractMOOCBundle:Organisation')->findAll();
+
+
+
+        return $this->render('TesseractMOOCBundle:Organisation:mainindex.html.twig',array('entities'=>$entities));
+
+    }
 }

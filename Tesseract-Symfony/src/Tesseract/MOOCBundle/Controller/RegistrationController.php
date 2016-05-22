@@ -9,6 +9,7 @@ use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\Event\GetResponseUserEvent;
 use FOS\UserBundle\Event\FilterUserResponseEvent;
+use Tesseract\MOOCBundle\Entity\Log;
 
 class RegistrationController extends BaseController {
 
@@ -56,13 +57,29 @@ class RegistrationController extends BaseController {
 
             if (null === $response = $event->getResponse()) {
                 $url = $this->generateUrl('fos_user_registration_confirmed');
+
                 $response = new RedirectResponse($url);
             }
 
             $dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
-
+            $log = new Log();
+            $log->setIdUtilisateur($user);
+            $log->setDate(new \DateTime("now"));
+            $log->setCible("platforme");
+            $log->setTache("signup");
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($log);
+            $em->flush();
             return $response;
         }
+        $log = new Log();
+        $log->setIdUtilisateur();
+        $log->setDate(new \DateTime("now"));
+        $log->setCible("platforme");
+        $log->setTache("signup");
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($log);
+        $em->flush();
 
         return $this->render('FOSUserBundle:Registration:register.html.twig', array(
                     'form' => $form->createView(),
